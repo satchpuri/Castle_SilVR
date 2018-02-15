@@ -1,0 +1,183 @@
+fileFormatVersion: 2
+guid: ea07c1228db123e4cacf9810690fff05
+timeCreated: 1518689352
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Armor1
+    100002: Armor2
+    100004: Bookcase1
+    100006: Bookcase2
+    100008: Bookcase3
+    100010: Distraction1
+    100012: Furniture1
+    100014: Furniture2
+    100016: Furniture3
+    100018: //RootNode
+    100020: Ground1
+    100022: Player
+    100024: Walls
+    400000: Armor1
+    400002: Armor2
+    400004: Bookcase1
+    400006: Bookcase2
+    400008: Bookcase3
+    400010: Distraction1
+    400012: Furniture1
+    400014: Furniture2
+    400016: Furniture3
+    400018: //RootNode
+    400020: Ground1
+    400022: Player
+    400024: Walls
+    2300000: Armor1
+    2300002: Armor2
+    2300004: Bookcase1
+    2300006: Bookcase2
+    2300008: Bookcase3
+    2300010: Distraction1
+    2300012: Furniture1
+    2300014: Furniture2
+    2300016: Furniture3
+    2300018: Ground1
+    2300020: Player
+    2300022: Walls
+    3300000: Armor1
+    3300002: Armor2
+    3300004: Bookcase1
+    3300006: Bookcase2
+    3300008: Bookcase3
+    3300010: Distraction1
+    3300012: Furniture1
+    3300014: Furniture2
+    3300016: Furniture3
+    3300018: Ground1
+    3300020: Player
+    3300022: Walls
+    4300000: Walls
+    4300002: Furniture1
+    4300004: Furniture2
+    4300006: Furniture3
+    4300008: Distraction1
+    4300010: Armor1
+    4300012: Armor2
+    4300014: Bookcase1
+    4300016: Bookcase2
+    4300018: Bookcase3
+    4300020: Ground1
+    4300022: Player
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bookcase
+    second: {fileID: 2100000, guid: 93fe20d5027dc0a4a8e4ea5c464ab4f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Distraction
+    second: {fileID: 2100000, guid: 2538d8e877a13294580a2114918f7c36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 8536d815fe27956459cf94f0c90b74a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Movable_Furniture
+    second: {fileID: 2100000, guid: 29267c1c4ff18f645b3e7bce18be867d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitOfArmor
+    second: {fileID: 2100000, guid: ec02d9dd8e0f0d94b9807417ac77e23f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall
+    second: {fileID: 2100000, guid: a7f637d3ef4a234479e5c5634c15f767, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 4529c10b6f7f38c47b928004ebee64db, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
