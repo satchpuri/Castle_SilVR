@@ -6,7 +6,7 @@ InputManager:
   serializedVersion: 2
   m_Axes:
   - serializedVersion: 3
-    m_Name: CONTROLLER_LEFT_STICK_HORIZONTAL
+    m_Name: LStick_Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: left
@@ -22,7 +22,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Right_Vert
+    m_Name: LStick_Vertical
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: down
@@ -30,8 +30,8 @@ InputManager:
     altNegativeButton: s
     altPositiveButton: w
     gravity: 3
-    dead: 0.001
-    sensitivity: 3
+    dead: 0.19
+    sensitivity: 1
     snap: 1
     invert: 0
     type: 2

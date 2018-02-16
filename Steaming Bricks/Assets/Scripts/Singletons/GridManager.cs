@@ -58,6 +58,14 @@ public class GridManager : Singleton<GridManager>
         CreateGrid();
     }
 
+    public void UpdateGrid()
+    {
+        foreach (Node n in grid)
+        {
+            n.free = !(Physics.CheckSphere(n.worldPosition, nodeRadius, filledMask)); 
+        }
+    }
+
     //Function to create grid
     public void CreateGrid()
     {

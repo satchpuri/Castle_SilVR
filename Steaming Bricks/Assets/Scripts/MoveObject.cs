@@ -45,7 +45,7 @@ public class MoveObject : MonoBehaviour {
     //For object move
     void OnMouseDrag()
     {
-        GridManager.Instance.CreateGrid();
+        GridManager.Instance.UpdateGrid();
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
@@ -97,10 +97,10 @@ public class MoveObject : MonoBehaviour {
             curPosition.y = 37.5f;
             transform.position = curPosition;
         }
-        //else
-        //{
-        //    transform.position = initial_pos;
-        //}
-        GridManager.Instance.CreateGrid();
+        else
+        {
+            transform.position = initial_pos;
+        }
+        GridManager.Instance.UpdateGrid();
     }
 }

@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		speed = 0.1f;
         
         player = this.gameObject;
 	}
@@ -35,16 +34,16 @@ public class PlayerMovement : MonoBehaviour {
 	// uses arrow keys to shift the GameObject identified as "Player" by the speed.
 	void MovePlayer() {
 		Vector3 current = player.transform.position;
-		if (Input.GetKey(KeyCode.RightArrow)) {
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
 			current += new Vector3 (speed, 0, 0);
 		}
-		if (Input.GetKey(KeyCode.LeftArrow)) {
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
 			current += new Vector3 (-speed, 0, 0);
 		}
-		if (Input.GetKey(KeyCode.DownArrow)) {
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
 			current += new Vector3 (0, 0, -speed);
 		}
-		if (Input.GetKey(KeyCode.UpArrow)) {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
 			current += new Vector3 (0, 0, speed);
 		}
 		player.transform.position = current;
@@ -55,16 +54,12 @@ public class PlayerMovement : MonoBehaviour {
         //current pos
 		Vector3 current = player.transform.position;
         
-        //get x
-        float xaxis = Input.GetAxis("CONTROLLER_LEFT_STICK_HORIZONTAL");
-		current += new Vector3 (speed * xaxis, 0, 0);
-        
-        //get y
-		/*if (Input.GetAxis("Axis 2") > .3 && Input.GetAxis("Axis 2") < -.3) {
-			current += new Vector3 (0, 0, speed * Input.GetAxis(Input.GetAxis("Axis 2")));
-		}*/
+        //get x and z
+        float xAxis = Input.GetAxis("LStick_Horizontal");
+        float zAxis = Input.GetAxis("LStick_Vertical");
         
         //update pos
+        current -= new Vector3 (speed * xAxis, 0, speed * zAxis);
 		player.transform.position = current;
 	}
 	
