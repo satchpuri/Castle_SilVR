@@ -1,0 +1,207 @@
+fileFormatVersion: 2
+guid: f3f0c749aa03eb64daf42ba9e4e3f4bb
+timeCreated: 1518738891
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Armor1
+    100002: Armor2
+    100004: Bookcase1
+    100006: Bookcase2
+    100008: Bookcase3
+    100010: Distraction1
+    100012: Furniture1
+    100014: Furniture2
+    100016: Furniture3
+    100018: //RootNode
+    100020: Ground1
+    100022: Player
+    100024: Walls
+    400000: Armor1
+    400002: Armor2
+    400004: Bookcase1
+    400006: Bookcase2
+    400008: Bookcase3
+    400010: Distraction1
+    400012: Furniture1
+    400014: Furniture2
+    400016: Furniture3
+    400018: //RootNode
+    400020: Ground1
+    400022: Player
+    400024: Walls
+    2300000: Armor1
+    2300002: Armor2
+    2300004: Bookcase1
+    2300006: Bookcase2
+    2300008: Bookcase3
+    2300010: Distraction1
+    2300012: Furniture1
+    2300014: Furniture2
+    2300016: Furniture3
+    2300018: Ground1
+    2300020: Player
+    2300022: Walls
+    3300000: Armor1
+    3300002: Armor2
+    3300004: Bookcase1
+    3300006: Bookcase2
+    3300008: Bookcase3
+    3300010: Distraction1
+    3300012: Furniture1
+    3300014: Furniture2
+    3300016: Furniture3
+    3300018: Ground1
+    3300020: Player
+    3300022: Walls
+    4300000: Armor1
+    4300002: Armor2
+    4300004: Bookcase1
+    4300006: Bookcase2
+    4300008: Bookcase3
+    4300010: Distraction1
+    4300012: Furniture1
+    4300014: Furniture2
+    4300016: Furniture3
+    4300018: Ground1
+    4300020: Player
+    4300022: Walls
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Armor1Mat
+    second: {fileID: 2100000, guid: 047118be2c6bf0e4c9658ed24a3b68df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Armor2Mat
+    second: {fileID: 2100000, guid: 4579bda3516cfb746a03f242ed278c2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bookcase1Mat
+    second: {fileID: 2100000, guid: 4ee21357871653e4bb54e05e38296b2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bookcase2Mat
+    second: {fileID: 2100000, guid: 1bf431ec8150c014499f0cff6a66195f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bookcase3Mat
+    second: {fileID: 2100000, guid: 2d2d33995cee4cd428dc44bb38bfad13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Distraction1Mat
+    second: {fileID: 2100000, guid: d4b8c65013d4dc742b17e5fc39aa3e75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Furniture1Mat
+    second: {fileID: 2100000, guid: 3695db1ba1d69794691a62bea7a095f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Furniture2Mat
+    second: {fileID: 2100000, guid: 52d989e57f133b943a708891700a90e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Furniture3Mat
+    second: {fileID: 2100000, guid: fc7b77cc1ee946d498715a64ff97c772, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground1Mat
+    second: {fileID: 2100000, guid: d67f4908e0b154743981e1e39a7e20d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlayerMat
+    second: {fileID: 2100000, guid: 152b36103569d7443a47421bba92ad69, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallsMat
+    second: {fileID: 2100000, guid: 239d30d577f591e4fadb31267852e1c7, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
