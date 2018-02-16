@@ -6,21 +6,34 @@ using UnityEngine.XR;
 
 public class MoveController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    [SerializeField] private GameObject leftHand;
+    [SerializeField] private GameObject rightHand;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start () {
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+        //RIGHT HAND
+        //get pos and rot
+        Vector3 rightPosition = InputTracking.GetLocalPosition(XRNode.RightHand);
+        Quaternion rightRotation = InputTracking.GetLocalRotation(XRNode.RightHand);
+
+        //set pos and rot
+        rightHand.transform.position = rightPosition;
+        rightHand.transform.rotation = rightRotation;
+
+        //LEFT HAND
         //get pos and rot
         Vector3 leftPosition = InputTracking.GetLocalPosition(XRNode.LeftHand);
         Quaternion leftRotation = InputTracking.GetLocalRotation(XRNode.LeftHand);
-        
+
         //set pos and rot
-        this.gameObject.transform.position = leftPosition;
-        this.gameObject.transform.rotation = leftRotation;
-		
-	}
-	
+        leftHand.transform.position = leftPosition;
+        leftHand.transform.rotation = leftRotation;
+
+    }
+
 }
