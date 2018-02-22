@@ -19,7 +19,8 @@ public class MoveController : MonoBehaviour {
         //RIGHT HAND
         //get pos and rot
         Vector3 rightPosition = InputTracking.GetLocalPosition(XRNode.RightHand);
-        rightPosition.z += .1f;
+        rightPosition = rightPosition * 500.0f;
+        rightPosition.y -= 800;
 
         Quaternion rightRotation = InputTracking.GetLocalRotation(XRNode.RightHand);
 
@@ -30,10 +31,13 @@ public class MoveController : MonoBehaviour {
         //LEFT HAND
         //get pos and rot
         Vector3 leftPosition = InputTracking.GetLocalPosition(XRNode.LeftHand);
+        leftPosition = leftPosition * 500.0f;
+        leftPosition.y -= 800;
+
         Quaternion leftRotation = InputTracking.GetLocalRotation(XRNode.LeftHand);
 
         //set pos and rot
-        //leftHand.transform.position = leftPosition;
+        leftHand.transform.position = leftPosition;
         leftHand.transform.rotation = leftRotation;
 
 
