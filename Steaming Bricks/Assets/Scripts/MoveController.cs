@@ -9,6 +9,9 @@ public class MoveController : MonoBehaviour {
     [SerializeField] private GameObject leftHand;
     [SerializeField] private GameObject rightHand;
 
+    [SerializeField] private float scaler;
+    [SerializeField] private float verticalDrop;
+
     // Use this for initialization
     void Start () {
 
@@ -19,8 +22,8 @@ public class MoveController : MonoBehaviour {
         //RIGHT HAND
         //get pos and rot
         Vector3 rightPosition = InputTracking.GetLocalPosition(XRNode.RightHand);
-        rightPosition = rightPosition * 500.0f;
-        rightPosition.y -= 800;
+        rightPosition = rightPosition * scaler;
+        rightPosition.y -= verticalDrop;
 
         Quaternion rightRotation = InputTracking.GetLocalRotation(XRNode.RightHand);
 
@@ -31,8 +34,8 @@ public class MoveController : MonoBehaviour {
         //LEFT HAND
         //get pos and rot
         Vector3 leftPosition = InputTracking.GetLocalPosition(XRNode.LeftHand);
-        leftPosition = leftPosition * 500.0f;
-        leftPosition.y -= 800;
+        leftPosition = leftPosition * scaler;
+        leftPosition.y -= verticalDrop;
 
         Quaternion leftRotation = InputTracking.GetLocalRotation(XRNode.LeftHand);
 
