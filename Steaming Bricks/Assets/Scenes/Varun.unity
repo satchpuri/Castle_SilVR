@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 106949900}
   m_Layer: 8
   m_Name: Furniture2
-  m_TagString: Untagged
+  m_TagString: Movable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -636,6 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d962e100bf2654981bba8a1d0c01d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorPlane: {fileID: 0}
   filledMask:
     serializedVersion: 2
     m_Bits: 256
@@ -1017,7 +1018,7 @@ GameObject:
   - component: {fileID: 1432720118}
   m_Layer: 8
   m_Name: Furniture3
-  m_TagString: Untagged
+  m_TagString: Movable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1209,7 +1210,7 @@ GameObject:
   - component: {fileID: 1601703959}
   m_Layer: 8
   m_Name: Furniture1
-  m_TagString: Untagged
+  m_TagString: Movable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1345,6 +1346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d962e100bf2654981bba8a1d0c01d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorPlane: {fileID: 1221103991}
   filledMask:
     serializedVersion: 2
     m_Bits: 256
@@ -1728,6 +1730,53 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 75, y: 100, z: 400}
   m_Center: {x: -50, y: 50, z: -700}
+--- !u!1001 &2125709220
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4473554359446686, guid: d7646d08c3cc1604996238a4a645aba6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 333.5194
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473554359446686, guid: d7646d08c3cc1604996238a4a645aba6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -353.875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473554359446686, guid: d7646d08c3cc1604996238a4a645aba6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 239.78125
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473554359446686, guid: d7646d08c3cc1604996238a4a645aba6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473554359446686, guid: d7646d08c3cc1604996238a4a645aba6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473554359446686, guid: d7646d08c3cc1604996238a4a645aba6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473554359446686, guid: d7646d08c3cc1604996238a4a645aba6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473554359446686, guid: d7646d08c3cc1604996238a4a645aba6, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114488775070812612, guid: d7646d08c3cc1604996238a4a645aba6,
+        type: 2}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 187458408}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d7646d08c3cc1604996238a4a645aba6, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2131815346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,8 +1791,8 @@ GameObject:
   - component: {fileID: 2131815352}
   - component: {fileID: 2131815351}
   m_Layer: 8
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: Sliding Cube
+  m_TagString: Sliding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
