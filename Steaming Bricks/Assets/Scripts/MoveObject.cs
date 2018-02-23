@@ -76,8 +76,8 @@ public class MoveObject : MonoBehaviour {
         //Will be slightly altered when step distance is determined
         if (y <= step*2)
         {
-            curPosition.x = ((int)Mathf.Round(curPosition.x) / step) * step+50;
-            curPosition.z = ((int)Mathf.Round(curPosition.z) / step) * step+50;
+            curPosition.x = ((int)Mathf.Round(curPosition.x) / step) * step;
+            curPosition.z = ((int)Mathf.Round(curPosition.z) / step) * step;
             droppable = true;
         }
         else
