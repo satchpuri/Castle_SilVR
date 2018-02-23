@@ -10,8 +10,10 @@ public class GridManager : Singleton<GridManager>
 
 	public GameObject floorPlane;
 
+	public GameObject invisibleCube;
+
     //grid with custom nodes
-    Node[,] grid;
+    public Node[,] grid;
     //for 3D
     //Node[,,] grid;
 
@@ -114,18 +116,24 @@ public class GridManager : Singleton<GridManager>
         if (grid != null)
         {           
 
-            foreach (Node n in grid)
-            {
-                //if walkable then green, if not then red
-                Gizmos.color = (n.free) ? Color.green : Color.red;
-                //object color
-                if(objectNode != null)
-                    if (objectNode == n)
-                    {
-                        Gizmos.color = Color.blue;
-                    }
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 10.000f));
-            }
+			foreach (Node n in grid) {
+				//if walkable then green, if not then red
+				Gizmos.color = (n.free) ? Color.green : Color.red;
+
+				if (path != null) {
+					foreach (Node obj in path) {
+
+						objectNode = obj;
+						//object color
+						if (objectNode != null)
+						if (objectNode == n) {
+							Gizmos.color = Color.blue;
+						}
+					}
+
+					Gizmos.DrawCube (n.worldPosition, Vector3.one * (nodeDiameter - 10.000f));
+				}
+			}
         }
 
     }

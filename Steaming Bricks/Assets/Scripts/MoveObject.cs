@@ -11,16 +11,22 @@ public class MoveObject : MonoBehaviour {
     private Vector3 initial_pos;
     private bool droppable = false;
 
+	private int objectX;
+	private float objectY;
+	private int objectZ;
+
+	private GameObject centerObject;
+
     //Level walls
     //To be replaced by range of actual floor of level
     //Redundant with physics?
     private Vector3 rangeA = new Vector3(1600.0f,0.0f,1600.0f);
     private Vector3 rangeB = new Vector3(-1600.0f,0.0f,-1600.0f);
 
-    //The distance of each step for the object
+    //The distance of each step for the object. Also the integer width of one node
     private int step;
 
-	//The floor height (y) to set the object to
+	//The height of the ground plane
 	private float floor;
 
     // Use this for initialization
@@ -51,10 +57,39 @@ public class MoveObject : MonoBehaviour {
     //For object pick up
     void OnMouseDown()
     {
-        GridManager.Instance.curr_object = transform;
-        initial_pos = transform.position;        
-        screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-        offset = transform.position - Camera.main.ScreenToWorldPoint(
+        //GridManager.Instance.curr_object = transform;
+
+		objectX = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.x * 2 / step);
+		objectY = transform.GetComponent<MeshRenderer> ().bounds.extents.y; //this should not be divided to preserve correct height
+		objectZ = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.z * 2 / step);
+		Debug.Log ("obx " + transform.GetComponent<MeshRenderer> ().bounds.extents.x + " obz " + transform.GetComponent<MeshRenderer> ().bounds.extents.z + " step " + step);
+		Debug.Log ("obx " + objectX + " obz " + objectZ);
+
+		float xOffset = Mathf.Floor (objectX / 2);
+		float zOffset = Mathf.Floor (objectZ / 2);
+
+		if (objectX % 2 == 0)
+			xOffset += .5f;
+		if (objectZ % 2 == 0)
+			zOffset += .5f;
+        
+		centerObject = Instantiate (GridManager.Instance.invisibleCube, new Vector3 (transform.position.x + (xOffset * step), transform.position.y, transform.position.z + (zOffset * step)), Quaternion.identity);
+		transform.SetParent (centerObject.transform);
+
+		List<Node> objectNodes = new List<Node> ();
+		for (int i = 0; i < objectX; i++) {
+			for (int k = 0; k < objectZ; k++) {
+				objectNodes.Add (GridManager.Instance.NodePoint (new Vector3 (
+					centerObject.transform.position.x - (i * step), centerObject.transform.position.y, centerObject.transform.position.z - (k * step))));
+			}
+		}
+
+		GridManager.Instance.curr_object = centerObject.transform;
+		GridManager.Instance.path = objectNodes;
+			
+		initial_pos = centerObject.transform.position;        
+		screenPoint = Camera.main.WorldToScreenPoint(centerObject.transform.position);
+		offset = centerObject.transform.position - Camera.main.ScreenToWorldPoint(
             new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
         GetComponent<Collider>().enabled = false;
         GridManager.Instance.UpdateGrid();
@@ -97,14 +132,14 @@ public class MoveObject : MonoBehaviour {
         if (curPosition.x <= rangeA.x && curPosition.x >= rangeB.x && curPosition.z <= rangeA.z && curPosition.z >= rangeB.z)
         {
             //Within walls
-            transform.position = curPosition;
+			centerObject.transform.position = curPosition;
         }
         else
         {
             //Prevent it from crossing the wall
-            Vector3 temp = transform.position;
+			Vector3 temp = centerObject.transform.position;
             temp.y = y;
-            transform.position = temp;
+			centerObject.transform.position = temp;
         }
 
     }
@@ -114,15 +149,18 @@ public class MoveObject : MonoBehaviour {
 
         if (droppable && GridManager.Instance.NodePoint(GridManager.Instance.curr_object.position).free)
         {
-            Vector3 curPosition = transform.position;
-			curPosition.y = floor + transform.GetComponent<MeshRenderer>().bounds.extents.y;
-            transform.position = curPosition;
+			Vector3 curPosition = centerObject.transform.position;
+			curPosition.y = floor + objectY;
+			centerObject.transform.position = curPosition;
         }
         else
         {
-            transform.position = initial_pos;
+			centerObject.transform.position = initial_pos;
         }
         GridManager.Instance.UpdateGrid();
+
+		transform.parent = null;
+		Destroy (centerObject);
     }
 
     private void ControllerGrab()
