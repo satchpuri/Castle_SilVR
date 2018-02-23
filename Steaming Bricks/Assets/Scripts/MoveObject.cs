@@ -16,7 +16,10 @@ public class MoveObject : MonoBehaviour {
     private Vector3 rangeB = new Vector3(-1600.0f,0.0f,-1600.0f);
 
     //The distance of each step for the object
-    private int step = 100;
+    private int step;
+
+	//The floor height (y) to set the object to
+	private float floor;
 
     // Use this for initialization
     void Start () {
@@ -24,7 +27,12 @@ public class MoveObject : MonoBehaviour {
         //rangeA = GridManager.Instance.worldTopRight;
         //rangeB = GridManager.Instance.worldBotLeft;
         //Debug.Log(GridManager.Instance.worldTopRight);
+
         //Set step as distance between 2 nodes in grid manager
+		step = Mathf.RoundToInt(GridManager.Instance.nodeRadius * 2);
+
+		//Set floor (y) to height of the floor plane
+		floor = 23 + GridManager.Instance.floorPlane.transform.position.y; //Make this not half hardcoded
     }
 	
 	// Update is called once per frame
@@ -99,7 +107,7 @@ public class MoveObject : MonoBehaviour {
         if (droppable && GridManager.Instance.NodePoint(GridManager.Instance.curr_object.position).free)
         {
             Vector3 curPosition = transform.position;
-            curPosition.y = 37.5f;
+			curPosition.y = floor;
             transform.position = curPosition;
         }
         else

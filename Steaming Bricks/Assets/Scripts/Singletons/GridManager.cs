@@ -8,6 +8,8 @@ public class GridManager : Singleton<GridManager>
     //will be filled with gameobjects, multiple spots can and will goto a single obj
     //public GameObject[,] grid;
 
+	public GameObject floorPlane;
+
     //grid with custom nodes
     Node[,] grid;
     //for 3D
