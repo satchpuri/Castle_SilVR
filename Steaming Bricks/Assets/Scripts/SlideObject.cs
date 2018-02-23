@@ -16,8 +16,11 @@ public class SlideObject : MonoBehaviour
     private Vector3 rangeA = new Vector3(1600.0f, 0.0f, 1600.0f);
     private Vector3 rangeB = new Vector3(-1600.0f, 0.0f, -1600.0f);
 
-    //The distance of each step for the object
-    private int step = 100;
+	//The distance of each step for the object
+	private int step;
+
+	//The floor height (y) to set the object to
+	private float floor;
 
     // Use this for initialization
     void Start()
@@ -26,7 +29,12 @@ public class SlideObject : MonoBehaviour
         //rangeA = GridManager.Instance.worldTopRight;
         //rangeB = GridManager.Instance.worldBotLeft;
         //Debug.Log(GridManager.Instance.worldTopRight);
-        //Set step as distance between 2 nodes in grid manager
+
+		//Set step as distance between 2 nodes in grid manager
+		step = Mathf.RoundToInt(GridManager.Instance.nodeRadius * 2);
+
+		//Set floor (y) to height of the floor plane
+		floor = 23 + GridManager.Instance.floorPlane.transform.position.y; //Make this not half hardcoded
     }
 
     // Update is called once per frame
@@ -71,8 +79,8 @@ public class SlideObject : MonoBehaviour
         //Will be slightly altered when step distance is determined
         //if (y <= step * 2)
         //{
-            curPosition.x = ((int)Mathf.Round(curPosition.x) / step) * step + 50;
-            curPosition.z = ((int)Mathf.Round(curPosition.z) / step) * step + 50;
+            curPosition.x = ((int)Mathf.Round(curPosition.x) / step) * step;
+            curPosition.z = ((int)Mathf.Round(curPosition.z) / step) * step;
             droppable = true;
         //}
         //else
