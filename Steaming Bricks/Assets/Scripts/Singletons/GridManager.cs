@@ -122,7 +122,7 @@ public class GridManager : Singleton<GridManager>
                     {
                         Gizmos.color = Color.blue;
                     }
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 10.0f));
+                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.100f));
             }
         }
 

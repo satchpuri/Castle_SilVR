@@ -6,6 +6,7 @@ public class Node {
 
     public bool free;
     public Vector3 worldPosition;
+    public int half_size;
 
     public Node(bool _free, Vector3 _worldPos)
     {
