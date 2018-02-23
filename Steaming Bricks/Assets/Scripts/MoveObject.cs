@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.WSA.Input;
+using UnityEngine.XR;
 
 public class MoveObject : MonoBehaviour {
 
@@ -37,7 +39,13 @@ public class MoveObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        //fire raycast on trigger pull
+        if (Input.GetAxis("RTrigger") > 0.25f)
+        {
+            Debug.Log("Trigger Pulled");
+            //attempt to grab
+            ControllerGrab();
+        }
 	}
 
     //For object pick up
@@ -115,5 +123,19 @@ public class MoveObject : MonoBehaviour {
             transform.position = initial_pos;
         }
         GridManager.Instance.UpdateGrid();
+    }
+
+    private void ControllerGrab()
+    {
+        //get right controller transform data
+        Vector3 rightPosition = InputTracking.GetLocalPosition(XRNode.RightHand);
+        Quaternion rightRotation = InputTracking.GetLocalRotation(XRNode.RightHand);
+
+        //raycast from controller pos
+        Debug.DrawRay(rightPosition, Vector3.forward, Color.white);
+        if (Physics.Raycast(rightPosition, (Vector3.forward * 500), 3000f))
+        {
+            Debug.Log("Grab!");
+        }
     }
 }
