@@ -22,6 +22,7 @@ public class MoveController : MonoBehaviour {
         //RIGHT HAND
         //get pos and rot
         Vector3 rightPosition = InputTracking.GetLocalPosition(XRNode.RightHand);
+        //rightPosition = new Vector3(rightPosition.x - 1.0f, rightPosition.y - 1.0f, rightPosition.z - 1.0f);
         rightPosition = rightPosition * scaler;
         rightPosition.y -= verticalDrop;
 
