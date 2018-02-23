@@ -32,7 +32,7 @@ public class MoveObject : MonoBehaviour {
 		step = Mathf.RoundToInt(GridManager.Instance.nodeRadius * 2);
 
 		//Set floor (y) to height of the floor plane
-		floor = 23 + GridManager.Instance.floorPlane.transform.position.y; //Make this not half hardcoded
+		floor = GridManager.Instance.floorPlane.transform.position.y;
     }
 	
 	// Update is called once per frame
@@ -63,9 +63,9 @@ public class MoveObject : MonoBehaviour {
 
         //To ensure object doesnt phase through floor 
         //Adding physics makes this redundant
-        if(curPosition.y < 37.5f)
+        if(curPosition.y < floor)
         {
-            curPosition.y = 37.5f;
+            curPosition.y = floor;
         }
 
         //Store y value so that object can still move in that direction when it hits castle wall
@@ -107,7 +107,7 @@ public class MoveObject : MonoBehaviour {
         if (droppable && GridManager.Instance.NodePoint(GridManager.Instance.curr_object.position).free)
         {
             Vector3 curPosition = transform.position;
-			curPosition.y = floor;
+			curPosition.y = floor + transform.GetComponent<MeshRenderer>().bounds.extents.y;
             transform.position = curPosition;
         }
         else

@@ -66,9 +66,9 @@ public class SlideObject : MonoBehaviour
 
         //To ensure object doesnt phase through floor 
         //Adding physics makes this redundant
-        if (curPosition.y < 37.5f)
+		if (curPosition.y < floor)
         {
-            curPosition.y = 37.5f;
+            curPosition.y = floor;
         }
 
         //Store y value so that object can still move in that direction when it hits castle wall
