@@ -12,13 +12,35 @@ public class MoveController : MonoBehaviour {
     [SerializeField] private float scaler;
     [SerializeField] private float verticalDrop;
 
+    private LineRenderer rayLine;
+    private RaycastHit hit;
+    private Ray ray;
+    private bool grabbing;
+    [SerializeField] private float grabDistance;
+
     // Use this for initialization
     void Start () {
+        rayLine = this.gameObject.GetComponent<LineRenderer>(); //atach linredrerer to field
+        rayLine.enabled = true; //make sure its on
+
+        //set inital line colour
+        rayLine.startColor = Color.white;
+        rayLine.endColor = Color.white;
+
+        //set grabbing initally
+        grabbing = false;
 
     }
 
     // Update is called once per frame
     void Update () {
+        TrackMovement(); //track motion controllers and apply it to ingame hand objects
+        DrawLine(rightHand);
+        RightTrigger();
+    }
+
+    private void TrackMovement()
+    {
         //RIGHT HAND
         //get pos and rot
         Vector3 rightPosition = InputTracking.GetLocalPosition(XRNode.RightHand);
@@ -29,7 +51,7 @@ public class MoveController : MonoBehaviour {
         Quaternion rightRotation = InputTracking.GetLocalRotation(XRNode.RightHand);
 
         //set pos and rot
-        rightHand.transform.position =  rightPosition;
+        rightHand.transform.position = rightPosition;
         rightHand.transform.rotation = rightRotation;
 
         //LEFT HAND
@@ -43,41 +65,68 @@ public class MoveController : MonoBehaviour {
         //set pos and rot
         leftHand.transform.position = leftPosition;
         leftHand.transform.rotation = leftRotation;
-
-
     }
 
-    private Vector3 TrackMovement(GameObject handGO, XRNode handNode)
+    private void DrawLine(GameObject hand)
     {
-        //get XR node position values
-        Vector3 nodePos = InputTracking.GetLocalPosition(handNode);
+        //build raycast from desired hand
+        ray = new Ray(hand.transform.position, hand.transform.up * -1);
 
-        //calc vector3 to be added to objs pos
-        float x = 0;
-        float y = 0;
-        float z = 0;
+        //draw line to vizualize raycast
+        rayLine.SetPosition(0, ray.origin);
+        rayLine.SetPosition(1, ray.GetPoint(grabDistance));
+    }
 
-        //x w/ deadzone
-        if (nodePos.x > .2f)
+    private void RightTrigger()
+    {
+        //fire raycast on trigger pull
+        if (Input.GetAxis("RTrigger") > 0.0f && Input.GetAxis("RTrigger") > 0.1f)
         {
-            x += .5f;
-        }
-        else if (nodePos.x < -.2f)
-        {
-            x -= .5f;
-        }
+            Debug.Log("RTrigger");
+            //change line colour
+            rayLine.startColor = Color.green;
+            rayLine.endColor = Color.green;
 
-        //y w/ deadzone
-        if (nodePos.y > .2f)
-        {
-            y += .5f;
-        }
-        else if (nodePos.y < -.2f)
-        {
-            y -= .5f;
-        }
+            //check if raycast hit anything we want
+            if (Physics.Raycast(ray, out hit, grabDistance)) //check for valid raycast
+            {
+                Debug.Log("Hit");
+                if(hit.collider.gameObject.tag == "Movable") //the object is movable
+                {
+                    //everything checks out- actually pickup the object
+                    hit.collider.gameObject.GetComponent<MoveObject>().PickUp();
+                    grabbing = true;
+                    Debug.Log("Grab");
+                }
+            }
 
-        return nodePos;
+        }
+        else if (Input.GetAxis("RTrigger") > 0.1f && Input.GetAxis("RTrigger") < 1.0f)
+        {
+            //check if we are grabbing
+            if (grabbing)
+            {
+                //drag that bish by the hair
+                hit.collider.gameObject.GetComponent<MoveObject>().Drag();
+            }
+
+        }
+        else if (Input.GetButtonUp("RTrigger"))
+        {
+            //check if we are grabbing
+            if (grabbing)
+            {
+                //drop object
+                hit.collider.gameObject.GetComponent<MoveObject>().Drop();
+
+                //reset colour
+                rayLine.startColor = Color.white;
+                rayLine.endColor = Color.white;
+
+                //notify that we let go
+                grabbing = false;
+            }
+        }
     }
 
 }

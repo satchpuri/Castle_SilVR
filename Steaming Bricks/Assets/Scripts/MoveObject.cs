@@ -45,13 +45,7 @@ public class MoveObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //fire raycast on trigger pull
-        if (Input.GetAxis("RTrigger") > 0.25f)
-        {
-            Debug.Log("Trigger Pulled");
-            //attempt to grab
-            ControllerGrab();
-        }
+        
 	}
 
     //For object pick up
@@ -163,17 +157,107 @@ public class MoveObject : MonoBehaviour {
 		Destroy (centerObject);
     }
 
-    private void ControllerGrab()
+    public void PickUp()
     {
-        //get right controller transform data
-        Vector3 rightPosition = InputTracking.GetLocalPosition(XRNode.RightHand);
-        Quaternion rightRotation = InputTracking.GetLocalRotation(XRNode.RightHand);
 
-        //raycast from controller pos
-        Debug.DrawRay(rightPosition, Vector3.forward, Color.white);
-        if (Physics.Raycast(rightPosition, (Vector3.forward * 500), 3000f))
-        {
-            Debug.Log("Grab!");
+        objectX = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.x * 2 / step);
+        objectY = transform.GetComponent<MeshRenderer> ().bounds.extents.y; //this should not be divided to preserve correct height
+        objectZ = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.z * 2 / step);
+        Debug.Log ("obx " + transform.GetComponent<MeshRenderer> ().bounds.extents.x + " obz " + transform.GetComponent<MeshRenderer> ().bounds.extents.z + " step " + step);
+        Debug.Log ("obx " + objectX + " obz " + objectZ);
+
+        float xOffset = Mathf.Floor (objectX / 2);
+        float zOffset = Mathf.Floor (objectZ / 2);
+
+        if (objectX % 2 == 0)
+            xOffset += .5f;
+        if (objectZ % 2 == 0)
+            zOffset += .5f;
+
+        centerObject = Instantiate (GridManager.Instance.invisibleCube, new Vector3 (transform.position.x + (xOffset * step), transform.position.y, transform.position.z + (zOffset * step)), Quaternion.identity);
+        transform.SetParent (centerObject.transform);
+
+        List<Node> objectNodes = new List<Node> ();
+        for (int i = 0; i < objectX; i++) {
+            for (int k = 0; k < objectZ; k++) {
+                objectNodes.Add (GridManager.Instance.NodePoint (new Vector3 (
+                    centerObject.transform.position.x - (i * step), centerObject.transform.position.y, centerObject.transform.position.z - (k * step))));
+            }
         }
+
+        GridManager.Instance.curr_object = centerObject.transform;
+        GridManager.Instance.path = objectNodes;
+
+        initial_pos = centerObject.transform.position;        
+        screenPoint = Camera.main.WorldToScreenPoint(centerObject.transform.position);
+        offset = centerObject.transform.position - Camera.main.ScreenToWorldPoint(
+            new Vector3(GameManager.Instance.rightHand.transform.position.x, GameManager.Instance.rightHand.transform.position.y, screenPoint.z));
+        GetComponent<Collider>().enabled = false;
+        GridManager.Instance.UpdateGrid();
+        GetComponent<Collider>().enabled = true;
+    }
+
+    public void Drag()
+    {
+        //GridManager.Instance.UpdateGrid();
+        Vector3 curScreenPoint = new Vector3(GameManager.Instance.rightHand.transform.position.x, GameManager.Instance.rightHand.transform.position.y, screenPoint.z);
+
+        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);// + offset;
+
+        //To ensure object doesnt phase through floor 
+        //Adding physics makes this redundant
+        if(curPosition.y < floor)
+        {
+            curPosition.y = floor;
+        }
+
+        //Store y value so that object can still move in that direction when it hits castle wall
+        float y = curPosition.y;
+
+        //You need to be this close to floor to snap object into position where it can be dropped
+        //Else it return to initial position when dropped
+        //Will be slightly altered when step distance is determined
+        if (y <= step*2)
+        {
+            curPosition.x = ((int)Mathf.Round(curPosition.x) / step) * step;
+            curPosition.z = ((int)Mathf.Round(curPosition.z) / step) * step;
+            droppable = true;
+        }
+        else
+        {
+            droppable = false;
+        }
+
+        //Condition for when you hit castle wall. Redundant with physics?
+        if (curPosition.x <= rangeA.x && curPosition.x >= rangeB.x && curPosition.z <= rangeA.z && curPosition.z >= rangeB.z)
+        {
+            //Within walls
+            centerObject.transform.position = curPosition;
+        }
+        else
+        {
+            //Prevent it from crossing the wall
+            Vector3 temp = centerObject.transform.position;
+            temp.y = y;
+            centerObject.transform.position = temp;
+        }
+    }
+
+    public void Drop()
+    {
+        if (droppable && GridManager.Instance.NodePoint(GridManager.Instance.curr_object.position).free)
+        {
+            Vector3 curPosition = centerObject.transform.position;
+            curPosition.y = floor + objectY;
+            centerObject.transform.position = curPosition;
+        }
+        else
+        {
+            centerObject.transform.position = initial_pos;
+        }
+        GridManager.Instance.UpdateGrid();
+
+        transform.parent = null;
+        Destroy (centerObject);
     }
 }
