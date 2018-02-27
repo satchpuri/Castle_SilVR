@@ -80,42 +80,14 @@ public class MoveController : MonoBehaviour {
     private void RightTrigger()
     {
         //fire raycast on trigger pull
-        if (Input.GetAxis("RTrigger") > 0.0f && Input.GetAxis("RTrigger") > 0.1f)
-        {
-            Debug.Log("RTrigger");
-            //change line colour
-            rayLine.startColor = Color.green;
-            rayLine.endColor = Color.green;
 
-            //check if raycast hit anything we want
-            if (Physics.Raycast(ray, out hit, grabDistance)) //check for valid raycast
-            {
-                Debug.Log("Hit");
-                if(hit.collider.gameObject.tag == "Movable") //the object is movable
-                {
-                    //everything checks out- actually pickup the object
-                    hit.collider.gameObject.GetComponent<MoveObject>().PickUp();
-                    grabbing = true;
-                    Debug.Log("Grab");
-                }
-            }
-
-        }
-        else if (Input.GetAxis("RTrigger") > 0.1f && Input.GetAxis("RTrigger") < 1.0f)
+        if (Input.GetAxis("RTrigger") > 0.0f && Input.GetAxis("RTrigger") < 0.3f) //early on trigger pull
         {
+            Debug.Log(Input.GetAxis("RTrigger"));
             //check if we are grabbing
             if (grabbing)
             {
-                //drag that bish by the hair
-                hit.collider.gameObject.GetComponent<MoveObject>().Drag();
-            }
-
-        }
-        else if (Input.GetButtonUp("RTrigger"))
-        {
-            //check if we are grabbing
-            if (grabbing)
-            {
+                Debug.Log("Drop");
                 //drop object
                 hit.collider.gameObject.GetComponent<MoveObject>().Drop();
 
@@ -125,7 +97,41 @@ public class MoveController : MonoBehaviour {
 
                 //notify that we let go
                 grabbing = false;
+
+                return; //leave this method bc we let go
             }
+            else //not grabbing! - we can check for a valid obj to grab
+            {
+                //change line colour
+                rayLine.startColor = Color.green;
+                rayLine.endColor = Color.green;
+
+                //check if raycast hit anything we want
+                if (Physics.Raycast(ray, out hit, grabDistance, GridManager.Instance.filledMask)) //check for valid raycast
+                {
+                    Debug.Log("Hit " + hit.collider.gameObject.tag);
+                    if(hit.collider.gameObject.tag == "Movable") //the object is movable
+                    {
+                        //everything checks out- actually pickup the object
+                        hit.collider.gameObject.GetComponent<MoveObject>().PickUp();
+                        grabbing = true;
+                        Debug.Log("Grab");
+                    }
+                }
+            }
+                
+
+
+        }
+        else if (Input.GetAxis("RTrigger") > 0.3f && Input.GetAxis("RTrigger") < 1.0f)
+        {
+            //check if we are grabbing
+            if (grabbing)
+            {
+                //drag that bish by the hair
+                hit.collider.gameObject.GetComponent<MoveObject>().Drag();
+            }
+
         }
     }
 
