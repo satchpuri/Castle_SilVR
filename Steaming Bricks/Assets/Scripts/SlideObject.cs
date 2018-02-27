@@ -25,16 +25,11 @@ public class SlideObject : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //Set rangeA and rangeB from grid manager
-        //rangeA = GridManager.Instance.worldTopRight;
-        //rangeB = GridManager.Instance.worldBotLeft;
-        //Debug.Log(GridManager.Instance.worldTopRight);
-
 		//Set step as distance between 2 nodes in grid manager
 		step = Mathf.RoundToInt(GridManager.Instance.nodeRadius * 2);
 
-		//Set floor (y) to height of the floor plane
-		floor = 23 + GridManager.Instance.floorPlane.transform.position.y; //Make this not half hardcoded
+        //Set floor (y) to height of the floor plane
+        floor = GridManager.Instance.floorPlane.transform.position.y;
     }
 
     // Update is called once per frame
@@ -74,19 +69,12 @@ public class SlideObject : MonoBehaviour
         //Store y value so that object can still move in that direction when it hits castle wall
         float y = curPosition.y;
 
-        //You need to be this close to floor to snap object into position where it can be dropped
-        //Else it return to initial position when dropped
-        //Will be slightly altered when step distance is determined
-        //if (y <= step * 2)
-        //{
-            curPosition.x = ((int)Mathf.Round(curPosition.x) / step) * step;
-            curPosition.z = ((int)Mathf.Round(curPosition.z) / step) * step;
-            droppable = true;
-        //}
-        //else
-        //{
-        //    droppable = false;
-        //}
+        //To snap object into position where it can be dropped
+        
+        curPosition.x = ((int)Mathf.Round(curPosition.x) / step) * step;
+        curPosition.z = ((int)Mathf.Round(curPosition.z) / step) * step;
+        droppable = true;
+       
 
         //So that it doesn't lift off ground
         curPosition.y = initial_pos.y;
@@ -99,28 +87,11 @@ public class SlideObject : MonoBehaviour
             //If there are !free objects there, don't move at all.
             transform.position = curPosition;
         }
-        else
-        {
-            //Vector3 temp = transform.position;
-            //temp.y = y;
-            //transform.position = temp;
-        }
 
     }
 
     private void OnMouseUp()
     {
-
-        if (droppable && GridManager.Instance.NodePoint(GridManager.Instance.curr_object.position).free)
-        {
-            //Vector3 curPosition = transform.position;
-            //curPosition.y = 37.5f;
-            //transform.position = curPosition;
-        }
-        else
-        {
-            //transform.position = initial_pos;
-        }
         GridManager.Instance.UpdateGrid();
     }
 }

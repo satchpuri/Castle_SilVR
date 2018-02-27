@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 82344311}
   - component: {fileID: 82344310}
   - component: {fileID: 82344309}
+  - component: {fileID: 82344313}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -276,8 +277,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 4
-  far clip plane: 5000
-  field of view: 39.893826
+  far clip plane: 7000
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -300,13 +301,29 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 82344308}
-  m_LocalRotation: {x: 0.5827462, y: -0, z: -0, w: 0.81265426}
+  m_LocalRotation: {x: 0.5842497, y: 0, z: 0, w: 0.81157404}
   m_LocalPosition: {x: 0, y: 4174, z: -1592}
   m_LocalScale: {x: 1, y: 1, z: 4.173186}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 71.288, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 71.5, y: 0, z: 0}
+--- !u!114 &82344313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 82344308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e927cc35abe0f7438ddc43253dc9d7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  speed: 10
+  rotSpeed: 2
+  devControls: 0
+  isVR: 0
 --- !u!1 &106949898
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,6 +654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorPlane: {fileID: 0}
+  invisibleCube: {fileID: 0}
   filledMask:
     serializedVersion: 2
     m_Bits: 256
@@ -1347,6 +1365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorPlane: {fileID: 1221103991}
+  invisibleCube: {fileID: 0}
   filledMask:
     serializedVersion: 2
     m_Bits: 256
