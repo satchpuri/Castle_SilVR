@@ -18,6 +18,9 @@ public class MoveController : MonoBehaviour {
     private bool grabbing;
     [SerializeField] private float grabDistance;
 
+    private float rTrigger_lastFrame;
+    private float rTrigger_currentFrame;
+
     // Use this for initialization
     void Start () {
         rayLine = this.gameObject.GetComponent<LineRenderer>(); //atach linredrerer to field
@@ -70,7 +73,7 @@ public class MoveController : MonoBehaviour {
     private void DrawLine(GameObject hand)
     {
         //build raycast from desired hand
-        ray = new Ray(hand.transform.position, hand.transform.up * -1);
+        ray = new Ray(hand.transform.position, hand.transform.forward);
 
         //draw line to vizualize raycast
         rayLine.SetPosition(0, ray.origin);
@@ -79,11 +82,46 @@ public class MoveController : MonoBehaviour {
 
     private void RightTrigger()
     {
-        //fire raycast on trigger pull
+        //update trigger frames checks
+        rTrigger_lastFrame = rTrigger_currentFrame;
+        rTrigger_currentFrame = Input.GetAxis("RTrigger");
 
-        if (Input.GetAxis("RTrigger") > 0.0f && Input.GetAxis("RTrigger") < 0.3f) //early on trigger pull
+        //trigger pull checks
+        if (rTrigger_lastFrame <= .1f && rTrigger_currentFrame > 0f) //trigger intial pull
         {
-            Debug.Log(Input.GetAxis("RTrigger"));
+            //change line colour
+            rayLine.startColor = Color.green;
+            rayLine.endColor = Color.green;
+
+            //check if raycast hit anything we want
+            if (Physics.Raycast(ray, out hit, grabDistance, GridManager.Instance.filledMask)) //check for valid raycast
+            {
+                Debug.Log("Hit " + hit.collider.gameObject.tag);
+                if(hit.collider.gameObject.tag == "Movable") //the object is movable
+                {
+                    //everything checks out- actually pickup the object
+                    hit.collider.gameObject.GetComponent<MoveObject>().PickUp(hit.transform);
+                    grabbing = true;
+                    Debug.Log("Grab");
+                }
+            }
+        }
+        else if (rTrigger_lastFrame > 0f && rTrigger_currentFrame > 0f) //holding trigger
+        {
+            //check if we are grabbing
+            if (grabbing)
+            {
+                //drag that bish by the hair
+                hit.collider.gameObject.GetComponent<MoveObject>().Drag(hit.transform);
+            }
+
+        }
+        else  if (rTrigger_lastFrame >= .1f && rTrigger_currentFrame <= .1f) //let go of trigger
+        {
+            //reset colour
+            rayLine.startColor = Color.white;
+            rayLine.endColor = Color.white;
+
             //check if we are grabbing
             if (grabbing)
             {
@@ -91,47 +129,9 @@ public class MoveController : MonoBehaviour {
                 //drop object
                 hit.collider.gameObject.GetComponent<MoveObject>().Drop();
 
-                //reset colour
-                rayLine.startColor = Color.white;
-                rayLine.endColor = Color.white;
-
                 //notify that we let go
                 grabbing = false;
-
-                return; //leave this method bc we let go
             }
-            else //not grabbing! - we can check for a valid obj to grab
-            {
-                //change line colour
-                rayLine.startColor = Color.green;
-                rayLine.endColor = Color.green;
-
-                //check if raycast hit anything we want
-                if (Physics.Raycast(ray, out hit, grabDistance, GridManager.Instance.filledMask)) //check for valid raycast
-                {
-                    Debug.Log("Hit " + hit.collider.gameObject.tag);
-                    if(hit.collider.gameObject.tag == "Movable") //the object is movable
-                    {
-                        //everything checks out- actually pickup the object
-                        hit.collider.gameObject.GetComponent<MoveObject>().PickUp();
-                        grabbing = true;
-                        Debug.Log("Grab");
-                    }
-                }
-            }
-                
-
-
-        }
-        else if (Input.GetAxis("RTrigger") > 0.3f && Input.GetAxis("RTrigger") < 1.0f)
-        {
-            //check if we are grabbing
-            if (grabbing)
-            {
-                //drag that bish by the hair
-                hit.collider.gameObject.GetComponent<MoveObject>().Drag();
-            }
-
         }
     }
 

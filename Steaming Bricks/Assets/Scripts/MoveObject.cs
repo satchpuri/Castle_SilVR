@@ -157,14 +157,13 @@ public class MoveObject : MonoBehaviour {
 		Destroy (centerObject);
     }
 
-    public void PickUp()
+    // VR GRABBING CONTROLS ===================================
+    public void PickUp(Transform hitTransform)
     {
 
         objectX = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.x * 2 / step);
         objectY = transform.GetComponent<MeshRenderer> ().bounds.extents.y; //this should not be divided to preserve correct height
         objectZ = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.z * 2 / step);
-        Debug.Log ("obx " + transform.GetComponent<MeshRenderer> ().bounds.extents.x + " obz " + transform.GetComponent<MeshRenderer> ().bounds.extents.z + " step " + step);
-        Debug.Log ("obx " + objectX + " obz " + objectZ);
 
         float xOffset = Mathf.Floor (objectX / 2);
         float zOffset = Mathf.Floor (objectZ / 2);
@@ -174,7 +173,7 @@ public class MoveObject : MonoBehaviour {
         if (objectZ % 2 == 0)
             zOffset += .5f;
 
-        centerObject = Instantiate (GridManager.Instance.invisibleCube, new Vector3 (transform.position.x + (xOffset * step), transform.position.y, transform.position.z + (zOffset * step)), Quaternion.identity);
+        centerObject = Instantiate (GridManager.Instance.invisibleCube, transform.position, Quaternion.identity); 
         transform.SetParent (centerObject.transform);
 
         List<Node> objectNodes = new List<Node> ();
@@ -189,20 +188,16 @@ public class MoveObject : MonoBehaviour {
         GridManager.Instance.path = objectNodes;
 
         initial_pos = centerObject.transform.position;        
-        screenPoint = Camera.main.WorldToScreenPoint(centerObject.transform.position);
-        offset = centerObject.transform.position - Camera.main.ScreenToWorldPoint(
-            new Vector3(GameManager.Instance.rightHand.transform.position.x, GameManager.Instance.rightHand.transform.position.y, screenPoint.z));
+        offset = centerObject.transform.position - hitTransform.position;
+
         GetComponent<Collider>().enabled = false;
         GridManager.Instance.UpdateGrid();
         GetComponent<Collider>().enabled = true;
     }
 
-    public void Drag()
+    public void Drag(Transform hitTransform)
     {
-        //GridManager.Instance.UpdateGrid();
-        Vector3 curScreenPoint = new Vector3(GameManager.Instance.rightHand.transform.position.x, GameManager.Instance.rightHand.transform.position.y, screenPoint.z);
-
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);// + offset;
+        Vector3 curPosition = hitTransform.position;// + offset;
 
         //To ensure object doesnt phase through floor 
         //Adding physics makes this redundant
