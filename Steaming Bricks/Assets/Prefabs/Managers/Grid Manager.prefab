@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorPlane: {fileID: 0}
+  invisibleCube: {fileID: 0}
   filledMask:
     serializedVersion: 2
     m_Bits: 256

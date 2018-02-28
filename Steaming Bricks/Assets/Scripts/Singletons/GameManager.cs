@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public class GameManager : Singleton<GameManager>
 {
     //references to movable objects, hands, and player
-    public GameObject Player;
+    public GameObject player;
 
     //Object with tag "Movable"
-    public GameObject[] Movable_Objects;
+    public GameObject[] movableObjects;
 
     //Object with tag "Sliding"
-    public GameObject[] Sliding_Object;
+    public GameObject[] slidingObject;
 
     //hands
     public GameObject leftHand;
@@ -20,8 +20,8 @@ public class GameManager : Singleton<GameManager>
     // Use this for initialization
     void Start()
     {
-        Movable_Objects = GameObject.FindGameObjectsWithTag("Movable");
-        Sliding_Object = GameObject.FindGameObjectsWithTag("Sliding");
+        movableObjects = GameObject.FindGameObjectsWithTag("Movable");
+        slidingObject = GameObject.FindGameObjectsWithTag("Sliding");
     }
 
     // Update is called once per frame

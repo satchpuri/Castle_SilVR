@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc2ca3e613de0c4eba7a043160ca5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  Movable_Objects: []
-  Sliding_Object: []
+  player: {fileID: 0}
+  movableObjects: []
+  slidingObject: []
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
