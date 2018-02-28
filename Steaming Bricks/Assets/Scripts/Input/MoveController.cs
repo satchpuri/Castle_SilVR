@@ -9,9 +9,6 @@ public class MoveController : MonoBehaviour {
     [SerializeField] private GameObject leftHand;
     [SerializeField] private GameObject rightHand;
 
-    [SerializeField] private float scaler;
-    [SerializeField] private float verticalDrop;
-
     private LineRenderer rayLine;
     private RaycastHit hit;
     private Ray ray;
@@ -47,10 +44,6 @@ public class MoveController : MonoBehaviour {
         //RIGHT HAND
         //get pos and rot
         Vector3 rightPosition = InputTracking.GetLocalPosition(XRNode.RightHand);
-        //rightPosition = new Vector3(rightPosition.x - 1.0f, rightPosition.y - 1.0f, rightPosition.z - 1.0f);
-        rightPosition = rightPosition * scaler;
-        rightPosition.y -= verticalDrop;
-
         Quaternion rightRotation = InputTracking.GetLocalRotation(XRNode.RightHand);
 
         //set pos and rot
@@ -60,9 +53,6 @@ public class MoveController : MonoBehaviour {
         //LEFT HAND
         //get pos and rot
         Vector3 leftPosition = InputTracking.GetLocalPosition(XRNode.LeftHand);
-        leftPosition = leftPosition * scaler;
-        leftPosition.y -= verticalDrop;
-
         Quaternion leftRotation = InputTracking.GetLocalRotation(XRNode.LeftHand);
 
         //set pos and rot
