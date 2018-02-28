@@ -17,6 +17,8 @@ public class MoveObject : MonoBehaviour {
 
 	private GameObject centerObject;
 
+	private List<Node> objectNodes;
+
     //Level walls
     //To be replaced by range of actual floor of level
     //Redundant with physics?
@@ -51,26 +53,27 @@ public class MoveObject : MonoBehaviour {
     //For object pick up
     void OnMouseDown()
     {
-        //GridManager.Instance.curr_object = transform;
-
+		//calculate the size of the object using its MeshRenderer. This sometimes causes odd bugs.
 		objectX = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.x * 2 / step);
 		objectY = transform.GetComponent<MeshRenderer> ().bounds.extents.y; //this should not be divided to preserve correct height
 		objectZ = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.z * 2 / step);
-		Debug.Log ("obx " + transform.GetComponent<MeshRenderer> ().bounds.extents.x + " obz " + transform.GetComponent<MeshRenderer> ().bounds.extents.z + " step " + step);
-		Debug.Log ("obx " + objectX + " obz " + objectZ);
 
+		//Round the object sizes into ints so they work with nodes
 		float xOffset = Mathf.Floor (objectX / 2);
 		float zOffset = Mathf.Floor (objectZ / 2);
 
+		//Fix the offset if the centerpoint would get stuck midway between 
 		if (objectX % 2 == 0)
 			xOffset += .5f;
 		if (objectZ % 2 == 0)
 			zOffset += .5f;
         
+		//Create a invisible object to get the center point of the object and set it as the parent
 		centerObject = Instantiate (GridManager.Instance.invisibleCube, new Vector3 (transform.position.x + (xOffset * step), transform.position.y, transform.position.z + (zOffset * step)), Quaternion.identity);
 		transform.SetParent (centerObject.transform);
 
-		List<Node> objectNodes = new List<Node> ();
+		//Loop through nodes adjacent to the starting point based on object size and add them to a list of active nodes
+		objectNodes = new List<Node> ();
 		for (int i = 0; i < objectX; i++) {
 			for (int k = 0; k < objectZ; k++) {
 				objectNodes.Add (GridManager.Instance.NodePoint (new Vector3 (
@@ -78,6 +81,7 @@ public class MoveObject : MonoBehaviour {
 			}
 		}
 
+		//Send the transform centerpoint and all nodes to the GridManager
 		GridManager.Instance.curr_object = centerObject.transform;
 		GridManager.Instance.path = objectNodes;
 			
@@ -136,12 +140,21 @@ public class MoveObject : MonoBehaviour {
 			centerObject.transform.position = temp;
         }
 
+		// TODO:potential optimization here
+		objectNodes = new List<Node> ();
+		for (int i = 0; i < objectX; i++) {
+			for (int k = 0; k < objectZ; k++) {
+				objectNodes.Add (GridManager.Instance.NodePoint (new Vector3 (
+					centerObject.transform.position.x - (i * step), centerObject.transform.position.y, centerObject.transform.position.z - (k * step))));
+			}
+		}
+		GridManager.Instance.path = objectNodes;
     }
 
     private void OnMouseUp()
     {
 
-        if (droppable && GridManager.Instance.NodePoint(GridManager.Instance.curr_object.position).free)
+		if (droppable && CheckFreeGrid())
         {
 			Vector3 curPosition = centerObject.transform.position;
 			curPosition.y = floor + objectY;
@@ -255,4 +268,20 @@ public class MoveObject : MonoBehaviour {
         transform.parent = null;
         Destroy (centerObject);
     }
+
+	/// <summary>
+	/// Runs through the current nodes under the object to see if they are all free
+	/// </summary>
+	/// <returns><c>true</c>, if all nodes were free, <c>false</c> otherwise.</returns>
+	private bool CheckFreeGrid() {
+
+		foreach (Node n in objectNodes) {
+			if (!GridManager.Instance.NodePoint (n.worldPosition).free) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }
