@@ -20,4 +20,16 @@ public class LeftController : BaseController {
     protected override void Update () {
         base.Update();
 	}
+
+    public override void OnTriggerDown()
+    {
+    }
+
+    public override void OnTriggerHold()
+    {
+    }
+
+    public override void OnTriggerUp()
+    {
+    }
 }
