@@ -12,7 +12,7 @@ public class LeftController : BaseController {
 
         //set varibles for specific hand from parent
         handNode = XRNode.LeftHand;
-        triggerAxis = ""; // NOT SET
+        triggerAxis = "LTrigger";
 		
 	}
 	
