@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HidingSpace : MonoBehaviour {
     [SerializeField] private LayerMask hiddenLayer;
+    [SerializeField] private float interactDistance;
     private bool hidding;
 
 	// Use this for initialization
@@ -19,14 +20,22 @@ public class HidingSpace : MonoBehaviour {
 
     public void Hide()
     {
-        //set hidden variable to true
-        hidding = true;
+        //check if the player is clsoe enough to hide
+        float difference = Vector3.Distance(GameManager.Instance.player.transform.position, this.gameObject.transform.position); //dista between player and this hiding spot
+        if(difference <= interactDistance)
+        {
+            //set hidden variable to true
+            hidding = true;
 
-        //change tiny terry layer mask so he wont be picked up by guards
-        GameManager.Instance.player.layer = hiddenLayer;
+            //change tiny terry layer mask so he wont be picked up by guards
+            GameManager.Instance.player.layer = hiddenLayer;
 
-        //turn tiny terry object invisible - coroutine?
-        StartCoroutine(Fade(0, -1, GameManager.Instance.player));
+            //stop tiny from moving
+            GameManager.Instance.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+
+            //turn tiny terry object invisible - coroutine?
+            StartCoroutine(Fade(0, -1, GameManager.Instance.player));
+        }
     }
 
     public void StopHidding()
@@ -36,6 +45,10 @@ public class HidingSpace : MonoBehaviour {
 
         //chnage tiny terry mask back to default
         GameManager.Instance.player.layer = 0; //0 is Default layer
+
+        //stop tiny from moving
+        GameManager.Instance.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None; //clear freeze
+        GameManager.Instance.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation; //refreeze rotation
 
         //make tiny terry visible again
         StartCoroutine(Fade(255, 1, GameManager.Instance.player));
