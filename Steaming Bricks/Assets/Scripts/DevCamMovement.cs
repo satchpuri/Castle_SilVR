@@ -18,9 +18,8 @@ public class DevCamMovement : MonoBehaviour
     void Start()
     {
         cam = this.gameObject;
-        pitch = transform.rotation.x;
-        yaw = transform.rotation.y;
-        Debug.Log(pitch);
+        pitch = transform.eulerAngles.x;
+        yaw = transform.eulerAngles.y;
     }
 
     // Update is called once per frame

@@ -3,23 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
 
-	[SerializeField] private GameObject player;
-	[SerializeField] private float speed;
+    [SerializeField] private GameObject player;
+    [SerializeField] private float speed;
     [SerializeField] bool devControls;
 
-	// Use this for initialization
-	void Start () {
-        
+    private Vector2 camRot;
+
+    // Use this for initialization
+    void Start()
+    {
+
         player = this.gameObject;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+        //Get Roatation (Radians) of the camera to alter player motion
+        //We use Mathf.Sin and Mathf.Cos to alter player motion which takes Radians as input
+        camRot = Mathf.Deg2Rad * Camera.main.transform.eulerAngles;
+        //Debug.Log(camRot);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         //chekc for dev or MR controls
-        if(devControls)
+        if (devControls)
         {
+            //Update Roatation of the camera to alter player motion
+            camRot.y = Mathf.Deg2Rad * Camera.main.transform.eulerAngles.y;
+            //Debug.Log(camRot);
+
             //dev is keyboard
             MovePlayer();
         }
@@ -28,39 +42,46 @@ public class PlayerMovement : MonoBehaviour {
             //MR Controls
             MovePlayerStick();
         }
-		
-	}
 
-	// uses arrow keys to shift the GameObject identified as "Player" by the speed.
-	void MovePlayer() {
-		Vector3 current = player.transform.position;
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-			current += new Vector3 (speed, 0, 0);
-		}
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
-			current += new Vector3 (-speed, 0, 0);
-		}
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-			current += new Vector3 (0, 0, -speed);
-		}
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
-			current += new Vector3 (0, 0, speed);
-		}
-		player.transform.position = current;
-	}
+    }
 
-	//Theoretically uses an axis to move by an amount relative to the amount of stick motion.
-	void MovePlayerStick() {
+    // uses arrow keys to shift the GameObject identified as "Player" by the speed.
+    void MovePlayer()
+    {
+        //Moves player in camera's POV using Mathf.Sin and Mathf.Cos
+        Vector3 current = player.transform.position;
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            current += new Vector3(speed * Mathf.Cos(camRot.y), 0, -speed * Mathf.Sin(camRot.y));
+        }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            current += new Vector3(-speed * Mathf.Cos(camRot.y), 0, speed * Mathf.Sin(camRot.y));
+        }
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            current += new Vector3(-speed * Mathf.Sin(camRot.y), 0, -speed * Mathf.Cos(camRot.y));
+        }
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            current += new Vector3(speed * Mathf.Sin(camRot.y), 0, speed * Mathf.Cos(camRot.y));
+        }
+        player.transform.position = current;
+    }
+
+    //Theoretically uses an axis to move by an amount relative to the amount of stick motion.
+    void MovePlayerStick()
+    {
         //current pos
-		Vector3 current = player.transform.position;
-        
+        Vector3 current = player.transform.position;
+
         //get x and z
         float xAxis = Input.GetAxis("LStick_Horizontal");
         float zAxis = Input.GetAxis("LStick_Vertical");
-        
+
         //update pos
-        current -= new Vector3 (speed * xAxis, 0, speed * zAxis);
-		player.transform.position = current;
-	}
-	
+        current -= new Vector3(speed * xAxis, 0, speed * zAxis);
+        player.transform.position = current;
+    }
+
 }
