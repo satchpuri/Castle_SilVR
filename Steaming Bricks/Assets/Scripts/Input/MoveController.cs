@@ -90,7 +90,7 @@ public class MoveController : MonoBehaviour {
                 if(hit.collider.gameObject.tag == "Movable") //the object is movable
                 {
                     //everything checks out- actually pickup the object
-                    hit.collider.gameObject.GetComponent<MoveObject>().PickUp(hit.transform);
+					hit.collider.gameObject.GetComponent<MoveObject>().PickUp(hit.transform, gameObject);
                     grabbing = true;
                     Debug.Log("Grab");
                 }

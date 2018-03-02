@@ -285,9 +285,11 @@ public class MoveObject : MonoBehaviour {
 		if (curPos.z - prevPos.z < -0.5f || curPos.z - prevPos.z > 0.5f)
 			moveZ = Mathf.Round(((curPos.z-prevPos.z) * moveScale) / step);
 		
-		centerObject.transform.position = new Vector3(objectCurPosition.x + (moveX * step), objectCurPosition + (moveY * step), objectCurPosition.z + (moveZ * step));
-		if (centerObject.transform.position.y < floor + (step * 2))
-			centerObject.transform.position.y = step * 2;
+		centerObject.transform.position = new Vector3(objectCurPosition.x + (moveX * step), objectCurPosition.y + (moveY * step), objectCurPosition.z + (moveZ * step));
+		if (centerObject.transform.position.y < floor + (step * 2)) {
+			Vector3 temp = centerObject.transform.position;
+			centerObject.transform.position = new Vector3(temp.x, step*2, temp.z);
+		}
 	}
 
     public void Drop()
