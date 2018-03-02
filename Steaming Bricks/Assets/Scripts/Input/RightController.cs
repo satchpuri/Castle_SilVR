@@ -35,7 +35,7 @@ public class RightController : BaseController {
             rayLine.endColor = Color.green;
 
             //everything checks out- actually pickup the object
-            hit.collider.gameObject.GetComponent<MoveObject>().PickUp(hit.transform);
+			hit.collider.gameObject.GetComponent<MoveObject>().PickUp(hit.transform, this);
             grabbing = true;
             Debug.Log("Grab");
         }
