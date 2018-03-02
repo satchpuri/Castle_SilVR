@@ -53,6 +53,7 @@ public class MoveObject : MonoBehaviour {
     //For object pick up
     void OnMouseDown()
     {
+
 		//calculate the size of the object using its MeshRenderer. This sometimes causes odd bugs.
 		objectX = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.x * 2 / step);
 		objectY = transform.GetComponent<MeshRenderer> ().bounds.extents.y; //this should not be divided to preserve correct height
@@ -174,6 +175,7 @@ public class MoveObject : MonoBehaviour {
     public void PickUp(Transform hitTransform)
     {
 
+
         objectX = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.x * 2 / step);
         objectY = transform.GetComponent<MeshRenderer> ().bounds.extents.y; //this should not be divided to preserve correct height
         objectZ = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.z * 2 / step);
@@ -249,6 +251,7 @@ public class MoveObject : MonoBehaviour {
             temp.y = y;
             centerObject.transform.position = temp;
         }
+		
     }
 
     public void Drop()
