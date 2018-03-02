@@ -12,6 +12,9 @@ public class GridManager : Singleton<GridManager>
 
 	public GameObject invisibleCube;
 
+    //Instance of the grid manager to check if already loaded
+    public static GridManager Instance;
+
     //grid with custom nodes
     public Node[,] grid;
     //for 3D
@@ -46,8 +49,18 @@ public class GridManager : Singleton<GridManager>
 
     void Awake()
     {
-        //dont touch me when we load a new scene
-        DontDestroyOnLoad(this);
+        //Checks whether grid manager has already been loaded and destroys any copies
+        if (Instance)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            //dont touch me when we load a new scene
+            DontDestroyOnLoad(this);
+            Instance = this;
+        }
+        
     }
     // Use this for initialization
     void Start () {
