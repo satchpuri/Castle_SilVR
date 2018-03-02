@@ -5,7 +5,7 @@ using UnityEngine;
 public class HidingSpace : MonoBehaviour {
     [SerializeField] private LayerMask hiddenLayer;
     [SerializeField] private float interactDistance;
-    private bool hidding;
+    public bool hidding;
 
 	// Use this for initialization
 	void Start () {
@@ -28,13 +28,13 @@ public class HidingSpace : MonoBehaviour {
             hidding = true;
 
             //change tiny terry layer mask so he wont be picked up by guards
-            GameManager.Instance.player.layer = hiddenLayer;
+            GameManager.Instance.player.layer = 10;
 
             //stop tiny from moving
-            GameManager.Instance.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+            GameManager.Instance.player.GetComponent<PlayerMovement>().canMove = false;
 
             //turn tiny terry object invisible - coroutine?
-            StartCoroutine(Fade(0, -1, GameManager.Instance.player));
+            StartCoroutine(FadeOut(GameManager.Instance.player));
         }
     }
 
@@ -46,27 +46,47 @@ public class HidingSpace : MonoBehaviour {
         //chnage tiny terry mask back to default
         GameManager.Instance.player.layer = 0; //0 is Default layer
 
-        //stop tiny from moving
-        GameManager.Instance.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None; //clear freeze
-        GameManager.Instance.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation; //refreeze rotation
+        //allow tiny from moving
+        GameManager.Instance.player.GetComponent<PlayerMovement>().canMove = true;
 
         //make tiny terry visible again
-        StartCoroutine(Fade(255, 1, GameManager.Instance.player));
+        StartCoroutine(FadeIn(GameManager.Instance.player));
     }
 
     /// <summary>
     /// Fade the specified object
     /// </summary>
-    /// <param name="endAlpha">the desired alpha at the end of the fade</param>
-    /// <param name="direction">Direction of fade -1 for fade out +1 for fade in</param>
     /// <param name="affectedObj">Affected object by fade</param>
-    IEnumerator Fade(float endAlpha, float direction, GameObject affectedObj)
+    IEnumerator FadeIn(GameObject affectedObj)
     {
         //get objs rednerer colour
         Color c = affectedObj.GetComponent<Renderer>().material.color;
 
         //loop and edit colour
-        for (float f = 1f; f == endAlpha; f += direction)
+        for (float f = 1f; f <= 255; f += 1)
+        {
+            //update alpha
+            c.a = f;
+
+            //give new colour to obj
+            affectedObj.GetComponent<Renderer>().material.color = c;
+
+            //idk man it was in the example
+            yield return null;
+        }
+    }
+
+    /// <summary>
+    /// Fade the specified object
+    /// </summary>
+    /// <param name="affectedObj">Affected object by fade</param>
+    IEnumerator FadeOut(GameObject affectedObj)
+    {
+        //get objs rednerer colour
+        Color c = affectedObj.GetComponent<Renderer>().material.color;
+
+        //loop and edit colour
+        for (float f = 1f; f >= 0; f -= 1)
         {
             //update alpha
             c.a = f;
