@@ -15,6 +15,13 @@ public class MoveObject : MonoBehaviour {
 	private float objectY;
 	private int objectZ;
 
+	private GameObject handle; //a value to store the controller for parenting
+
+	//These values are used to see if the hand has moved
+	private Vector3 prevPos;
+	private Vector3 curPos;
+	private float moveScale = 10f; //this would probably need to be some scale factor of map to bigTerry
+
 	private GameObject centerObject;
 
 	private List<Node> objectNodes;
@@ -53,14 +60,15 @@ public class MoveObject : MonoBehaviour {
     //For object pick up
     void OnMouseDown()
     {
+
 		//calculate the size of the object using its MeshRenderer. This sometimes causes odd bugs.
 		objectX = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.x * 2 / step);
 		objectY = transform.GetComponent<MeshRenderer> ().bounds.extents.y; //this should not be divided to preserve correct height
 		objectZ = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.z * 2 / step);
 
 		//Round the object sizes into ints so they work with nodes
-		float xOffset = Mathf.Floor (objectX / 2);
-		float zOffset = Mathf.Floor (objectZ / 2);
+		float xOffset = Mathf.Floor (objectX / 2); //This seems to need a buffer
+		float zOffset = Mathf.Floor (objectZ / 2); //This seems to need a buffer
 
 		//Fix the offset if the centerpoint would get stuck midway between 
 		if (objectX % 2 == 0)
@@ -171,8 +179,9 @@ public class MoveObject : MonoBehaviour {
     }
 
     // VR GRABBING CONTROLS ===================================
-    public void PickUp(Transform hitTransform)
+	public void PickUp(Transform hitTransform, GameObject hand)
     {
+
 
         objectX = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.x * 2 / step);
         objectY = transform.GetComponent<MeshRenderer> ().bounds.extents.y; //this should not be divided to preserve correct height
@@ -206,9 +215,15 @@ public class MoveObject : MonoBehaviour {
         GetComponent<Collider>().enabled = false;
         GridManager.Instance.UpdateGrid();
         GetComponent<Collider>().enabled = true;
+
+		//Save the grabbing hand;
+		handle = hand;
+		prevPos = handle.transform.position;
+		//this.transform.parent = handle;
+
     }
 
-    public void Drag(Transform hitTransform)
+    public void DragOrigin(Transform hitTransform)
     {
         Vector3 curPosition = hitTransform.position;// + offset;
 
@@ -216,7 +231,7 @@ public class MoveObject : MonoBehaviour {
         //Adding physics makes this redundant
         if(curPosition.y < floor)
         {
-            curPosition.y = floor;
+            curPosition.y = floor + 50;
         }
 
         //Store y value so that object can still move in that direction when it hits castle wall
@@ -249,11 +264,37 @@ public class MoveObject : MonoBehaviour {
             temp.y = y;
             centerObject.transform.position = temp;
         }
+		
     }
+
+	public void Drag(Transform hitTransform) {
+
+		Vector3 objectCurPosition = centerObject.transform.position;
+
+		prevPos = curPos;
+		curPos = handle.transform.position;
+
+		float moveX = 0;
+		float moveY = 0;
+		float moveZ = 0;
+
+		if (curPos.x - prevPos.x < -0.5f || curPos.x - prevPos.x > 0.5f)
+			moveX = Mathf.Round((curPos.x-prevPos.x) * step);
+		if (curPos.y - prevPos.y < -0.5f || curPos.y - prevPos.y > 0.5f)
+			moveY = Mathf.Round(curPos.y-prevPos.y);
+		if (curPos.z - prevPos.z < -0.5f || curPos.z - prevPos.z > 0.5f)
+			moveZ = Mathf.Round(((curPos.z-prevPos.z) * moveScale) / step);
+		
+		centerObject.transform.position = new Vector3(objectCurPosition.x + (moveX * step), objectCurPosition.y + (moveY * step), objectCurPosition.z + (moveZ * step));
+		if (centerObject.transform.position.y < floor + (step * 2)) {
+			Vector3 temp = centerObject.transform.position;
+			centerObject.transform.position = new Vector3(temp.x, step*2, temp.z);
+		}
+	}
 
     public void Drop()
     {
-        if (droppable && GridManager.Instance.NodePoint(GridManager.Instance.curr_object.position).free)
+        if (GridManager.Instance.NodePoint(GridManager.Instance.curr_object.position).free)
         {
             Vector3 curPosition = centerObject.transform.position;
             curPosition.y = floor + objectY;
@@ -267,6 +308,8 @@ public class MoveObject : MonoBehaviour {
 
         transform.parent = null;
         Destroy (centerObject);
+
+		handle = null;
     }
 
 	/// <summary>

@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private GameObject player;
     [SerializeField] private float speed;
-    [SerializeField] bool devControls;
+    public bool canMove;
 
     private Vector2 camRot;
 
@@ -22,32 +22,31 @@ public class PlayerMovement : MonoBehaviour
         //We use Mathf.Sin and Mathf.Cos to alter player motion which takes Radians as input
         camRot = Mathf.Deg2Rad * Camera.main.transform.eulerAngles;
         //Debug.Log(camRot);
+
+        canMove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //chekc for dev or MR controls
-        if (devControls)
+        if (canMove)
         {
-            //Update Roatation of the camera to alter player motion
-            camRot.y = Mathf.Deg2Rad * Camera.main.transform.eulerAngles.y;
-            //Debug.Log(camRot);
-
             //dev is keyboard
             MovePlayer();
-        }
-        else
-        {
+
             //MR Controls
             MovePlayerStick();
         }
+            
 
     }
 
     // uses arrow keys to shift the GameObject identified as "Player" by the speed.
     void MovePlayer()
     {
+        //Update Roatation of the camera to alter player motion
+        camRot.y = Mathf.Deg2Rad * Camera.main.transform.eulerAngles.y;
+
         //Moves player in camera's POV using Mathf.Sin and Mathf.Cos
         Vector3 current = player.transform.position;
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
