@@ -233,6 +233,11 @@ Prefab:
       propertyPath: leftHand
       value: 
       objectReference: {fileID: 223697399}
+    - target: {fileID: 114488775070812612, guid: d7646d08c3cc1604996238a4a645aba6,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 344755524}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7646d08c3cc1604996238a4a645aba6, type: 2}
   m_IsPrefabParent: 0
@@ -1535,6 +1540,11 @@ Prefab:
         type: 2}
       propertyPath: speed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 23773731788536658, guid: 9e7d33363defe554da7c7c1d04708c2e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e7d33363defe554da7c7c1d04708c2e, type: 2}

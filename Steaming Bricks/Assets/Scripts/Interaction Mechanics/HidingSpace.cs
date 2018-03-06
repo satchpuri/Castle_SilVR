@@ -10,13 +10,13 @@ public class HidingSpace : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         hidding = false;
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+        
 
     public void Hide()
     {
@@ -34,7 +34,8 @@ public class HidingSpace : MonoBehaviour {
             GameManager.Instance.player.GetComponent<PlayerMovement>().canMove = false;
 
             //turn tiny terry object invisible - coroutine?
-            StartCoroutine(FadeOut(GameManager.Instance.player));
+            //StartCoroutine(FadeOut(GameManager.Instance.player));
+            GameManager.Instance.player.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
@@ -50,7 +51,8 @@ public class HidingSpace : MonoBehaviour {
         GameManager.Instance.player.GetComponent<PlayerMovement>().canMove = true;
 
         //make tiny terry visible again
-        StartCoroutine(FadeIn(GameManager.Instance.player));
+        //StartCoroutine(FadeIn(GameManager.Instance.player));
+        GameManager.Instance.player.GetComponent<MeshRenderer>().enabled = true;
     }
 
     /// <summary>
