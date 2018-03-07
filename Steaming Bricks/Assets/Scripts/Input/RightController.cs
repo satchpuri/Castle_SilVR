@@ -39,6 +39,20 @@ public class RightController : BaseController {
             grabbing = true;
             Debug.Log("Grab");
         }
+        if (hit.collider.gameObject.tag == "HidingSpace")
+        {
+            //chekc if we are hiding
+            if (!hit.collider.gameObject.GetComponent<HidingSpace>().hidding) //we are not
+            {
+                //hide
+                hit.collider.gameObject.GetComponent<HidingSpace>().Hide();
+            }
+            else //we are hiding
+            {
+                //stop hiding
+                hit.collider.gameObject.GetComponent<HidingSpace>().StopHidding();
+            }
+        }
     }
 
     public override void OnTriggerHold()
