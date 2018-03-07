@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.WSA.Input;
+using UnityEngine.XR;
 
 public class SlideObject : MonoBehaviour
 {
@@ -98,7 +100,7 @@ public class SlideObject : MonoBehaviour
         //To check is there an obsatcle to the right of the object 
         if (Physics.Raycast(transform.position, -transform.right, out hit, rayDistance))
         {
-            if (hit.rigidbody.gameObject.layer == 8 && (curPosition.x - transform.position.x < 0))
+            if (hit.collider.gameObject.layer == 8 && (curPosition.x - transform.position.x < 0))
             {
                 leftBlocked = true;
             }
@@ -116,8 +118,8 @@ public class SlideObject : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.right, out hit, rayDistance))
         {
             //If hit obsatcle is a part of the filled layer (may not be required)
-            //Also if new slidong object position is going toward or away from the hit obsatcle
-            if (hit.rigidbody.gameObject.layer == 8 && (curPosition.x - transform.position.x > 0))
+            //Also if new sliding object position is going toward or away from the hit obsatcle
+            if (hit.collider.gameObject.layer == 8 && (curPosition.x - transform.position.x > 0))
             {
                 rightBlocked = true;
             }
@@ -134,7 +136,7 @@ public class SlideObject : MonoBehaviour
         //In front of
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayDistance))
         {
-            if (hit.rigidbody.gameObject.layer == 8 && (curPosition.z - transform.position.z > 0))
+            if (hit.collider.gameObject.layer == 8 && (curPosition.z - transform.position.z > 0))
             {
                 forwardBlocked = true;
             }
@@ -151,7 +153,7 @@ public class SlideObject : MonoBehaviour
         //Behind
         if (Physics.Raycast(transform.position, -transform.forward, out hit, rayDistance))
         {
-            if (hit.rigidbody.gameObject.layer == 8 && (curPosition.z - transform.position.z < 0))
+            if (hit.collider.gameObject.layer == 8 && (curPosition.z - transform.position.z < 0))
             {
                 backwardBlocked = true;
             }
@@ -193,4 +195,5 @@ public class SlideObject : MonoBehaviour
     {
         GridManager.Instance.UpdateGrid();
     }
+
 }

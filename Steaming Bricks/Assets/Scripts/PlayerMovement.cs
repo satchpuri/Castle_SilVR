@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         //Update Roatation of the camera to alter player motion
         camRot.y = Mathf.Deg2Rad * Camera.main.transform.eulerAngles.y;
 
-        //Moves player in camera's POV using Mathf.Sin and Mathf.Cos
+        //Moves player in camera's POV using Mathf.Sin and Mathf.Cos of the cam rotation
         Vector3 current = player.transform.position;
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
