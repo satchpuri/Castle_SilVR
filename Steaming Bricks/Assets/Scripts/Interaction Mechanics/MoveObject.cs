@@ -20,7 +20,7 @@ public class MoveObject : MonoBehaviour {
 	//These values are used to see if the hand has moved
 	private Vector3 prevPos;
 	private Vector3 curPos;
-	private float moveScale = 10f; //this would probably need to be some scale factor of map to bigTerry
+	private float moveScale = 85f; //this would probably need to be some scale factor of map to bigTerry
 
 	private GameObject centerObject;
 
@@ -218,6 +218,7 @@ public class MoveObject : MonoBehaviour {
 
 		//Save the grabbing hand;
 		handle = hand;
+        curPos = handle.transform.position;
 		prevPos = handle.transform.position;
 		//this.transform.parent = handle;
 
@@ -279,21 +280,44 @@ public class MoveObject : MonoBehaviour {
 		float moveZ = 0;
 
 		//if (curPos.x - prevPos.x < -0.5f || curPos.x - prevPos.x > 0.5f)
-			moveX = Mathf.Round((curPos.x-prevPos.x) * step);
+        moveX = /*Mathf.Round(*/((curPos.x-prevPos.x) * moveScale);
 		//if (curPos.y - prevPos.y < -0.5f || curPos.y - prevPos.y > 0.5f)
-			moveY = Mathf.Round(curPos.y-prevPos.y);
+        moveY = /*Mathf.Round(*/(curPos.y-prevPos.y) * moveScale;
 		//if (curPos.z - prevPos.z < -0.5f || curPos.z - prevPos.z > 0.5f)
-			moveZ = Mathf.Round(((curPos.z-prevPos.z) * moveScale) / step);
+		moveZ = /*Mathf.Round(*/((curPos.z-prevPos.z) * moveScale);
 		
 		centerObject.transform.position = new Vector3(objectCurPosition.x + (moveX * step), objectCurPosition.y + (moveY * step), objectCurPosition.z + (moveZ * step));
-		if (centerObject.transform.position.y < floor + (step * 2)) {
+		/*if (centerObject.transform.position.y < floor + (step * 2)) {
 			Vector3 temp = centerObject.transform.position;
 			centerObject.transform.position = new Vector3(temp.x, step*2, temp.z);
-		}
+		}*/
+        objectNodes = new List<Node> ();
+        for (int i = 0; i < objectX; i++) {
+            for (int k = 0; k < objectZ; k++) {
+                objectNodes.Add (GridManager.Instance.NodePoint (new Vector3 (
+                    centerObject.transform.position.x - (i * step), centerObject.transform.position.y, centerObject.transform.position.z - (k * step))));
+            }
+        }
 	}
 
     public void Drop()
     {
+
+        if (CheckFreeGrid())
+        {
+            Vector3 curPosition = centerObject.transform.position;
+            curPosition.y = floor + objectY;
+            centerObject.transform.position = curPosition;
+        }
+        else
+        {
+            centerObject.transform.position = initial_pos;
+        }
+        GridManager.Instance.UpdateGrid();
+
+        transform.parent = null;
+        Destroy (centerObject);
+        /*
         if (GridManager.Instance.NodePoint(GridManager.Instance.curr_object.position).free)
         {
             Vector3 curPosition = centerObject.transform.position;
@@ -310,6 +334,7 @@ public class MoveObject : MonoBehaviour {
         Destroy (centerObject);
 
 		handle = null;
+        */      
     }
 
 	/// <summary>
@@ -318,12 +343,16 @@ public class MoveObject : MonoBehaviour {
 	/// <returns><c>true</c>, if all nodes were free, <c>false</c> otherwise.</returns>
 	private bool CheckFreeGrid() {
 
+        //Debug.Log(objectNodes);
+
 		foreach (Node n in objectNodes) {
+            
 			if (!GridManager.Instance.NodePoint (n.worldPosition).free) {
-				return false;
+                Debug.Log("false");
+                return false;
 			}
 		}
-
+        Debug.Log("true");
 		return true;
 	}
 
