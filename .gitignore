@@ -32,3 +32,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Steaming Bricks/Assets/Scenes/etc.meta
+Steaming Bricks/.vs/Steaming Bricks/v15/Server/sqlite3/db.lock
+Steaming Bricks/.vs/Steaming Bricks/v15/Server/sqlite3/storage.ide
+Steaming Bricks/.vs/Steaming Bricks/v15/Server/sqlite3/storage.ide-shm
+Steaming Bricks/.vs/Steaming Bricks/v15/Server/sqlite3/storage.ide-wal

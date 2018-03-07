@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     public bool canMove;
 
-    private Vector2 camRot;
+    private float camRotRad;
 
     // Use this for initialization
     void Start()
@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Get Roatation (Radians) of the camera to alter player motion
         //We use Mathf.Sin and Mathf.Cos to alter player motion which takes Radians as input
-        camRot = Mathf.Deg2Rad * Camera.main.transform.eulerAngles;
+        camRotRad = Mathf.Deg2Rad * Camera.main.transform.eulerAngles.y;
         //Debug.Log(camRot);
 
         canMove = true;
@@ -45,25 +45,25 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer()
     {
         //Update Roatation of the camera to alter player motion
-        camRot.y = Mathf.Deg2Rad * Camera.main.transform.eulerAngles.y;
+        camRotRad = Mathf.Deg2Rad * Camera.main.transform.eulerAngles.y;
 
         //Moves player in camera's POV using Mathf.Sin and Mathf.Cos of the cam rotation
         Vector3 current = player.transform.position;
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            current += new Vector3(speed * Mathf.Cos(camRot.y), 0, -speed * Mathf.Sin(camRot.y));
+            current += new Vector3(speed * Mathf.Cos(camRotRad), 0, -speed * Mathf.Sin(camRotRad));
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            current += new Vector3(-speed * Mathf.Cos(camRot.y), 0, speed * Mathf.Sin(camRot.y));
+            current += new Vector3(-speed * Mathf.Cos(camRotRad), 0, speed * Mathf.Sin(camRotRad));
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            current += new Vector3(-speed * Mathf.Sin(camRot.y), 0, -speed * Mathf.Cos(camRot.y));
+            current += new Vector3(-speed * Mathf.Sin(camRotRad), 0, -speed * Mathf.Cos(camRotRad));
         }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            current += new Vector3(speed * Mathf.Sin(camRot.y), 0, speed * Mathf.Cos(camRot.y));
+            current += new Vector3(speed * Mathf.Sin(camRotRad), 0, speed * Mathf.Cos(camRotRad));
         }
         player.transform.position = current;
     }
@@ -73,13 +73,18 @@ public class PlayerMovement : MonoBehaviour
     {
         //current pos
         Vector3 current = player.transform.position;
-
+        
         //get x and z
         float xAxis = Input.GetAxis("LStick_Horizontal");
         float zAxis = Input.GetAxis("LStick_Vertical");
 
+        Debug.Log(xAxis +"  "+ zAxis);
+
         //update pos
-        current -= new Vector3(speed * xAxis, 0, speed * zAxis);
+        //current -= new Vector3(speed * xAxis, 0, speed * zAxis);
+        current -= new Vector3(speed * xAxis * Mathf.Cos(camRotRad), 0, -speed * xAxis * Mathf.Sin(camRotRad));
+        current -= new Vector3(speed * zAxis * Mathf.Sin(camRotRad), 0, speed * zAxis * Mathf.Cos(camRotRad));
+        
         player.transform.position = current;
     }
 
