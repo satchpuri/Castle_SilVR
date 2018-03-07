@@ -278,11 +278,11 @@ public class MoveObject : MonoBehaviour {
 		float moveY = 0;
 		float moveZ = 0;
 
-		if (curPos.x - prevPos.x < -0.5f || curPos.x - prevPos.x > 0.5f)
+		//if (curPos.x - prevPos.x < -0.5f || curPos.x - prevPos.x > 0.5f)
 			moveX = Mathf.Round((curPos.x-prevPos.x) * step);
-		if (curPos.y - prevPos.y < -0.5f || curPos.y - prevPos.y > 0.5f)
+		//if (curPos.y - prevPos.y < -0.5f || curPos.y - prevPos.y > 0.5f)
 			moveY = Mathf.Round(curPos.y-prevPos.y);
-		if (curPos.z - prevPos.z < -0.5f || curPos.z - prevPos.z > 0.5f)
+		//if (curPos.z - prevPos.z < -0.5f || curPos.z - prevPos.z > 0.5f)
 			moveZ = Mathf.Round(((curPos.z-prevPos.z) * moveScale) / step);
 		
 		centerObject.transform.position = new Vector3(objectCurPosition.x + (moveX * step), objectCurPosition.y + (moveY * step), objectCurPosition.z + (moveZ * step));
