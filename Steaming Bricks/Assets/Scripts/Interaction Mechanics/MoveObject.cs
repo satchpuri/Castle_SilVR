@@ -224,50 +224,6 @@ public class MoveObject : MonoBehaviour {
 
     }
 
-    public void DragOrigin(Transform hitTransform)
-    {
-        Vector3 curPosition = hitTransform.position;// + offset;
-
-        //To ensure object doesnt phase through floor 
-        //Adding physics makes this redundant
-        if(curPosition.y < floor)
-        {
-            curPosition.y = floor + 50;
-        }
-
-        //Store y value so that object can still move in that direction when it hits castle wall
-        float y = curPosition.y;
-
-        //You need to be this close to floor to snap object into position where it can be dropped
-        //Else it return to initial position when dropped
-        //Will be slightly altered when step distance is determined
-        if (y <= step*2)
-        {
-            curPosition.x = ((int)Mathf.Round(curPosition.x) / step) * step;
-            curPosition.z = ((int)Mathf.Round(curPosition.z) / step) * step;
-            droppable = true;
-        }
-        else
-        {
-            droppable = false;
-        }
-
-        //Condition for when you hit castle wall. Redundant with physics?
-        if (curPosition.x <= rangeA.x && curPosition.x >= rangeB.x && curPosition.z <= rangeA.z && curPosition.z >= rangeB.z)
-        {
-            //Within walls
-            centerObject.transform.position = curPosition;
-        }
-        else
-        {
-            //Prevent it from crossing the wall
-            Vector3 temp = centerObject.transform.position;
-            temp.y = y;
-            centerObject.transform.position = temp;
-        }
-		
-    }
-
 	public void Drag(Transform hitTransform) {
 
 		Vector3 objectCurPosition = centerObject.transform.position;
