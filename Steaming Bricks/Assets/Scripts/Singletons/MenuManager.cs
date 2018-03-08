@@ -15,4 +15,10 @@ public class MenuManager : Singleton<MenuManager> {
             print("space key was pressed");
 
     }
+
+    public void Quit()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
+    }
 }
