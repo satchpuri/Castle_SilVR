@@ -6,6 +6,7 @@ using UnityEngine.XR;
 
 public class RightController : BaseController {
     private bool grabbing; //are we holding an object
+	private bool sliding; //are we sliding an object
 
 	// Use this for initialization
 	protected override void Start () {
@@ -53,6 +54,17 @@ public class RightController : BaseController {
                 hit.collider.gameObject.GetComponent<HidingSpace>().StopHidding();
             }
         }
+		if(hit.collider.gameObject.tag == "Sliding")
+		{
+			//change line colour
+			rayLine.startColor = Color.yellow;
+			rayLine.endColor = Color.yellow;
+
+			//everything checks out- actually pickup the object
+			hit.collider.gameObject.GetComponent<SlideObject>().PickUp(hit.transform, gameObject);
+			sliding = true;
+			Debug.Log("Slide Grab");
+		}
     }
 
     public override void OnTriggerHold()
@@ -63,6 +75,11 @@ public class RightController : BaseController {
             //drag that bish by the hair
             hit.collider.gameObject.GetComponent<MoveObject>().Drag(hit.transform);
         }
+		if (sliding)
+		{
+			//drag that bish by the hair
+			hit.collider.gameObject.GetComponent<SlideObject>().Drag(hit.transform);
+		}
     }
 
     public override void OnTriggerUp()
@@ -81,5 +98,15 @@ public class RightController : BaseController {
             //notify that we let go
             grabbing = false;
         }
+
+		if (sliding)
+		{
+			Debug.Log("Slide Drop");
+			//drop object
+			hit.collider.gameObject.GetComponent<SlideObject>().Drop();
+
+			//notify that we stopped sliding
+			sliding = false;
+		}
     }
 }
