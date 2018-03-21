@@ -11,6 +11,9 @@ public class LevelManager : Singleton<LevelManager>
 	#region Fields
     //Instance of the manager to check if already loaded
     public static LevelManager Instance;
+
+    public int gemsCollected;
+    [SerializeField] private int gemsRequired;
 	#endregion
 
 	#region Properties
@@ -21,6 +24,17 @@ public class LevelManager : Singleton<LevelManager>
 
 	void Awake()
 	{
+        MaintainSingleton();
+            
+	}
+
+    void Start()
+    {
+        gemsCollected = 0;
+    }
+
+    private void MaintainSingleton()
+    {
         //Checks whether manager has already been loaded and destroys any copies
         if (Instance)
         {
@@ -39,8 +53,7 @@ public class LevelManager : Singleton<LevelManager>
                 SceneManager.LoadSceneAsync(i, LoadSceneMode.Additive);
             }
         }
-            
-	}
+    }
 
     /// <summary>
     /// Goes to next scene in order
@@ -69,5 +82,15 @@ public class LevelManager : Singleton<LevelManager>
     {
         //get index of current scene and make that active
         SceneManager.SetActiveScene(SceneManager.GetActiveScene());
+    }
+
+    public void OnTriggerEnter(Collider ply)
+    {
+        //make sure its the player and we have enough gems
+        if (ply.gameObject == GameManager.Instance.player && gemsCollected >= gemsRequired)
+        {
+            //goto next level
+            NextScene();
+        }
     }
 }
