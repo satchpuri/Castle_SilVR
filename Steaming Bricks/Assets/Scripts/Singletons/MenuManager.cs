@@ -11,8 +11,7 @@ public class MenuManager : Singleton<MenuManager> {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Debug.Log("Working");
 
-        if (Input.GetKeyDown("space"))
-            print("space key was pressed");
+        
 
     }
 
@@ -20,5 +19,15 @@ public class MenuManager : Singleton<MenuManager> {
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void Update()
+    {
+
+        if (Input.GetKeyDown("space"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            print("space key was pressed");
+        }
     }
 }

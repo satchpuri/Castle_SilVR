@@ -137,10 +137,12 @@ public class SlideObject : MonoBehaviour {
 		List<Node> nextNodes = new List<Node> ();
 		for (int i = 0; i < objectX; i++) {
 			for (int k = 0; k < objectZ; k++) {
-				objectNodes.Add (GridManager.Instance.NodePoint (new Vector3 (
+				nextNodes.Add (GridManager.Instance.NodePoint (new Vector3 (
 					newPosition.x - (i * step), newPosition.y, newPosition.z - (k * step))));
 			}
 		}
+
+        Debug.Log(nextNodes);
 		//move the object if the next nodes it takes up are free
 		if (CheckFreeGrid (nextNodes))
 			centerObject.transform.position = newPosition;

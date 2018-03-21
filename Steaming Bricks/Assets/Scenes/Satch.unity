@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 197210686}
   m_Layer: 0
   m_Name: Exit  Canvas
-  m_TagString: Untagged
+  m_TagString: Exit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -939,7 +939,7 @@ GameObject:
   - component: {fileID: 1970144062}
   m_Layer: 0
   m_Name: Start Button
-  m_TagString: Untagged
+  m_TagString: Start
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

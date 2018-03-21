@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 
 public class RightController : BaseController {
     private bool grabbing; //are we holding an object
@@ -65,6 +66,15 @@ public class RightController : BaseController {
 			sliding = true;
 			Debug.Log("Slide Grab");
 		}
+
+        if(hit.collider.gameObject.tag =="Start")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        if(hit.collider.gameObject.tag == "Exit")
+        {
+            Application.Quit();
+        }
     }
 
     public override void OnTriggerHold()
