@@ -15,12 +15,17 @@ public class MoveObject : MonoBehaviour {
 	private float objectY;
 	private int objectZ;
 
+	public bool lockedX;
+	public bool lockedY;
+	public bool lockedZ;
+	public bool lockedRotation;
+
 	private GameObject handle; //a value to store the controller for parenting
 
 	//These values are used to see if the hand has moved
 	private Vector3 prevPos;
 	private Vector3 curPos;
-	private float moveScale = 85f; //this would probably need to be some scale factor of map to bigTerry
+	private float moveScale = 500f; //this would probably need to be some scale factor of map to bigTerry
 
 	private GameObject centerObject;
 
@@ -50,11 +55,18 @@ public class MoveObject : MonoBehaviour {
 
 		//Set floor (y) to height of the floor plane
 		floor = GridManager.Instance.floorPlane.transform.position.y;
+
+		if (lockedRotation)
+			gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
         
+
+		if (transform.position.y - (gameObject.GetComponent<MeshRenderer> ().bounds.extents.y) - 5 <= floor)
+			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+
 	}
 
     //For object pick up
@@ -181,8 +193,10 @@ public class MoveObject : MonoBehaviour {
     // VR GRABBING CONTROLS ===================================
 	public void PickUp(Transform hitTransform, GameObject hand)
     {
+		gameObject.GetComponent<Rigidbody> ().useGravity = false;
+		gameObject.GetComponent<Rigidbody> ().isKinematic = false;
 
-
+		/*
         objectX = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.x * 2 / step);
         objectY = transform.GetComponent<MeshRenderer> ().bounds.extents.y; //this should not be divided to preserve correct height
         objectZ = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.z * 2 / step);
@@ -205,7 +219,7 @@ public class MoveObject : MonoBehaviour {
                     centerObject.transform.position.x - (i * step), centerObject.transform.position.y, centerObject.transform.position.z - (k * step))));
             }
         }
-
+		
         GridManager.Instance.curr_object = centerObject.transform;
         GridManager.Instance.path = objectNodes;
 
@@ -215,7 +229,7 @@ public class MoveObject : MonoBehaviour {
         GetComponent<Collider>().enabled = false;
         GridManager.Instance.UpdateGrid();
         GetComponent<Collider>().enabled = true;
-
+		*/
 		//Save the grabbing hand;
 		handle = hand;
         curPos = handle.transform.position;
@@ -226,7 +240,7 @@ public class MoveObject : MonoBehaviour {
 
 	public void Drag(Transform hitTransform) {
 
-		Vector3 objectCurPosition = centerObject.transform.position;
+		Vector3 objectCurPosition = transform.position;
 
 		prevPos = curPos;
 		curPos = handle.transform.position;
@@ -235,18 +249,20 @@ public class MoveObject : MonoBehaviour {
 		float moveY = 0;
 		float moveZ = 0;
 
-		//if (curPos.x - prevPos.x < -0.5f || curPos.x - prevPos.x > 0.5f)
-        moveX = /*Mathf.Round(*/((curPos.x-prevPos.x) * moveScale);
-		//if (curPos.y - prevPos.y < -0.5f || curPos.y - prevPos.y > 0.5f)
-        moveY = /*Mathf.Round(*/(curPos.y-prevPos.y) * moveScale;
-		//if (curPos.z - prevPos.z < -0.5f || curPos.z - prevPos.z > 0.5f)
-		moveZ = /*Mathf.Round(*/((curPos.z-prevPos.z) * moveScale);
-		
-		centerObject.transform.position = new Vector3(objectCurPosition.x + (moveX * step), objectCurPosition.y + (moveY * step), objectCurPosition.z + (moveZ * step));
+		//prevent motion in certain directions if the object can't move that way
+		if (!lockedX)
+			moveX = (curPos.x-prevPos.x) * moveScale;
+		if (!lockedY)
+			moveY = (curPos.y-prevPos.y) * moveScale;
+		if (!lockedZ)
+			moveZ = (curPos.z-prevPos.z) * moveScale;
+
+
+		transform.position = new Vector3(objectCurPosition.x + (moveX), objectCurPosition.y + (moveY), objectCurPosition.z + (moveZ));
 		/*if (centerObject.transform.position.y < floor + (step * 2)) {
 			Vector3 temp = centerObject.transform.position;
 			centerObject.transform.position = new Vector3(temp.x, step*2, temp.z);
-		}*/
+		}
         objectNodes = new List<Node> ();
         for (int i = 0; i < objectX; i++) {
             for (int k = 0; k < objectZ; k++) {
@@ -254,11 +270,14 @@ public class MoveObject : MonoBehaviour {
                     centerObject.transform.position.x - (i * step), centerObject.transform.position.y, centerObject.transform.position.z - (k * step))));
             }
         }
+        */
 	}
 
     public void Drop()
     {
-
+		gameObject.GetComponent<Rigidbody> ().isKinematic = false;
+		gameObject.GetComponent<Rigidbody> ().useGravity = true;
+		/*
         if (CheckFreeGrid())
         {
             Vector3 curPosition = centerObject.transform.position;
@@ -273,7 +292,7 @@ public class MoveObject : MonoBehaviour {
 
         transform.parent = null;
         Destroy (centerObject);
-        /*
+
         if (GridManager.Instance.NodePoint(GridManager.Instance.curr_object.position).free)
         {
             Vector3 curPosition = centerObject.transform.position;

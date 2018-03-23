@@ -58,7 +58,7 @@ public class SlideObject : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+		
 	}
 
 	// VR GRABBING CONTROLS ===================================

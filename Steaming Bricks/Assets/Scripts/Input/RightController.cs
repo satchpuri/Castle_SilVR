@@ -62,7 +62,7 @@ public class RightController : BaseController {
 			rayLine.endColor = Color.yellow;
 
 			//everything checks out- actually pickup the object
-			hit.collider.gameObject.GetComponent<SlideObject>().PickUp(hit.transform, gameObject);
+			hit.collider.gameObject.GetComponent<MoveObject>().PickUp(hit.transform, gameObject);
 			sliding = true;
 			Debug.Log("Slide Grab");
 		}
@@ -88,7 +88,7 @@ public class RightController : BaseController {
 		if (sliding)
 		{
 			//drag that bish by the hair
-			hit.collider.gameObject.GetComponent<SlideObject>().Drag(hit.transform);
+			hit.collider.gameObject.GetComponent<MoveObject>().Drag(hit.transform);
 		}
     }
 
@@ -113,7 +113,7 @@ public class RightController : BaseController {
 		{
 			Debug.Log("Slide Drop");
 			//drop object
-			hit.collider.gameObject.GetComponent<SlideObject>().Drop();
+			hit.collider.gameObject.GetComponent<MoveObject>().Drop();
 
 			//notify that we stopped sliding
 			sliding = false;
