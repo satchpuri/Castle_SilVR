@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 82344310}
   - component: {fileID: 82344309}
   - component: {fileID: 82344313}
+  - component: {fileID: 82344314}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -325,6 +326,18 @@ MonoBehaviour:
   rotSpeed: 2
   devControls: 0
   isVR: 0
+--- !u!114 &82344314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 82344308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d0fa06bb569424193b1345beca8a53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
 --- !u!1 &106949898
 GameObject:
   m_ObjectHideFlags: 0

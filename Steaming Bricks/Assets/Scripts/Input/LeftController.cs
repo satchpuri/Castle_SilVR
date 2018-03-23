@@ -23,6 +23,9 @@ public class LeftController : BaseController {
 
     public override void OnTriggerDown()
     {
+        //change line colour
+        rayLine.startColor = Color.blue;
+        rayLine.endColor = Color.blue;
     }
 
     public override void OnTriggerHold()
@@ -31,5 +34,12 @@ public class LeftController : BaseController {
 
     public override void OnTriggerUp()
     {
+        //reset colour
+        rayLine.startColor = Color.white;
+        rayLine.endColor = Color.white;
+
+        //Teleport Player on left trigger up. Calls Teleport method attached to Main Camera Script
+        //Sends rayLine field from BaseController base class to find position to teleport
+        Camera.main.GetComponent<BigPlayerTeleport>().Teleport(rayLine);
     }
 }
