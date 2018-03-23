@@ -41,6 +41,6 @@ public class LeftController : BaseController {
 
         //Teleport Player on left trigger up. Calls Teleport method attached to Main Camera Script
         //Sends rayLine field from BaseController base class to find position to teleport
-        Camera.main.GetComponent<BigPlayerTeleport>().Teleport(rayLine);
+        Camera.main.GetComponent<BigPlayerTeleport>().Teleport(this.gameObject.transform.forward);
     }
 }

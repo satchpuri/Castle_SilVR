@@ -701,6 +701,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6405baefb5dc54a92ff895e8aa737c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedX: 0
+  lockedY: 0
+  lockedZ: 0
+  lockedRotation: 0
 --- !u!23 &63575020
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7751,6 +7755,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6405baefb5dc54a92ff895e8aa737c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedX: 0
+  lockedY: 0
+  lockedZ: 0
+  lockedRotation: 0
 --- !u!23 &567175811
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13817,6 +13825,21 @@ MonoBehaviour:
   rotSpeed: 2
   devControls: 0
   isVR: 0
+--- !u!114 &979933962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 979933956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d0fa06bb569424193b1345beca8a53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  world: {fileID: 787474987}
+  player: {fileID: 491167634}
+  teleport_factor: 100
 --- !u!1 &986573579
 GameObject:
   m_ObjectHideFlags: 0
@@ -16349,6 +16372,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6405baefb5dc54a92ff895e8aa737c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedX: 0
+  lockedY: 0
+  lockedZ: 0
+  lockedRotation: 0
 --- !u!4 &1165300636
 Transform:
   m_ObjectHideFlags: 0
@@ -18736,6 +18763,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6405baefb5dc54a92ff895e8aa737c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedX: 0
+  lockedY: 0
+  lockedZ: 0
+  lockedRotation: 0
 --- !u!23 &1372954928
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21463,6 +21494,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6405baefb5dc54a92ff895e8aa737c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedX: 0
+  lockedY: 0
+  lockedZ: 0
+  lockedRotation: 0
 --- !u!23 &1551944237
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21887,13 +21922,28 @@ Prefab:
     - target: {fileID: 114890418430433500, guid: 114fa06cec9ac1f4c90875adbc084862,
         type: 2}
       propertyPath: rayLayer.m_Bits
-      value: 32
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 114164543302516704, guid: 114fa06cec9ac1f4c90875adbc084862,
         type: 2}
       propertyPath: rayLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 20322226530743354, guid: 114fa06cec9ac1f4c90875adbc084862,
+        type: 2}
+      propertyPath: far clip plane
+      value: 8000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114689497238325244, guid: 114fa06cec9ac1f4c90875adbc084862,
+        type: 2}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 417843928}
+    - target: {fileID: 114689497238325244, guid: 114fa06cec9ac1f4c90875adbc084862,
+        type: 2}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 223697399}
     m_RemovedComponents:
     - {fileID: 120781863905394122, guid: 114fa06cec9ac1f4c90875adbc084862, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 114fa06cec9ac1f4c90875adbc084862, type: 2}
@@ -22822,6 +22872,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6405baefb5dc54a92ff895e8aa737c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedX: 0
+  lockedY: 0
+  lockedZ: 0
+  lockedRotation: 0
 --- !u!23 &1675481282
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23379,7 +23433,7 @@ Prefab:
     - target: {fileID: 114330209338994086, guid: a3a3dd4d14613814f90831645bad7171,
         type: 2}
       propertyPath: nodeRadius
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114330209338994086, guid: a3a3dd4d14613814f90831645bad7171,
         type: 2}
@@ -25870,6 +25924,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6405baefb5dc54a92ff895e8aa737c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedX: 0
+  lockedY: 0
+  lockedZ: 0
+  lockedRotation: 0
 --- !u!23 &1917345806
 MeshRenderer:
   m_ObjectHideFlags: 0
