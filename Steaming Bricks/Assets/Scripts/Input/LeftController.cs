@@ -23,6 +23,7 @@ public class LeftController : BaseController {
 
     public override void OnTriggerDown()
     {
+		Debug.Log ("blue");
         //change line colour
         rayLine.startColor = Color.blue;
         rayLine.endColor = Color.blue;

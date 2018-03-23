@@ -41,7 +41,7 @@ public class MoveObject : MonoBehaviour {
     private int step;
 
 	//The height of the ground plane
-	private float floor;
+	private GameObject floor;
 
     // Use this for initialization
     void Start () {
@@ -51,21 +51,23 @@ public class MoveObject : MonoBehaviour {
         //Debug.Log(GridManager.Instance.worldTopRight);
 
         //Set step as distance between 2 nodes in grid manager
-		step = Mathf.RoundToInt(GridManager.Instance.nodeRadius * 2);
+		//step = Mathf.RoundToInt(GridManager.Instance.nodeRadius * 2);
+		step = 60; //this is for testing and isn't actually used
 
 		//Set floor (y) to height of the floor plane
-		floor = GridManager.Instance.floorPlane.transform.position.y;
 
 		if (lockedRotation)
 			gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
+
+		floor = GameObject.Find ("Ground");
     }
 	
 	// Update is called once per frame
 	void Update () {
         
 
-		if (transform.position.y - (gameObject.GetComponent<MeshRenderer> ().bounds.extents.y) - 5 <= floor)
-			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+		//if (transform.position.y - (gameObject.GetComponent<MeshRenderer> ().bounds.extents.y) - 5 <= floor.transform.position.y)
+		//	gameObject.GetComponent<Rigidbody> ().mass = 100000;
 
 	}
 
@@ -124,9 +126,9 @@ public class MoveObject : MonoBehaviour {
 
         //To ensure object doesnt phase through floor 
         //Adding physics makes this redundant
-        if(curPosition.y < floor)
+		if(curPosition.y < floor.transform.position.y)
         {
-            curPosition.y = floor;
+			curPosition.y = floor.transform.position.y;
         }
 
         //Store y value so that object can still move in that direction when it hits castle wall
@@ -177,7 +179,7 @@ public class MoveObject : MonoBehaviour {
 		if (droppable && CheckFreeGrid())
         {
 			Vector3 curPosition = centerObject.transform.position;
-			curPosition.y = floor + objectY;
+			curPosition.y = floor.transform.position.y + objectY;
 			centerObject.transform.position = curPosition;
         }
         else
@@ -194,7 +196,7 @@ public class MoveObject : MonoBehaviour {
 	public void PickUp(Transform hitTransform, GameObject hand)
     {
 		gameObject.GetComponent<Rigidbody> ().useGravity = false;
-		gameObject.GetComponent<Rigidbody> ().isKinematic = false;
+		gameObject.GetComponent<Rigidbody> ().mass = 1;
 
 		/*
         objectX = Mathf.CeilToInt(transform.GetComponent<MeshRenderer> ().bounds.extents.x * 2 / step);
@@ -275,7 +277,7 @@ public class MoveObject : MonoBehaviour {
 
     public void Drop()
     {
-		gameObject.GetComponent<Rigidbody> ().isKinematic = false;
+		gameObject.GetComponent<Rigidbody> ().mass = 100000;
 		gameObject.GetComponent<Rigidbody> ().useGravity = true;
 		/*
         if (CheckFreeGrid())
@@ -327,7 +329,6 @@ public class MoveObject : MonoBehaviour {
                 return false;
 			}
 		}
-        Debug.Log("true");
 		return true;
 	}
 
