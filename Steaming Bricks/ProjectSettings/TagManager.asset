@@ -9,6 +9,8 @@ TagManager:
   - HidingSpace
   - Start
   - Exit
+  - Guard
+  - Distraction
   layers:
   - Default
   - TransparentFX

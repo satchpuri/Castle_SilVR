@@ -27,7 +27,7 @@ public class BigPlayerTeleport : MonoBehaviour
     {
         //Vector3 teleport_to = hand_rayLine.GetPosition(1);
         hand_forward *= teleport_factor;
-        Debug.Log(hand_forward);
+        //Debug.Log(hand_forward);
         world.transform.position -= new Vector3(hand_forward.x, 0, hand_forward.z);
         player.transform.position -= new Vector3(hand_forward.x, 0, hand_forward.z);
     }

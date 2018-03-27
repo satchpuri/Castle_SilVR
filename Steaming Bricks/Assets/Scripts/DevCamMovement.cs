@@ -27,7 +27,6 @@ public class DevCamMovement : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.O))
         {
-            Debug.Log(pitch + " " + yaw);
             devControls = !devControls;
         }
 

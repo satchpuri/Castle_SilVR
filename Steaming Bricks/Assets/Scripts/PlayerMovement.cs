@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         float xAxis = Input.GetAxis("LStick_Horizontal");
         float zAxis = Input.GetAxis("LStick_Vertical");
 
-        Debug.Log(xAxis +"  "+ zAxis);
+        //Debug.Log(xAxis +"  "+ zAxis);
 
         //update pos
         //current -= new Vector3(speed * xAxis, 0, speed * zAxis);

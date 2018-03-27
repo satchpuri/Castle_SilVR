@@ -15,7 +15,8 @@ public class GuardMovement : MonoBehaviour {
     private GameObject vision;
     //player
     private GameObject player;
-
+    //check if guard is distracted
+    public bool distracted = false;
     // Use this for initialization
     void Start () {
         //start on waypoint 0
@@ -24,10 +25,14 @@ public class GuardMovement : MonoBehaviour {
         //get child vision object
         vision = this.gameObject.transform.GetChild(0).gameObject;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        SeekPoint(waypoints[currWaypointNum]);
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!distracted)
+        {
+            SeekPoint(waypoints[currWaypointNum]);
+        }
 	}
 
     //moves guard towards current waypoint, updates current waypoint
