@@ -15,10 +15,7 @@ public class GameManager : Singleton<GameManager>
 
     //Object with tag "Guard"
     public GameObject[] guards;
-
-    //Object with tag "Distraction"
-    public GameObject distraction;
-
+    
     //hands
     public GameObject leftHand;
     public GameObject rightHand;
@@ -29,7 +26,7 @@ public class GameManager : Singleton<GameManager>
         movableObjects = GameObject.FindGameObjectsWithTag("Movable");
         slidingObject = GameObject.FindGameObjectsWithTag("Sliding");
         guards = GameObject.FindGameObjectsWithTag("Guard");
-        distraction = GameObject.FindGameObjectWithTag("Distraction");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
