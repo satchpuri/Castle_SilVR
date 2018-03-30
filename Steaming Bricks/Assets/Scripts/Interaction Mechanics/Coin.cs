@@ -12,7 +12,10 @@ public class Coin : MonoBehaviour
             this.gameObject.SetActive(false);
 
             //Goes to next level?
-            LevelManager.Instance.NextScene();
+            if (GameManager.Instance.number_of_coins == 0)
+            {
+                LevelManager.Instance.NextScene();
+            }
         }
     }
 }
