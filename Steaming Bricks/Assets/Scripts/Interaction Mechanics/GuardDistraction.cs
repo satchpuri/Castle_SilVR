@@ -6,7 +6,7 @@ public class GuardDistraction : MonoBehaviour
     [SerializeField] private GameObject distraction;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.tag == "Player")
         {
             for (int i = 0; i < GameManager.Instance.guards.Length; i++)
             {

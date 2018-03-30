@@ -15,7 +15,10 @@ public class GameManager : Singleton<GameManager>
 
     //Object with tag "Guard"
     public GameObject[] guards;
-    
+
+    //Object with tag "Coin"
+    public int number_of_coins;
+
     //hands
     public GameObject leftHand;
     public GameObject rightHand;
@@ -26,6 +29,7 @@ public class GameManager : Singleton<GameManager>
         movableObjects = GameObject.FindGameObjectsWithTag("Movable");
         slidingObject = GameObject.FindGameObjectsWithTag("Sliding");
         guards = GameObject.FindGameObjectsWithTag("Guard");
+        number_of_coins = GameObject.FindGameObjectsWithTag("Coin").Length;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
