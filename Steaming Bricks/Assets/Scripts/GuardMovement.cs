@@ -22,14 +22,18 @@ public class GuardMovement : MonoBehaviour {
         //start on waypoint 0
         currWaypointNum = 0;
 
-        //get child vision object
-        vision = this.gameObject.transform.GetChild(0).gameObject;
+        if(waypoints.Length > 0)
+        {
+            //get child vision object
+            vision = this.gameObject.transform.GetChild(0).gameObject;
+        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!distracted)
+        if (!distracted && waypoints.Length > 0)
         {
             SeekPoint(waypoints[currWaypointNum]);
         }
