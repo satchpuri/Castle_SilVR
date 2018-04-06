@@ -18,7 +18,7 @@ public class MoveObject : MonoBehaviour {
 	public bool lockedX;
 	public bool lockedY;
 	public bool lockedZ;
-	public bool lockedRotation;
+	//public bool lockedRotation;
 
 	private GameObject handle; //a value to store the controller for parenting
 
@@ -56,8 +56,8 @@ public class MoveObject : MonoBehaviour {
 
 		//Set floor (y) to height of the floor plane
 
-		if (lockedRotation)
-			gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
+		//if (lockedRotation)
+		gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
 
 		floor = GameObject.Find ("Ground");
     }

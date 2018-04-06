@@ -353,7 +353,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 912355825}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 706, y: 77, z: 450.03152}
+  m_LocalPosition: {x: 706, y: 545, z: 450.03152}
   m_LocalScale: {x: 200, y: 75, z: 300}
   m_Children: []
   m_Father: {fileID: 546552288}
@@ -373,7 +373,6 @@ MonoBehaviour:
   lockedX: 0
   lockedY: 0
   lockedZ: 0
-  lockedRotation: 0
 --- !u!23 &912355828
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -599,7 +598,6 @@ MonoBehaviour:
   lockedX: 1
   lockedY: 1
   lockedZ: 0
-  lockedRotation: 1
 --- !u!23 &1178567764
 MeshRenderer:
   m_ObjectHideFlags: 0
