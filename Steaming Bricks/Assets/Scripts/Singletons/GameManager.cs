@@ -36,7 +36,9 @@ public class GameManager : Singleton<GameManager>
         number_of_coins = GameObject.FindGameObjectsWithTag("Coin").Length;
         player = GameObject.FindGameObjectWithTag("Player");
 
+        //find ground object and update navmesh
         ground = GameObject.FindGameObjectWithTag("NavGround").GetComponent<NavMeshSurface>();
+        UpdateNavMesh();
     }
 
     // Update is called once per frame
@@ -45,6 +47,9 @@ public class GameManager : Singleton<GameManager>
 
     }
 
+    /// <summary>
+    /// rebuilds navmesh durring runtime
+    /// </summary>
     public void UpdateNavMesh()
     {
         ground.BuildNavMesh();
