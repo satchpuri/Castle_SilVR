@@ -11,6 +11,8 @@ TagManager:
   - Exit
   - Guard
   - Distraction
+  - Coin
+  - NavGround
   layers:
   - Default
   - TransparentFX

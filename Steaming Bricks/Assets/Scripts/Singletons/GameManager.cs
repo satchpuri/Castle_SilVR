@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -23,6 +24,9 @@ public class GameManager : Singleton<GameManager>
     public GameObject leftHand;
     public GameObject rightHand;
 
+    //NavMesh
+    [SerializeField] private NavMeshSurface ground;
+
     // Use this for initialization
     void Start()
     {
@@ -31,11 +35,18 @@ public class GameManager : Singleton<GameManager>
         guards = GameObject.FindGameObjectsWithTag("Guard");
         number_of_coins = GameObject.FindGameObjectsWithTag("Coin").Length;
         player = GameObject.FindGameObjectWithTag("Player");
+
+        ground = GameObject.FindGameObjectWithTag("NavGround").GetComponent<NavMeshSurface>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void UpdateNavMesh()
+    {
+        ground.BuildNavMesh();
     }
 }
