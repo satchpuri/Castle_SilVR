@@ -71,6 +71,13 @@ public class MoveObject : MonoBehaviour {
 
 	}
 
+    void OnCollisionEnter(Collision collision)
+    {
+        //update navmesh when you hit the ground
+        GameManager.Instance.UpdateNavMesh();
+    }
+
+
     //For object pick up
     void OnMouseDown()
     {
