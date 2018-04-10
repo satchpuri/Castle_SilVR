@@ -18,8 +18,8 @@ public class GameManager : Singleton<GameManager>
     public GameObject[] guards;
 
     //Object with tag "Coin"
-    public int number_of_coins;
-
+    public int coins_remaining;
+    
     //hands
     public GameObject leftHand;
     public GameObject rightHand;
@@ -33,11 +33,11 @@ public class GameManager : Singleton<GameManager>
         movableObjects = GameObject.FindGameObjectsWithTag("Movable");
         slidingObject = GameObject.FindGameObjectsWithTag("Sliding");
         guards = GameObject.FindGameObjectsWithTag("Guard");
-        number_of_coins = GameObject.FindGameObjectsWithTag("Coin").Length;
+        coins_remaining = GameObject.FindGameObjectsWithTag("Coin").Length;
         player = GameObject.FindGameObjectWithTag("Player");
 
         //find ground object and update navmesh
-        ground = GameObject.FindGameObjectWithTag("NavGround").GetComponent<NavMeshSurface>();
+        //ground = GameObject.FindGameObjectWithTag("NavGround").GetComponent<NavMeshSurface>();
         UpdateNavMesh();
     }
 
@@ -52,6 +52,6 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public void UpdateNavMesh()
     {
-        ground.BuildNavMesh();
+        //ground.BuildNavMesh();
     }
 }

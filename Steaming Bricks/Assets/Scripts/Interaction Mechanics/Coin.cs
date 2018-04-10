@@ -8,11 +8,11 @@ public class Coin : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameManager.Instance.number_of_coins--;
+            GameManager.Instance.coins_remaining--;
             this.gameObject.SetActive(false);
 
             //Goes to next level?
-            if (GameManager.Instance.number_of_coins == 0)
+            if (GameManager.Instance.coins_remaining == 0)
             {
                 LevelManager.Instance.NextScene();
             }

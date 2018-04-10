@@ -41,6 +41,24 @@ public class RightController : BaseController {
             grabbing = true;
             Debug.Log("Grab");
         }
+
+        if (hit.collider.gameObject.tag == "Key")
+        {
+            //change line colour
+            rayLine.startColor = Color.blue;
+            rayLine.endColor = Color.blue;
+
+            hit.collider.gameObject.GetComponent<DoorAndKey>().CollectKey();
+        }
+        if (hit.collider.gameObject.tag == "Door")
+        {
+            //change line colour
+            rayLine.startColor = Color.blue;
+            rayLine.endColor = Color.blue;
+
+            hit.collider.transform.parent.GetComponent<DoorAndKey>().OpenDoor();
+        }
+
         if (hit.collider.gameObject.tag == "HidingSpace")
         {
             //chekc if we are hiding
