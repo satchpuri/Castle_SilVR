@@ -36,6 +36,7 @@ public class MoveObject : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
 
 		floor = GameObject.Find ("Ground");
+        gameObject.GetComponent<Rigidbody> ().mass = .0000001f;
     }
 	
 	// Update is called once per frame
@@ -58,7 +59,7 @@ public class MoveObject : MonoBehaviour {
 	public void PickUp(Transform hitTransform, GameObject hand)
     {
 		gameObject.GetComponent<Rigidbody> ().useGravity = false;
-		gameObject.GetComponent<Rigidbody> ().mass = 1;
+		//gameObject.GetComponent<Rigidbody> ().mass = 1;
 
 		
 		//Save the grabbing hand;
@@ -94,7 +95,7 @@ public class MoveObject : MonoBehaviour {
 
     public void Drop()
     {
-		gameObject.GetComponent<Rigidbody> ().mass = 1;
+		//gameObject.GetComponent<Rigidbody> ().mass = .00001f;
 		gameObject.GetComponent<Rigidbody> ().useGravity = true;
 		
     }

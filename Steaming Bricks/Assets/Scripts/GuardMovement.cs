@@ -55,7 +55,7 @@ public class GuardMovement : MonoBehaviour {
         float dist = Vector3.Distance(this.transform.position, waypointLoc.transform.position);
 
         //if it reaches the location, cycle to the next waypoint
-        if (dist < 1)
+        if (dist < .01f)
         {
             currWaypointNum += 1;
             if(currWaypointNum >= waypoints.Length)
