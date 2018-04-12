@@ -24,9 +24,6 @@ public class GameManager : Singleton<GameManager>
     public GameObject leftHand;
     public GameObject rightHand;
 
-    //NavMesh
-    [SerializeField] private NavMeshSurface ground;
-
     // Use this for initialization
     void Start()
     {
@@ -35,23 +32,11 @@ public class GameManager : Singleton<GameManager>
         guards = GameObject.FindGameObjectsWithTag("Guard");
         coins_remaining = GameObject.FindGameObjectsWithTag("Coin").Length;
         player = GameObject.FindGameObjectWithTag("Player");
-
-        //find ground object and update navmesh
-        //ground = GameObject.FindGameObjectWithTag("NavGround").GetComponent<NavMeshSurface>();
-        UpdateNavMesh();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-    }
-
-    /// <summary>
-    /// rebuilds navmesh durring runtime
-    /// </summary>
-    public void UpdateNavMesh()
-    {
-        //ground.BuildNavMesh();
     }
 }

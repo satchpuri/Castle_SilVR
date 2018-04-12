@@ -2071,7 +2071,6 @@ GameObject:
   - component: {fileID: 231491211}
   - component: {fileID: 231491208}
   - component: {fileID: 231491209}
-  - component: {fileID: 231491213}
   m_Layer: 0
   m_Name: Guardian5
   m_TagString: Guard
@@ -2173,27 +2172,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 231491207}
   m_Mesh: {fileID: 4300174, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
---- !u!195 &231491213
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 231491207}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 45.810066
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 169.29892
-  m_BaseOffset: 84.64946
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &238243805
 GameObject:
   m_ObjectHideFlags: 0
@@ -2817,7 +2795,6 @@ GameObject:
   - component: {fileID: 308853203}
   - component: {fileID: 308853202}
   - component: {fileID: 308853199}
-  - component: {fileID: 308853200}
   m_Layer: 8
   m_Name: Ground
   m_TagString: NavGround
@@ -2837,34 +2814,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 33499.85, y: 1000, z: 33499.85}
   m_Center: {x: 0, y: -500, z: 0}
---- !u!114 &308853200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 308853198}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.01
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 79d0d871566db9348a27da60c6764c9f, type: 2}
 --- !u!4 &308853201
 Transform:
   m_ObjectHideFlags: 0
@@ -3241,7 +3190,6 @@ GameObject:
   - component: {fileID: 323039784}
   - component: {fileID: 323039781}
   - component: {fileID: 323039782}
-  - component: {fileID: 323039786}
   m_Layer: 0
   m_Name: Guardian6
   m_TagString: Guard
@@ -3331,27 +3279,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 323039780}
   m_Mesh: {fileID: 4300176, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
---- !u!195 &323039786
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 323039780}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 45.810097
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 169.29892
-  m_BaseOffset: 84.64946
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &337984820
 GameObject:
   m_ObjectHideFlags: 0
@@ -5503,7 +5430,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 733628013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.07, z: 0}
+  m_LocalPosition: {x: 0, y: 0.167, z: 0}
   m_LocalScale: {x: 0.04610497, y: 0.04610498, z: 0.04610498}
   m_Children:
   - {fileID: 1757536079}
@@ -6313,7 +6240,6 @@ GameObject:
   - component: {fileID: 832970961}
   - component: {fileID: 832970958}
   - component: {fileID: 832970959}
-  - component: {fileID: 832970963}
   m_Layer: 0
   m_Name: Guardian1
   m_TagString: Guard
@@ -6403,27 +6329,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 832970957}
   m_Mesh: {fileID: 4300166, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
---- !u!195 &832970963
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 832970957}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 45.810066
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 169.29892
-  m_BaseOffset: 84.64946
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &856755310
 GameObject:
   m_ObjectHideFlags: 0
@@ -8635,7 +8540,6 @@ GameObject:
   - component: {fileID: 1157330767}
   - component: {fileID: 1157330764}
   - component: {fileID: 1157330765}
-  - component: {fileID: 1157330769}
   m_Layer: 0
   m_Name: Guardian3
   m_TagString: Guard
@@ -8725,27 +8629,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1157330763}
   m_Mesh: {fileID: 4300170, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
---- !u!195 &1157330769
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1157330763}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 47.34153
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 169.29892
-  m_BaseOffset: 84.64946
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1001 &1186554069
 Prefab:
   m_ObjectHideFlags: 0
@@ -12082,6 +11965,10 @@ Prefab:
       propertyPath: rayDistance
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4137784790696182, guid: 114fa06cec9ac1f4c90875adbc084862, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 120781863905394122, guid: 114fa06cec9ac1f4c90875adbc084862, type: 2}
     - {fileID: 114689497238325244, guid: 114fa06cec9ac1f4c90875adbc084862, type: 2}
@@ -12295,7 +12182,6 @@ GameObject:
   - component: {fileID: 1588702694}
   - component: {fileID: 1588702691}
   - component: {fileID: 1588702692}
-  - component: {fileID: 1588702696}
   m_Layer: 0
   m_Name: Guardian2
   m_TagString: Guard
@@ -12385,27 +12271,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1588702690}
   m_Mesh: {fileID: 4300168, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
---- !u!195 &1588702696
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1588702690}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 47.341576
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 169.29892
-  m_BaseOffset: 84.64946
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &1588831006
 GameObject:
   m_ObjectHideFlags: 0
@@ -16019,7 +15884,6 @@ GameObject:
   - component: {fileID: 2033928921}
   - component: {fileID: 2033928918}
   - component: {fileID: 2033928919}
-  - component: {fileID: 2033928923}
   m_Layer: 0
   m_Name: Guardian4
   m_TagString: Guard
@@ -16109,27 +15973,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2033928917}
   m_Mesh: {fileID: 4300172, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
---- !u!195 &2033928923
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2033928917}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 45.81008
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 169.29892
-  m_BaseOffset: 84.64946
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1001 &2050959993
 Prefab:
   m_ObjectHideFlags: 0
