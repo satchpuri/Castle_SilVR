@@ -153,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1952783976706498
 GameObject:
   m_ObjectHideFlags: 1
@@ -627,12 +627,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1060792049974150}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 1
+  color: 0
   eraseRenderer: 0
 --- !u!114 &114164543302516704
 MonoBehaviour:
@@ -671,12 +671,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1952783976706498}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 1
+  color: 0
   eraseRenderer: 0
 --- !u!114 &114883648110309252
 MonoBehaviour:
@@ -689,7 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d0fa06bb569424193b1345beca8a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 1553124250816644}
   world: {fileID: 0}
   player: {fileID: 0}
   teleport_factor: 0
@@ -722,9 +722,14 @@ MonoBehaviour:
   lineThickness: 1
   lineIntensity: 0.5
   fillAmount: 0.2
-  lineColor0: {r: 1, g: 0, b: 0, a: 1}
+  lineColor0: {r: 1, g: 1, b: 1, a: 1}
   lineColor1: {r: 0, g: 1, b: 0, a: 1}
   lineColor2: {r: 0, g: 0, b: 1, a: 1}
+  lineColor3: {r: 1, g: 0, b: 0, a: 1}
+  lineColor4: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  lineColor5: {r: 0.945, g: 0.42820072, b: 0, a: 1}
+  lineColor6: {r: 0, g: 0, b: 0, a: 1}
+  lineColor7: {r: 1, g: 0, b: 0.92647076, a: 1}
   additiveRendering: 0
   backfaceCulling: 1
   cornerOutlines: 0

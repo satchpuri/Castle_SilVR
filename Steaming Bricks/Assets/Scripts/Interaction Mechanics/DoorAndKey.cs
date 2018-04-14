@@ -6,13 +6,12 @@ public class DoorAndKey : MonoBehaviour
     [SerializeField] private GameObject dangleKey;
     [SerializeField] private float interactDistance;
     private bool collected;
-    private GameObject key;
+    [SerializeField] private GameObject key;
 
     // Use this for initialization
     void Start()
     {
         collected = false;
-        key = this.gameObject.GetComponentInChildren<BoxCollider>().gameObject;
     }
 
     // Update is called once per frame

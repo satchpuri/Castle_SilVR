@@ -48,7 +48,7 @@ public class RightController : BaseController {
             rayLine.startColor = Color.blue;
             rayLine.endColor = Color.blue;
 
-            hit.collider.gameObject.GetComponent<DoorAndKey>().CollectKey();
+            hit.collider.gameObject.GetComponentInParent<DoorAndKey>().CollectKey();
         }
         if (hit.collider.gameObject.tag == "Door")
         {
