@@ -72,9 +72,9 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayerStick()
     {
         //make player look same dir as cam
-        Vector3 rotDifference = Camera.main.transform.rotation.eulerAngles - player.transform.rotation.eulerAngles; //get difference bteween the cam and player
-        rotDifference = new Vector3(0, rotDifference.y, 0); //get rid of x and z rotations
-        player.transform.Rotate(rotDifference); //apply to player
+        //Vector3 rotDifference = Camera.main.transform.rotation.eulerAngles - player.transform.rotation.eulerAngles; //get difference bteween the cam and player
+        //rotDifference = new Vector3(0, rotDifference.y, 0); //get rid of x and z rotations
+        //player.transform.Rotate(rotDifference); //apply to player
 
         //current pos
         Vector3 current = player.transform.position;
@@ -89,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
         //current -= new Vector3(speed * xAxis, 0, speed * zAxis);
         current -= new Vector3(speed * xAxis * Mathf.Cos(camRotRad), 0, -speed * xAxis * Mathf.Sin(camRotRad));
         current -= new Vector3(speed * zAxis * Mathf.Sin(camRotRad), 0, speed * zAxis * Mathf.Cos(camRotRad));
+
+        player.transform.LookAt(current); //look where youre going 
         
         player.transform.position = current;
 

@@ -6,10 +6,12 @@ public class HidingSpace : MonoBehaviour {
     [SerializeField] private LayerMask hiddenLayer;
     [SerializeField] private float interactDistance;
     public bool hidding;
+    private ParticleSystem smoke;
 
 	// Use this for initialization
 	void Start () {
-        hidding = false;
+        hidding = false; //initally be hiding
+        smoke = GameManager.Instance.player.GetComponent<ParticleSystem>(); //save players particle system
 	}
 	
 	// Update is called once per frame
@@ -34,8 +36,8 @@ public class HidingSpace : MonoBehaviour {
             GameManager.Instance.player.GetComponent<PlayerMovement>().canMove = false;
 
             //turn tiny terry object invisible - coroutine?
-            //StartCoroutine(FadeOut(GameManager.Instance.player));
-            GameManager.Instance.player.GetComponent<MeshRenderer>().enabled = false;
+            StartCoroutine(FadeOut(GameManager.Instance.player));
+            smoke.Play(); //play smoke particle anim
         }
     }
 
@@ -47,12 +49,12 @@ public class HidingSpace : MonoBehaviour {
         //chnage tiny terry mask back to default
         GameManager.Instance.player.layer = 0; //0 is Default layer
 
+        //make tiny terry visible again
+        StartCoroutine(FadeIn(GameManager.Instance.player));
+        smoke.Play(); //play smoke particle anim
+
         //allow tiny from moving
         GameManager.Instance.player.GetComponent<PlayerMovement>().canMove = true;
-
-        //make tiny terry visible again
-        //StartCoroutine(FadeIn(GameManager.Instance.player));
-        GameManager.Instance.player.GetComponent<MeshRenderer>().enabled = true;
     }
 
     /// <summary>
@@ -61,43 +63,17 @@ public class HidingSpace : MonoBehaviour {
     /// <param name="affectedObj">Affected object by fade</param>
     IEnumerator FadeIn(GameObject affectedObj)
     {
-        //get objs rednerer colour
-        Color c = affectedObj.GetComponent<Renderer>().material.color;
-
-        //loop and edit colour
-        for (float f = 1f; f <= 255; f += 1)
-        {
-            //update alpha
-            c.a = f;
-
-            //give new colour to obj
-            affectedObj.GetComponent<Renderer>().material.color = c;
-
-            //idk man it was in the example
-            yield return null;
-        }
+        yield return new WaitForSeconds(.6f);
+        GameManager.Instance.player.GetComponent<Renderer>().enabled = true; //turn on mesh
     }
 
     /// <summary>
-    /// Fade the specified object
+    /// wait to pop away
     /// </summary>
     /// <param name="affectedObj">Affected object by fade</param>
     IEnumerator FadeOut(GameObject affectedObj)
     {
-        //get objs rednerer colour
-        Color c = affectedObj.GetComponent<Renderer>().material.color;
-
-        //loop and edit colour
-        for (float f = 1f; f >= 0; f -= 1)
-        {
-            //update alpha
-            c.a = f;
-
-            //give new colour to obj
-            affectedObj.GetComponent<Renderer>().material.color = c;
-
-            //idk man it was in the example
-            yield return null;
-        }
+        yield return new WaitForSeconds(.6f);
+        GameManager.Instance.player.GetComponent<Renderer>().enabled = false; //turn off mesh renderer to make tiny terry invible
     }
 }
