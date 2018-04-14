@@ -58,9 +58,15 @@ namespace cakeslice
         [Range(0, 1)]
         public float fillAmount = 0.2f;
 
-        public Color lineColor0 = Color.red;
+        public Color lineColor0 = Color.white;
         public Color lineColor1 = Color.green;
         public Color lineColor2 = Color.blue;
+        public Color lineColor3 = Color.red;
+        public Color lineColor4 = Color.yellow;
+        public Color lineColor5 = Color.magenta;
+        public Color lineColor6 = Color.black;
+        public Color lineColor7 = Color.cyan;
+
 
         public bool additiveRendering = false;
 

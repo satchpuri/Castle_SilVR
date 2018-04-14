@@ -54,5 +54,7 @@ MonoBehaviour:
   player: {fileID: 0}
   movableObjects: []
   slidingObject: []
+  guards: []
+  coins_remaining: 0
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}

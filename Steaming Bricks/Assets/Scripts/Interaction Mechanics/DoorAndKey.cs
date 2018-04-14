@@ -3,17 +3,16 @@ using System.Collections;
 
 public class DoorAndKey : MonoBehaviour
 {
+    [SerializeField] private GameObject dangleKey;
     [SerializeField] private float interactDistance;
     private bool collected;
+    private GameObject key;
 
     // Use this for initialization
     void Start()
     {
         collected = false;
-        if(interactDistance <= 0)
-        {
-            interactDistance = 5;
-        }
+        key = this.gameObject.GetComponentInChildren<BoxCollider>().gameObject;
     }
 
     // Update is called once per frame
@@ -21,15 +20,16 @@ public class DoorAndKey : MonoBehaviour
     {
 
     }
-    
+
     public void CollectKey()
     {
         //check if the player is close enough to collect key
-        float difference = Vector3.Distance(GameManager.Instance.player.transform.position, this.gameObject.transform.position); //dista between player and this hiding spot
+        float difference = Vector3.Distance(GameManager.Instance.player.transform.position, key.transform.position); //dista between player and this hiding spot
         if (difference <= interactDistance)
         {
             collected = true;
-            this.gameObject.SetActive(false);
+            key.SetActive(false);
+            dangleKey.SetActive(true); //show dangling key
         }
     }
 
@@ -39,7 +39,8 @@ public class DoorAndKey : MonoBehaviour
         float difference = Vector3.Distance(GameManager.Instance.player.transform.position, this.gameObject.transform.position); //dista between player and this hiding spot
         if (difference <= interactDistance && collected)
         {
-            this.gameObject.SetActive(false);            
+            this.gameObject.SetActive(false);
+            dangleKey.SetActive(false); //hide dangling key
         }
     }
 
