@@ -57,6 +57,7 @@ public abstract class BaseController : MonoBehaviour {
         hit = col.gameObject;
 
         //check for valid interactable
+        if (hit.GetComponent<Outline>() != null) //check it has an outline component
         {
             //highlight interactable obj
             hit.GetComponent<Outline>().enabled = true;
