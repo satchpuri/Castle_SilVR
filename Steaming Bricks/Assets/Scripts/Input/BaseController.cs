@@ -8,6 +8,7 @@ using cakeslice;
 public abstract class BaseController : MonoBehaviour {
     //hand fields
     protected XRNode handNode; //node for which hand should be either XRNode.RightHand or XRNode.LeftHand
+    protected Outline highlight;
 
     //ray cast fields
     protected LineRenderer rayLine; //visual of ray
@@ -15,7 +16,8 @@ public abstract class BaseController : MonoBehaviour {
     protected Ray ray; //ray line itself
     [SerializeField] protected LayerMask rayLayer; //layer in which raycast interacts
     [SerializeField] protected float rayDistance; //distance raycast extends
-    protected Outline highlight;
+    enum InteractMode {Grab, Raycast}; //default is physicla grab, raycast for long distance interactions
+    private InteractMode interactMode ;
 
     //trigger fields
     protected string triggerAxis; //axis name for trigger in use
@@ -27,6 +29,9 @@ public abstract class BaseController : MonoBehaviour {
         rayLine = this.gameObject.GetComponent<LineRenderer>(); //attach linerenderer to field
         rayLine.enabled = true; //make sure its on
 
+        //set inital interaction mode
+        interactMode = InteractMode.Grab; //grab by default
+
         //set inital line colour
         rayLine.startColor = Color.white;
         rayLine.endColor = Color.white;
@@ -36,26 +41,47 @@ public abstract class BaseController : MonoBehaviour {
 	// Update is called once per frame
 	protected virtual void Update () {
         TrackMovement();
-        //DrawLine();
         Trigger();
+
+        //draw ray if we are in raycast mode
+        if (interactMode == InteractMode.Raycast)
+        {
+            DrawLine();
+        }
 	}
-        
+       
+    //for staying within trigger type colliders
     void OnTriggerStay(Collider col)
     {
         //update which obj you are interacting with
         hit = col.gameObject;
 
-        //highlight interactable obj
-        hit.GetComponent<Outline>().enabled = true;
+        //check for valid interactable
+        {
+            //highlight interactable obj
+            hit.GetComponent<Outline>().enabled = true;
+        }
+        else
+        {
+            //not valid dont set it as hit
+            hit = null;
+        }
+
     }
 
+    //for leaving trigger type colliders
     void OnTriggerExit(Collider col)
     {
-        //clear interacting object
-        hit = null;
+        //check to see if we are leaving the currently slected object
+        if (hit == col.gameObject)
+        {
+            //turn off highlight
+            hit.GetComponent<Outline>().enabled = false;
 
-        //turn off highlight
-        hit.GetComponent<Outline>().enabled = false;
+            //clear interacting object
+            hit = null;
+        }
+
     }
 
     /// <summary>
@@ -79,7 +105,7 @@ public abstract class BaseController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Runs proper trigger events (ie down hold and up) - 
+    /// Runs proper trigger controller events (ie down hold and up) - 
     /// </summary>
     protected virtual void Trigger()
     {
@@ -90,12 +116,35 @@ public abstract class BaseController : MonoBehaviour {
         //trigger pull checks
         if (trigger_lastFrame <= .1f && trigger_currentFrame > 0f) //trigger intial pull
         {
-            //check if raycast hit anything we want
-            //if (Physics.Raycast(ray, out hit, rayDistance, rayLayer)) //check for valid raycast
-            if(hit != null) //we have a collision selected
+            //check ineract mode and run TriggerDown accordingly
+            switch (interactMode)
             {
-                OnTriggerDown();
+                //Default mode is a physical grab- hit is set with trigger colliders
+                case InteractMode.Grab:
+                    if(hit != null) //we have a collision selected
+                    {
+                        OnTriggerDown();
+                    }
+                    break;
+
+                //long distance mode is raycast- need to set ht with physics raycast
+                case InteractMode.Raycast:
+                    //turn on rayline
+                    rayLine.enabled = true;
+
+                    //check raycast and set hit
+                    RaycastHit rayHit;
+                    if(Physics.Raycast(ray, out rayHit, rayDistance, rayLayer))
+                    {
+                        //set hit
+                        hit = rayHit.collider.gameObject;
+
+                        //run on trigger down
+                        OnTriggerDown();
+                    }
+                    break;
             }
+           
         }
         else if (trigger_lastFrame > 0f && trigger_currentFrame > 0f) //holding trigger
         {
@@ -103,7 +152,15 @@ public abstract class BaseController : MonoBehaviour {
         }
         else  if (trigger_lastFrame >= .1f && trigger_currentFrame <= .1f) //let go of trigger
         {
+            //run trigger up function
             OnTriggerUp();
+
+            //clean up raycast if we are in that mode
+            if (interactMode == InteractMode.Raycast)
+            {
+                //clean up turning it off
+                rayLine.enabled = false;
+            }
         }
     }
 
