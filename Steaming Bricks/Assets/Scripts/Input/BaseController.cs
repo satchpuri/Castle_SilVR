@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR;
+using cakeslice;
 
 public abstract class BaseController : MonoBehaviour {
     //hand fields
@@ -10,10 +11,11 @@ public abstract class BaseController : MonoBehaviour {
 
     //ray cast fields
     protected LineRenderer rayLine; //visual of ray
-    protected RaycastHit hit; //what the raycast hits
+    protected GameObject hit; //what the raycast hits
     protected Ray ray; //ray line itself
     [SerializeField] protected LayerMask rayLayer; //layer in which raycast interacts
     [SerializeField] protected float rayDistance; //distance raycast extends
+    protected Outline highlight;
 
     //trigger fields
     protected string triggerAxis; //axis name for trigger in use
@@ -34,9 +36,27 @@ public abstract class BaseController : MonoBehaviour {
 	// Update is called once per frame
 	protected virtual void Update () {
         TrackMovement();
-        DrawLine();
+        //DrawLine();
         Trigger();
 	}
+        
+    void OnTriggerStay(Collider col)
+    {
+        //update which obj you are interacting with
+        hit = col.gameObject;
+
+        //highlight interactable obj
+        hit.GetComponent<Outline>().enabled = true;
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        //clear interacting object
+        hit = null;
+
+        //turn off highlight
+        hit.GetComponent<Outline>().enabled = false;
+    }
 
     /// <summary>
     /// Tracks the position and roation of nodes for hands amd applies them to ingame representation of each hand
@@ -71,7 +91,8 @@ public abstract class BaseController : MonoBehaviour {
         if (trigger_lastFrame <= .1f && trigger_currentFrame > 0f) //trigger intial pull
         {
             //check if raycast hit anything we want
-            if (Physics.Raycast(ray, out hit, rayDistance, rayLayer)) //check for valid raycast
+            //if (Physics.Raycast(ray, out hit, rayDistance, rayLayer)) //check for valid raycast
+            if(hit != null) //we have a collision selected
             {
                 OnTriggerDown();
             }

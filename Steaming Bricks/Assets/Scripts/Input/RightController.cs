@@ -30,66 +30,62 @@ public class RightController : BaseController {
     public override void OnTriggerDown()
     {
         //check what kind of object we hit with the raycast and interact accordingly
-        if(hit.collider.gameObject.tag == "Movable")
+        if(hit.tag == "Movable")
         {
-            //change line colour
-            rayLine.startColor = Color.green;
-            rayLine.endColor = Color.green;
-
             //everything checks out- actually pickup the object
-			hit.collider.gameObject.GetComponent<MoveObject>().PickUp(hit.transform, gameObject);
+			hit.GetComponent<MoveObject>().PickUp(hit.transform, gameObject);
             grabbing = true;
             Debug.Log("Grab");
         }
 
-        if (hit.collider.gameObject.tag == "Key")
+        if (hit.tag == "Key")
         {
             //change line colour
             rayLine.startColor = Color.blue;
             rayLine.endColor = Color.blue;
 
-            hit.collider.gameObject.GetComponentInParent<DoorAndKey>().CollectKey();
+            hit.GetComponentInParent<DoorAndKey>().CollectKey();
         }
-        if (hit.collider.gameObject.tag == "Door")
+        if (hit.tag == "Door")
         {
             //change line colour
             rayLine.startColor = Color.blue;
             rayLine.endColor = Color.blue;
 
-            hit.collider.transform.parent.GetComponent<DoorAndKey>().OpenDoor();
+            hit.transform.parent.GetComponent<DoorAndKey>().OpenDoor();
         }
 
-        if (hit.collider.gameObject.tag == "HidingSpace")
+        if (hit.tag == "HidingSpace")
         {
             //chekc if we are hiding
-            if (!hit.collider.gameObject.GetComponent<HidingSpace>().hidding) //we are not
+            if (!hit.GetComponent<HidingSpace>().hidding) //we are not
             {
                 //hide
-                hit.collider.gameObject.GetComponent<HidingSpace>().Hide();
+                hit.GetComponent<HidingSpace>().Hide();
             }
             else //we are hiding
             {
                 //stop hiding
-                hit.collider.gameObject.GetComponent<HidingSpace>().StopHidding();
+                hit.GetComponent<HidingSpace>().StopHidding();
             }
         }
-		if(hit.collider.gameObject.tag == "Sliding")
+		if(hit.tag == "Sliding")
 		{
 			//change line colour
 			rayLine.startColor = Color.yellow;
 			rayLine.endColor = Color.yellow;
 
 			//everything checks out- actually pickup the object
-			hit.collider.gameObject.GetComponent<MoveObject>().PickUp(hit.transform, gameObject);
+			hit.GetComponent<MoveObject>().PickUp(hit.transform, gameObject);
 			sliding = true;
 			Debug.Log("Slide Grab");
 		}
 
-        if(hit.collider.gameObject.tag =="Start")
+        if(hit.tag =="Start")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
-        if(hit.collider.gameObject.tag == "Exit")
+        if(hit.tag == "Exit")
         {
             Application.Quit();
         }
@@ -101,12 +97,12 @@ public class RightController : BaseController {
         if (grabbing)
         {
             //drag that bish by the hair
-            hit.collider.gameObject.GetComponent<MoveObject>().Drag(hit.transform);
+            hit.GetComponent<MoveObject>().Drag(hit.transform);
         }
 		if (sliding)
 		{
 			//drag that bish by the hair
-			hit.collider.gameObject.GetComponent<MoveObject>().Drag(hit.transform);
+			hit.GetComponent<MoveObject>().Drag(hit.transform);
 		}
     }
 
@@ -121,7 +117,7 @@ public class RightController : BaseController {
         {
             Debug.Log("Drop");
             //drop object
-            hit.collider.gameObject.GetComponent<MoveObject>().Drop();
+            hit.GetComponent<MoveObject>().Drop();
 
             //notify that we let go
             grabbing = false;
@@ -131,7 +127,7 @@ public class RightController : BaseController {
 		{
 			Debug.Log("Slide Drop");
 			//drop object
-			hit.collider.gameObject.GetComponent<MoveObject>().Drop();
+			hit.GetComponent<MoveObject>().Drop();
 
 			//notify that we stopped sliding
 			sliding = false;

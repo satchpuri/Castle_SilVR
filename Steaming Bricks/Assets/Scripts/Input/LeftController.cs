@@ -19,6 +19,7 @@ public class LeftController : BaseController {
 	// Update is called once per frame
     protected override void Update () {
         base.Update();
+
 	}
 
     public override void OnTriggerDown()
@@ -30,6 +31,9 @@ public class LeftController : BaseController {
 
     public override void OnTriggerHold()
     {
+        //turn on rayline and draw
+        rayLine.enabled = true;
+        DrawLine();
     }
 
     public override void OnTriggerUp()
@@ -37,6 +41,9 @@ public class LeftController : BaseController {
         //reset colour
         rayLine.startColor = Color.white;
         rayLine.endColor = Color.white;
+
+        //turn off rayline
+        rayLine.enabled = false;
 
         //Teleport Player on left trigger up. Calls Teleport method attached to Main Camera Script
         //Sends rayLine field from BaseController base class to find position to teleport
