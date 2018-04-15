@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114890418430433500}
   - component: {fileID: 54974138650770754}
   - component: {fileID: 114126910566243344}
+  - component: {fileID: 135252158195504312}
   m_Layer: 0
   m_Name: left
   m_TagString: Untagged
@@ -167,6 +168,7 @@ GameObject:
   - component: {fileID: 120824329477344406}
   - component: {fileID: 114164543302516704}
   - component: {fileID: 114731714773854574}
+  - component: {fileID: 135954074315302762}
   m_Layer: 0
   m_Name: right
   m_TagString: Untagged
@@ -209,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 1952783976706498}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.61947566, y: 0.61947566, z: 0.61947566}
   m_Children: []
   m_Father: {fileID: 4627813418232902}
   m_RootOrder: 0
@@ -222,7 +224,7 @@ Transform:
   m_GameObject: {fileID: 1060792049974150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.61947566, y: 0.61947566, z: 0.61947566}
   m_Children: []
   m_Father: {fileID: 4627813418232902}
   m_RootOrder: 1
@@ -530,7 +532,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -0.5199999, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -0.8394194, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -725,11 +727,6 @@ MonoBehaviour:
   lineColor0: {r: 1, g: 1, b: 1, a: 1}
   lineColor1: {r: 0, g: 1, b: 0, a: 1}
   lineColor2: {r: 0, g: 0, b: 1, a: 1}
-  lineColor3: {r: 1, g: 0, b: 0, a: 1}
-  lineColor4: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  lineColor5: {r: 0.945, g: 0.42820072, b: 0, a: 1}
-  lineColor6: {r: 0, g: 0, b: 0, a: 1}
-  lineColor7: {r: 1, g: 0, b: 0.92647076, a: 1}
   additiveRendering: 0
   backfaceCulling: 1
   cornerOutlines: 0
@@ -925,6 +922,18 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1553124250816644}
   m_Enabled: 1
+--- !u!135 &135252158195504312
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1060792049974150}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.45
+  m_Center: {x: 0, y: 0, z: 0.12}
 --- !u!135 &135542433885292090
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -932,11 +941,23 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1060792049974150}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &135954074315302762
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1952783976706498}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.45
+  m_Center: {x: 0, y: 0, z: 0.12}
 --- !u!137 &137698059150315528
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

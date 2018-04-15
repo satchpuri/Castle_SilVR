@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR;
 using UnityEngine.SceneManagement;
+using cakeslice;
 
 public class RightController : BaseController {
     private bool grabbing; //are we holding an object
@@ -26,6 +27,8 @@ public class RightController : BaseController {
         base.Update();
 		
 	}
+
+
 
     public override void OnTriggerDown()
     {
@@ -52,7 +55,9 @@ public class RightController : BaseController {
             rayLine.startColor = Color.blue;
             rayLine.endColor = Color.blue;
 
-            hit.transform.parent.GetComponent<DoorAndKey>().OpenDoor();
+            Debug.Log("Open Door");
+
+            hit.transform.GetComponent<DoorAndKey>().OpenDoor();
         }
 
         if (hit.tag == "HidingSpace")

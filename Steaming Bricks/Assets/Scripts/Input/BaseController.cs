@@ -8,7 +8,6 @@ using cakeslice;
 public abstract class BaseController : MonoBehaviour {
     //hand fields
     protected XRNode handNode; //node for which hand should be either XRNode.RightHand or XRNode.LeftHand
-    protected Outline highlight;
 
     //ray cast fields
     protected LineRenderer rayLine; //visual of ray
@@ -48,19 +47,27 @@ public abstract class BaseController : MonoBehaviour {
         {
             DrawLine();
         }
+
+        //update highlight around interactables
+        UpdateHighlight();
 	}
        
     //for staying within trigger type colliders
-    void OnTriggerStay(Collider col)
+    void OnTriggerEnter(Collider col)
     {
-        //update which obj you are interacting with
-        hit = col.gameObject;
-
         //check for valid interactable
-        if (hit.GetComponent<Outline>() != null) //check it has an outline component
+        if (col.gameObject.GetComponent<Outline>() != null) //check it has an outline component
         {
-            //highlight interactable obj
-            hit.GetComponent<Outline>().enabled = true;
+            
+            if (hit != null)//check if no hit is set
+            {
+                //turn off highlight on old selected object
+                hit.GetComponent<Outline>().enabled = false;
+            }
+
+            //update which obj you are interacting with
+            hit = col.gameObject;
+            hit.GetComponent<Outline>().enabled = true; //highlight
         }
         else
         {
@@ -83,6 +90,39 @@ public abstract class BaseController : MonoBehaviour {
             hit = null;
         }
 
+    }
+
+    //chnages highlight color depending on which is selected
+    private void UpdateHighlight()
+    {
+        //check if we haev something selected
+        if (hit != null)
+        {
+            //switch color based on interactable type
+            switch (hit.tag)
+            {
+                case "Movable":
+                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = Color.green;
+                    break;
+
+                case "Sliding":
+                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = Color.yellow;
+                    break;
+
+                case "Key":
+                case "Door":
+                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = Color.red;
+                    break;
+
+                case "HidingSpace":
+                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = Color.magenta;
+                    break;
+
+                case "Coin":
+                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = Color.cyan;
+                    break;
+            }
+        }
     }
 
     /// <summary>

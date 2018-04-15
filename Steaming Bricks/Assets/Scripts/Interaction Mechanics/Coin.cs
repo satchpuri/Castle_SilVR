@@ -6,7 +6,7 @@ public class Coin : MonoBehaviour
     //Coin Collection
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             GameManager.Instance.coins_remaining--;
             this.gameObject.SetActive(false);
