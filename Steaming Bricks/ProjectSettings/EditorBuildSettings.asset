@@ -11,12 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Main.unity
     guid: 2f3f5b96b33fa644698d628e682f5b63
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Satch.unity
     guid: fdd4efd0f6f9e5a41895f4beda9bc146
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 04ed32e9156326c46877f6e1e6939ec7
+  - enabled: 1
     path: Assets/Scenes/KingPoptart.unity
     guid: f95b696dbcdb9044898c8cbc29fc5310
-  - enabled: 0
-    path: Assets/Scenes/Level1.unity
-    guid: bec282dbd63455e4fb022119b3164277

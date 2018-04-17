@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour {
 	//play 
     public void Play()
     {
+        Debug.Log("Start Pressed");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         PauseMenu.isPaused = false;
     }
