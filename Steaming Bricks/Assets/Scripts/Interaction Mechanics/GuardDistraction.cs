@@ -10,8 +10,7 @@ public class GuardDistraction : MonoBehaviour
         {
             for (int i = 0; i < GameManager.Instance.guards.Length; i++)
             {
-                GameManager.Instance.guards[i].GetComponent<GuardMovement>().distracted = true;
-                GameManager.Instance.guards[i].transform.LookAt(distraction.transform);
+                GameManager.Instance.guards[i].GetComponent<GuardMovement>().SetDistracted(distraction.transform);
             }
         }
     }

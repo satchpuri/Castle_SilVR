@@ -18,10 +18,15 @@ public class GuardMovement : MonoBehaviour {
     private GameObject player;
     //check if guard is distracted
     public bool distracted = false;
-
+    //timer for distraction
+    [SerializeField] private int distract_time;
+    private int distract_counter;
 
     // Use this for initialization
     void Start () {
+        //if distract time is not set, set it to 5 seconds
+        if (distract_time == 0) { distract_time = 5; }
+
         //build path from GO that hold spath nodes
         waypoints.AddRange(pathParent.GetComponentsInChildren<Transform>());
         waypoints.RemoveAt(0); //remove 0 index because GetComponentsInCHildren is inclusive of parent
@@ -39,6 +44,10 @@ public class GuardMovement : MonoBehaviour {
         if (!distracted && waypoints.Count > 0)
         {
             SeekPoint(waypoints[currWaypointNum]);
+        }
+        else if(Time.time > distract_counter + distract_time)
+        {
+            distracted = false;
         }
 	}
 
@@ -73,6 +82,12 @@ public class GuardMovement : MonoBehaviour {
         }
     }
 
-    
+    //Guard gets distracted
+    public void SetDistracted(Transform distraction)
+    {
+        distract_counter = (int)Time.time;
+        distracted = true;
+        transform.LookAt(distraction);
+    }
 
 }
