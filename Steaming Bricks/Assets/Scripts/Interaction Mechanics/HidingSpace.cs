@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HidingSpace : MonoBehaviour {
     [SerializeField] private LayerMask hiddenLayer;
@@ -8,10 +9,27 @@ public class HidingSpace : MonoBehaviour {
     public bool hidding;
     private ParticleSystem smoke;
 
+    // Use this for initialization
+    void OnEnabled()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        smoke = GameManager.Instance.player.GetComponent<ParticleSystem>(); //save players particle system - GameObject.FindGameObjectWithTag("Player")
+    }
+
+    void OnDisabled()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+      
+
 	// Use this for initialization
 	void Start () {
         hidding = false; //initally be hiding
-        smoke = GameObject.FindGameObjectWithTag("Player").GetComponent<ParticleSystem>(); //save players particle system
+
 	}
 	
 	// Update is called once per frame

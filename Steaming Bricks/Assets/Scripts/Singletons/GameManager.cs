@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -25,13 +26,23 @@ public class GameManager : Singleton<GameManager>
     public GameObject rightHand;
 
     // Use this for initialization
-    void Start()
+    void OnEnabled()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         movableObjects = GameObject.FindGameObjectsWithTag("Movable");
         slidingObject = GameObject.FindGameObjectsWithTag("Sliding");
         guards = GameObject.FindGameObjectsWithTag("Guard");
-        coins_remaining = GameObject.FindGameObjectsWithTag("Coin").Length;
+        //coins_remaining = GameObject.FindGameObjectsWithTag("Coin").Length; //wasnt working so I made it manually set in inspector
         player = GameObject.FindGameObjectWithTag("Player");
+    }
+       
+    void OnDisabled()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     // Update is called once per frame
@@ -39,4 +50,7 @@ public class GameManager : Singleton<GameManager>
     {
 
     }
+
+
+
 }
