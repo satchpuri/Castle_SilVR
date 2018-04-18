@@ -296,6 +296,16 @@ Prefab:
       propertyPath: dangleKey
       value: 
       objectReference: {fileID: 1505440430}
+    - target: {fileID: 198432835905058256, guid: 96f7d11a899715e43930a2b26e785de9,
+        type: 2}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198432835905058256, guid: 96f7d11a899715e43930a2b26e785de9,
+        type: 2}
+      propertyPath: randomSeed
+      value: -1422715037
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96f7d11a899715e43930a2b26e785de9, type: 2}
   m_IsPrefabParent: 0
