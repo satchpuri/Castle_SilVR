@@ -11,7 +11,7 @@ public class HidingSpace : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         hidding = false; //initally be hiding
-        smoke = GameManager.Instance.player.GetComponent<ParticleSystem>(); //save players particle system
+        smoke = GameObject.FindGameObjectWithTag("Player").GetComponent<ParticleSystem>(); //save players particle system
 	}
 	
 	// Update is called once per frame
