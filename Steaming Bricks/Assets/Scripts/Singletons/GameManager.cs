@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject rightHand;
 
     // Use this for initialization
-    void OnEnabled()
+    void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -36,11 +36,11 @@ public class GameManager : Singleton<GameManager>
         movableObjects = GameObject.FindGameObjectsWithTag("Movable");
         slidingObject = GameObject.FindGameObjectsWithTag("Sliding");
         guards = GameObject.FindGameObjectsWithTag("Guard");
-        //coins_remaining = GameObject.FindGameObjectsWithTag("Coin").Length; //wasnt working so I made it manually set in inspector
+        coins_remaining = GameObject.FindGameObjectsWithTag("Coin").Length; //wasnt working so I made it manually set in inspector
         player = GameObject.FindGameObjectWithTag("Player");
     }
        
-    void OnDisabled()
+    void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }

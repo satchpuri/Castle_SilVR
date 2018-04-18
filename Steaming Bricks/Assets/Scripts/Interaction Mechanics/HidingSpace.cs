@@ -10,7 +10,7 @@ public class HidingSpace : MonoBehaviour {
     private ParticleSystem smoke;
 
     // Use this for initialization
-    void OnEnabled()
+    void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -20,8 +20,9 @@ public class HidingSpace : MonoBehaviour {
         smoke = GameManager.Instance.player.GetComponent<ParticleSystem>(); //save players particle system - GameObject.FindGameObjectWithTag("Player")
     }
 
-    void OnDisabled()
+    void OnDisable()
     {
+        smoke = null;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
       
