@@ -65,15 +65,15 @@ public class HidingSpace : MonoBehaviour {
         //set hidden variable to false
         hidding = false;
 
-        //chnage tiny terry mask back to default
-        GameManager.Instance.player.layer = 0; //0 is Default layer
-
         //make tiny terry visible again
         StartCoroutine(FadeIn(GameManager.Instance.player));
         smoke.Play(); //play smoke particle anim
 
         //allow tiny from moving
         GameManager.Instance.player.GetComponent<PlayerMovement>().canMove = true;
+
+        //chnage tiny terry mask back to default
+        GameManager.Instance.player.layer = 0; //0 is Default layer
     }
 
     /// <summary>
