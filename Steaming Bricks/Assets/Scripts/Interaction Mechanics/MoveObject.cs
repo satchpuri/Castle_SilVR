@@ -98,7 +98,7 @@ public class MoveObject : MonoBehaviour {
 	public void PickUp(Transform hitTransform, GameObject hand)
     {
 
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
         gameObject.GetComponent<Rigidbody> ().useGravity = false;
 		zeroG = true;
@@ -145,7 +145,7 @@ public class MoveObject : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody> ().useGravity = true;
 		zeroG = false;
 
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
     }
 
