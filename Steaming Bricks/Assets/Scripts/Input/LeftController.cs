@@ -13,6 +13,7 @@ public class LeftController : BaseController {
         //set varibles for specific hand from parent
         handNode = XRNode.LeftHand;
         triggerAxis = "LTrigger";
+		gripAxis = "LGrip";
 		
 	}
 	
@@ -49,4 +50,9 @@ public class LeftController : BaseController {
         //Sends rayLine field from BaseController base class to find position to teleport
         Camera.main.GetComponent<BigPlayerTeleport>().Teleport(this.gameObject.transform.forward);
     }
+
+	public override void OnGripDown() {}
+	public override void OnGripHold() {}
+	public override void OnGripUp() {}
+
 }

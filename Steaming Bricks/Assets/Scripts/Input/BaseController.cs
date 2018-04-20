@@ -23,6 +23,10 @@ public abstract class BaseController : MonoBehaviour {
     protected float trigger_lastFrame; //trigger state last frame
     protected float trigger_currentFrame; //trigger state current frame
 
+	protected string gripAxis;
+	protected float grip_lastFrame;
+	protected float grip_currentFrame;
+
 	// Use this for initialization
 	protected virtual void Start () {
         rayLine = this.gameObject.GetComponent<LineRenderer>(); //attach linerenderer to field
@@ -41,6 +45,7 @@ public abstract class BaseController : MonoBehaviour {
 	protected virtual void Update () {
         TrackMovement();
         Trigger();
+		GripButton ();
 
         //draw ray if we are in raycast mode
         if (interactMode == InteractMode.Raycast)
@@ -145,6 +150,30 @@ public abstract class BaseController : MonoBehaviour {
         rayLine.SetPosition(1, ray.GetPoint(rayDistance));
     }
 
+	protected virtual void GripButton() {
+
+		//update grip frame checks
+		grip_lastFrame = grip_currentFrame;
+		grip_currentFrame = Input.GetAxis (gripAxis);
+
+		//grip press checks
+		if (grip_lastFrame == 0 && grip_currentFrame == 1) { //first press of button
+
+			//run grip down function
+			OnGripDown ();
+
+		} else if (grip_lastFrame == 1 && grip_currentFrame == 1) { //holding button
+
+			//run grip hold function
+			OnGripHold ();
+
+		} else if (grip_lastFrame == 1 && grip_currentFrame == 0) { //release of button
+
+			//run grip up button
+			OnGripUp ();
+		}
+	}
+
     /// <summary>
     /// Runs proper trigger controller events (ie down hold and up) - 
     /// </summary>
@@ -219,4 +248,19 @@ public abstract class BaseController : MonoBehaviour {
     /// The trigger up event.
     /// </summary>
     public abstract void OnTriggerUp();
+
+	/// <summary>
+	/// The grip down event.
+	/// </summary>
+	public abstract void OnGripDown();
+
+	/// <summary>
+	/// The grip hold event.
+	/// </summary>
+	public abstract void OnGripHold();
+
+	/// <summary>
+	/// the grip up event.
+	/// </summary>
+	public abstract void OnGripUp();
 }

@@ -15,6 +15,7 @@ TagManager:
   - NavGround
   - Door
   - Key
+  - Boundary
   layers:
   - Default
   - TransparentFX
