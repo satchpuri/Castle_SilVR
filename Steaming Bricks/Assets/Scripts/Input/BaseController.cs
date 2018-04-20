@@ -74,11 +74,7 @@ public abstract class BaseController : MonoBehaviour {
             hit = col.gameObject;
             hit.GetComponent<Outline>().enabled = true; //highlight
         }
-        else
-        {
-            //not valid dont set it as hit
-            hit = null;
-        }
+
 
     }
 

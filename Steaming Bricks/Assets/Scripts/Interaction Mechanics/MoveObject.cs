@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
@@ -57,7 +58,7 @@ public class MoveObject : MonoBehaviour {
 		}
 		//if an object is in bounds, prevent it from falling past the floor.
 		if (!outOfBounds && transform.position.y - gameObject.GetComponent<Rigidbody> ().velocity.y < floor.transform.position.y) {
-			transform.position = new Vector3 (transform.position.x, floor.transform.position.y + /*(GetComponent<MeshRenderer>().bounds.extents.y/2)*/.5f, transform.position.z);
+			transform.position = new Vector3 (transform.position.x, floor.transform.position.y + .5f, transform.position.z);
 			GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		}
 
@@ -150,8 +151,11 @@ public class MoveObject : MonoBehaviour {
     }
 
 }
+*/
 
-/*
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR;
 
@@ -208,7 +212,7 @@ public class MoveObject : MonoBehaviour {
 			gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		}
 		//if an object is in bounds, prevent it from falling past the floor.
-		if (!outOfBounds && transform.position.y - gameObject.GetComponent<Rigidbody> ().velocity.y < floor.transform.position.y) {
+        else if (!outOfBounds &&  handle == null && transform.position.y < floor.transform.position.y) { //GameManager.Instance.rightHand.GetComponent<RightController>().grabbing
 			transform.position = new Vector3 (transform.position.x, floor.transform.position.y + .5f, transform.position.z);
 			GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		}
@@ -262,8 +266,14 @@ public class MoveObject : MonoBehaviour {
 		prevPos = handle.transform.position;
 		//this.transform.parent = handle;
 
-		if (!lockedX && !lockedY && !lockedZ)
-			transform.SetParent (handle.transform);
+        if (!lockedX && !lockedY && !lockedZ)
+        {
+            //set parent to be hand
+            transform.SetParent(handle.transform);
+
+            //turn off collider
+            this.gameObject.GetComponent<Collider>().enabled = false;
+        }
 
     }
 
@@ -301,11 +311,13 @@ public class MoveObject : MonoBehaviour {
 
 		transform.rotation = originalRot;
 
-		if (!lockedX && !lockedY && !lockedZ)
-			transform.parent = GameObject.Find("Moveable").transform;
+        if (!lockedX && !lockedY && !lockedZ)
+        {
+            transform.parent = GameObject.Find("Moveable").transform;
+            this.gameObject.GetComponent<Collider>().enabled = true;
+        }
 		
     }
 
 }
 
-*/

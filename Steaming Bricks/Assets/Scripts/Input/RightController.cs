@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using cakeslice;
 
 public class RightController : BaseController {
-    private bool grabbing; //are we holding an object
+    public bool grabbing; //are we holding an object
 	private bool sliding; //are we sliding an object
 	private bool raising; //are we in raise island mode
 
