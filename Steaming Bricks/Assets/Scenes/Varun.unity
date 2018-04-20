@@ -1157,7 +1157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 874440602}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Waypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2132,6 +2132,11 @@ Prefab:
       propertyPath: pathParent
       value: 
       objectReference: {fileID: 874440601}
+    - target: {fileID: 114202801609537974, guid: ebe0646ec371d1a42a1053a55911df35,
+        type: 2}
+      propertyPath: speed
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ebe0646ec371d1a42a1053a55911df35, type: 2}
   m_IsPrefabParent: 0

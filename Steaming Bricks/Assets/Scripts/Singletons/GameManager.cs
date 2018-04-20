@@ -34,7 +34,19 @@ public class GameManager : Singleton<GameManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         movableObjects = GameObject.FindGameObjectsWithTag("Movable");
+
+        foreach(GameObject child in movableObjects)
+        {
+            child.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
+
         slidingObject = GameObject.FindGameObjectsWithTag("Sliding");
+
+        foreach (GameObject child in slidingObject)
+        {
+            child.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
+
         guards = GameObject.FindGameObjectsWithTag("Guard");
         coins_remaining = GameObject.FindGameObjectsWithTag("Coin").Length; //wasnt working so I made it manually set in inspector
         player = GameObject.FindGameObjectWithTag("Player");

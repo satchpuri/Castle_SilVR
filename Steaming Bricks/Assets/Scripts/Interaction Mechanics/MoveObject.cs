@@ -97,7 +97,10 @@ public class MoveObject : MonoBehaviour {
     // VR GRABBING CONTROLS ===================================
 	public void PickUp(Transform hitTransform, GameObject hand)
     {
-		gameObject.GetComponent<Rigidbody> ().useGravity = false;
+
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
+        gameObject.GetComponent<Rigidbody> ().useGravity = false;
 		zeroG = true;
 		//gameObject.GetComponent<Rigidbody> ().mass = 1;
 
@@ -141,7 +144,9 @@ public class MoveObject : MonoBehaviour {
 		//gameObject.GetComponent<Rigidbody> ().mass = .00001f;
 		gameObject.GetComponent<Rigidbody> ().useGravity = true;
 		zeroG = false;
-		
+
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
     }
 
 }
