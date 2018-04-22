@@ -13,6 +13,8 @@ public class GuardVision : MonoBehaviour {
     [SerializeField]
     private float visionDistance;
 
+    private LineRenderer line;
+
 
     // Use this for initialization
     void OnEnable()
@@ -33,6 +35,7 @@ public class GuardVision : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        line = this.gameObject.GetComponent<LineRenderer>();
 		
 	}
 	
@@ -58,8 +61,18 @@ public class GuardVision : MonoBehaviour {
         //Debug.Log(angle);
 
         //Debug.DrawLine(transform.position, transform.position + transform.forward.normalized * 1.5f);
-        Debug.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(visionAngle, transform.up) * transform.forward * visionDistance);
-        Debug.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(-visionAngle, transform.up) * transform.forward * visionDistance);
+        //Debug.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(visionAngle, transform.up) * transform.forward * visionDistance);
+        //Debug.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(-visionAngle, transform.up) * transform.forward * visionDistance);
+
+        //draw a line faking out this
+        Ray left = new Ray(transform.position, Quaternion.AngleAxis(visionAngle, transform.up) * transform.forward * visionDistance);
+        line.SetPosition(0, left.origin);
+        line.SetPosition(1, left.GetPoint(visionDistance));
+
+        Ray right = new Ray(transform.position, Quaternion.AngleAxis(-visionAngle, transform.up) * transform.forward * visionDistance);
+
+        line.SetPosition(3, right.GetPoint(visionDistance));
+        line.SetPosition(2, right.origin);
 
         if (angle > visionAngle)
         {
