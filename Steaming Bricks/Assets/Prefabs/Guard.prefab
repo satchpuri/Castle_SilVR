@@ -154,4 +154,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionAngle: 20
-  visionDistance: 0.15
+  visionDistance: 0.08

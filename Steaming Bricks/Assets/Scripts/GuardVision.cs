@@ -73,7 +73,7 @@ public class GuardVision : MonoBehaviour {
 
             //Debug.Log(hit.transform.gameObject.name);
 
-            if (hit.transform.gameObject == target && target.layer != 10)
+            if (hit.transform.gameObject == target && target.layer != 10 && direction.magnitude <= visionDistance)
             {
 
                 return true;

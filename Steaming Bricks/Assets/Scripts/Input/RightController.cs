@@ -36,17 +36,8 @@ public class RightController : BaseController {
 
     public override void OnTriggerDown()
     {
-
-		if (raising) {
-
-			//highlight island
-
-			//GameObject.Find ("Land").GetComponent<LevelRaise> ().UpdatePosition (gameObject);
-
-			Debug.Log ("moving the island");
-
-			//disable all other controls while in island mode
-		} else {
+        //disable other controls while in island mode
+        if (!raising) {
 			//check what kind of object we hit with the raycast and interact accordingly
 			if (hit.tag == "Movable") {
 				//everything checks out- actually pickup the object
@@ -115,11 +106,6 @@ public class RightController : BaseController {
 			//drag that bish by the hair
 			hit.GetComponent<MoveObject>().Drag(hit.transform);
 		}
-		if (raising) {
-
-			Debug.Log ("holding trigger");
-			GameObject.Find ("Land").GetComponent<LevelRaise> ().Move (gameObject);
-		}
     }
 
     public override void OnTriggerUp()
@@ -148,27 +134,45 @@ public class RightController : BaseController {
 			//notify that we stopped sliding
 			sliding = false;
 		}
-
-		if (raising) {
-
-			GameObject.Find ("Land").GetComponent<LevelRaise> ().ResetPos ();
-
-			//stop highlighting
-
-		}
     }
 
 	public override void OnGripDown() {
 
 		//turn the normal hand off
-		GetComponent<MeshRenderer> ().enabled = !GetComponent<MeshRenderer> ().enabled;
+        GetComponent<MeshRenderer> ().enabled = false;
 		//turn the island on
 		transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
 
 		//acknowledge we are in island mode
-		raising = !raising;
+		raising = true;
+
+        //start highlighting here
 	}
 
-	public override void OnGripHold() {}
-	public override void OnGripUp() {}
+	public override void OnGripHold() {
+
+        if (raising) {
+
+            Debug.Log ("holding trigger");
+            GameObject.Find ("Land").GetComponent<LevelRaise> ().Move (gameObject);
+        }
+
+    }
+	public override void OnGripUp() {
+
+        if (raising) {
+
+            GameObject.Find ("Land").GetComponent<LevelRaise> ().ResetPos ();
+
+            //stop highlighting here
+        }
+
+        //turn the normal hand on
+        GetComponent<MeshRenderer> ().enabled = true;
+        //turn the island off
+        transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
+
+        //end island mode
+        raising = false;
+    }
 }
