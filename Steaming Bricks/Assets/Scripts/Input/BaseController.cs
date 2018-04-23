@@ -15,8 +15,8 @@ public abstract class BaseController : MonoBehaviour {
     protected Ray ray; //ray line itself
     [SerializeField] protected LayerMask rayLayer; //layer in which raycast interacts
     [SerializeField] protected float rayDistance; //distance raycast extends
-    enum InteractMode {Grab, Raycast}; //default is physicla grab, raycast for long distance interactions
-    private InteractMode interactMode ;
+    protected enum InteractMode {Grab, Raycast}; //default is physicla grab, raycast for long distance interactions
+    protected InteractMode interactMode ;
 
     //trigger fields
     protected string triggerAxis; //axis name for trigger in use
@@ -30,7 +30,7 @@ public abstract class BaseController : MonoBehaviour {
 	// Use this for initialization
 	protected virtual void Start () {
         rayLine = this.gameObject.GetComponent<LineRenderer>(); //attach linerenderer to field
-        rayLine.enabled = true; //make sure its on
+        rayLine.enabled = false; //turn off line draying by default
 
         //set inital interaction mode
         interactMode = InteractMode.Grab; //grab by default

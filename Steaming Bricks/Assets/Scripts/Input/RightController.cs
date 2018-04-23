@@ -24,6 +24,13 @@ public class RightController : BaseController {
         grabbing = false;
 		sliding = false;
 		raising = false;
+
+        //change interaction mode to raycast for main menu
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
+        {
+            //set mode to raycast- things are far away and we cant touch them
+            interactMode = InteractMode.Raycast;
+        }
 	}
 	
 	// Update is called once per frame
@@ -36,61 +43,71 @@ public class RightController : BaseController {
 
     public override void OnTriggerDown()
     {
-        //disable other controls while in island mode
-        if (!raising) {
-			//check what kind of object we hit with the raycast and interact accordingly
-			if (hit.tag == "Movable") {
-				//everything checks out- actually pickup the object
-				hit.GetComponent<MoveObject> ().PickUp (hit.transform, gameObject);
-				grabbing = true;
-				Debug.Log ("Grab");
-			}
+        
+        //use only specific interactions for some levels- so check what scene we are on
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
+        {
+            if (hit.tag == "Start")
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else if (hit.tag == "Exit")
+            {
+                Application.Quit();
+            }
+        }
+        else //all other scenes should use these
+        {
+            //disable other controls while in island mode
+            if (!raising) {
+                //check what kind of object we hit with the raycast and interact accordingly
+                if (hit.tag == "Movable") {
+                    //everything checks out- actually pickup the object
+                    hit.GetComponent<MoveObject> ().PickUp (hit.transform, gameObject);
+                    grabbing = true;
+                    Debug.Log ("Grab");
+                }
 
-			if (hit.tag == "Key") {
-				//change line colour
-				rayLine.startColor = Color.blue;
-				rayLine.endColor = Color.blue;
+                if (hit.tag == "Key") {
+                    //change line colour
+                    rayLine.startColor = Color.blue;
+                    rayLine.endColor = Color.blue;
 
-				hit.GetComponentInParent<DoorAndKey> ().CollectKey ();
-			}
-			if (hit.tag == "Door") {
-				//change line colour
-				rayLine.startColor = Color.blue;
-				rayLine.endColor = Color.blue;
+                    hit.GetComponentInParent<DoorAndKey> ().CollectKey ();
+                }
+                if (hit.tag == "Door") {
+                    //change line colour
+                    rayLine.startColor = Color.blue;
+                    rayLine.endColor = Color.blue;
 
-				Debug.Log ("Open Door");
+                    Debug.Log ("Open Door");
 
-				hit.transform.GetComponent<DoorAndKey> ().OpenDoor ();
-			}
+                    hit.transform.GetComponent<DoorAndKey> ().OpenDoor ();
+                }
 
-			if (hit.tag == "HidingSpace") {
-				//chekc if we are hiding
-				if (!hit.GetComponent<HidingSpace> ().hidding) { //we are not
-					//hide
-					hit.GetComponent<HidingSpace> ().Hide ();
-				} else { //we are hiding
-					//stop hiding
-					hit.GetComponent<HidingSpace> ().StopHidding ();
-				}
-			}
-			if (hit.tag == "Sliding") {
-				//change line colour
-				rayLine.startColor = Color.yellow;
-				rayLine.endColor = Color.yellow;
+                if (hit.tag == "HidingSpace") {
+                    //chekc if we are hiding
+                    if (!hit.GetComponent<HidingSpace> ().hidding) { //we are not
+                        //hide
+                        hit.GetComponent<HidingSpace> ().Hide ();
+                    } else { //we are hiding
+                        //stop hiding
+                        hit.GetComponent<HidingSpace> ().StopHidding ();
+                    }
+                }
+                if (hit.tag == "Sliding") {
+                    //change line colour
+                    rayLine.startColor = Color.yellow;
+                    rayLine.endColor = Color.yellow;
 
-				//everything checks out- actually pickup the object
-				hit.GetComponent<MoveObject> ().PickUp (hit.transform, gameObject);
-				sliding = true;
-				Debug.Log ("Slide Grab");
-			}
+                    //everything checks out- actually pickup the object
+                    hit.GetComponent<MoveObject> ().PickUp (hit.transform, gameObject);
+                    sliding = true;
+                    Debug.Log ("Slide Grab");
+                }
+            }
+        }
 
-			if (hit.tag == "Start") {
-				SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
-			}
-			if (hit.tag == "Exit") {
-				Application.Quit ();
-			}
-		}
     }
 
     public override void OnTriggerHold()
@@ -137,16 +154,19 @@ public class RightController : BaseController {
     }
 
 	public override void OnGripDown() {
+        
+            //turn the normal hand off
+            GetComponent<MeshRenderer> ().enabled = false;
+            //turn the island on
+            transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
 
-		//turn the normal hand off
-        GetComponent<MeshRenderer> ().enabled = false;
-		//turn the island on
-		transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
-
-		//acknowledge we are in island mode
-		raising = true;
-
-        //start highlighting here
+        //dont do level raising in the menus
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
+        {
+            //acknowledge we are in island mode
+            raising = true;
+        }
+		
 	}
 
 	public override void OnGripHold() {
