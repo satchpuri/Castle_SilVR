@@ -786,6 +786,54 @@ Prefab:
       propertyPath: m_TagString
       value: Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 114894752566702732, guid: fdc787f6fdf8bb847a125440357f100c,
+        type: 2}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 92226ab4835e77146956fd1b84e1ed52,
+        type: 3}
+    - target: {fileID: 114894752566702732, guid: fdc787f6fdf8bb847a125440357f100c,
+        type: 2}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 26561ca043a5fc74a860a5d9dc9c2c46,
+        type: 3}
+    - target: {fileID: 114766628551275862, guid: fdc787f6fdf8bb847a125440357f100c,
+        type: 2}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: de3b8554c9cb99a4a8de83f2b9a070f7,
+        type: 3}
+    - target: {fileID: 114766628551275862, guid: fdc787f6fdf8bb847a125440357f100c,
+        type: 2}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6717d1e8824dc5b4d9fe52be18d0d4a4,
+        type: 3}
+    - target: {fileID: 114399512312185462, guid: fdc787f6fdf8bb847a125440357f100c,
+        type: 2}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b58616c9d4d9c7f4f9700d27a42c6701,
+        type: 3}
+    - target: {fileID: 114399512312185462, guid: fdc787f6fdf8bb847a125440357f100c,
+        type: 2}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 207ab77473fb2c1468786e71aad8be48,
+        type: 3}
+    - target: {fileID: 114989942952538404, guid: fdc787f6fdf8bb847a125440357f100c,
+        type: 2}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 158b0c3309cab044eae1cf719980efdf,
+        type: 3}
+    - target: {fileID: 114989942952538404, guid: fdc787f6fdf8bb847a125440357f100c,
+        type: 2}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f4d267bab3797634f854069348979615,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fdc787f6fdf8bb847a125440357f100c, type: 2}
   m_IsPrefabParent: 0
