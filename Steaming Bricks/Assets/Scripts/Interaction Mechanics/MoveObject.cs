@@ -80,6 +80,10 @@ public class MoveObject : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+        if(zeroG)
+        {
+            //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
         //update navmesh when you hit the ground
         //GameManager.Instance.UpdateNavMesh();
     }
@@ -146,6 +150,7 @@ public class MoveObject : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody> ().useGravity = true;
 		zeroG = false;
 
+        //Need find when Movable object hits the floor and put this there (OnCollisionEnter()?)
         //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
     }
@@ -235,6 +240,11 @@ public class MoveObject : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+        if(zeroG)
+        {
+            //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
+
         //update navmesh when you hit the ground
         //GameManager.Instance.UpdateNavMesh();
     }
@@ -253,7 +263,9 @@ public class MoveObject : MonoBehaviour {
     // VR GRABBING CONTROLS ===================================
 	public void PickUp(Transform hitTransform, GameObject hand)
     {
-		gameObject.GetComponent<Rigidbody> ().useGravity = false;
+        //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
+        gameObject.GetComponent<Rigidbody> ().useGravity = false;
 		zeroG = true;
 		//gameObject.GetComponent<Rigidbody> ().mass = 1;
 
@@ -316,7 +328,9 @@ public class MoveObject : MonoBehaviour {
             transform.parent = GameObject.Find("Moveable").transform;
             this.gameObject.GetComponent<Collider>().enabled = true;
         }
-		
+
+        //Need find when Movable object hits the floor and put this there (OnCollisionEnter()?)
+        //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
 }
