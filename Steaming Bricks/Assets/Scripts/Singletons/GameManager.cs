@@ -46,7 +46,7 @@ public class GameManager : Singleton<GameManager>
             child.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
         */
-        guards = GameObject.FindGameObjectsWithTag("Guard");
+        guards = GameObject.FindGameObjectsWithTag("Distract");
         coins_remaining = GameObject.FindGameObjectsWithTag("Coin").Length; //wasnt working so I made it manually set in inspector
         player = GameObject.FindGameObjectWithTag("Player");
     }
