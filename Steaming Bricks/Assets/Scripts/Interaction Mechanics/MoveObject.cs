@@ -84,6 +84,19 @@ public class MoveObject : MonoBehaviour {
         if(collision.gameObject == GameManager.Instance.player)
         {
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            this.GetComponent<Rigidbody>().isKinematic = true;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        //unfreeze frozen obj
+        if(collision.gameObject == GameManager.Instance.player)
+        {
+            //unfreeze this object - but keep rot frozen
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
+            this.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 
@@ -104,6 +117,7 @@ public class MoveObject : MonoBehaviour {
         //unfreeze this object - but keep rot frozen
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
+        this.GetComponent<Rigidbody>().isKinematic = false;
 
 
         gameObject.GetComponent<Rigidbody> ().useGravity = false;
