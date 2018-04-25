@@ -8,9 +8,11 @@ public class PopIn : MonoBehaviour {
 
 	private bool active;
 	public bool Active { get { return active; } }
+    private Transform properSize;
 
 	// Use this for initialization
 	void Start () {
+        properSize = this.gameObject.transform;
 		//make object invisible on startup
 		transform.localScale = Vector3.zero;
 	}
@@ -25,7 +27,7 @@ public class PopIn : MonoBehaviour {
 			transform.localScale = Vector3.zero;
 			active = false;
 		} else if (!active) {
-			transform.localScale = new Vector3 (.00015f, .00015f, .00015f);
+            transform.localScale = new Vector3 (.0005f, 0.0005f, 0.0005f);
 			active = true;
 		}
 		
