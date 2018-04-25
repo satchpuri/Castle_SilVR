@@ -65,14 +65,45 @@ public class GuardVision : MonoBehaviour {
         //Debug.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(-visionAngle, transform.up) * transform.forward * visionDistance);
 
         //draw a line faking out this
-        Ray left = new Ray(transform.position, Quaternion.AngleAxis(visionAngle, transform.up) * transform.forward * visionDistance);
+        Ray left = new Ray(transform.position, Quaternion.AngleAxis(visionAngle, transform.up) * transform.forward * visionDistance); //ray itself
+
+        RaycastHit hitpoint; //where we save hit data for walls
+        Physics.Raycast(left, out hitpoint, visionDistance); //use raycast to get hit point
+
+        //start point
         line.SetPosition(0, left.origin);
-        line.SetPosition(1, left.GetPoint(visionDistance));
 
+        //check if we hit anything - wont draw to endpoint if hit is null
+        if (hitpoint.distance == 0)
+        {
+            //draw line to fully length
+            line.SetPosition(1, left.GetPoint(visionDistance));
+        }
+        else
+        {
+            //use raycasts hit point to draw the line to whatever its hitting
+            line.SetPosition(1, left.GetPoint(hitpoint.distance));
+        }
+
+
+
+        //same thing but for the right
         Ray right = new Ray(transform.position, Quaternion.AngleAxis(-visionAngle, transform.up) * transform.forward * visionDistance);
+        Physics.Raycast(right, out hitpoint, visionDistance); //use raycast to get hit point
 
-        line.SetPosition(3, right.GetPoint(visionDistance));
+        //check if we hit anything - wont draw to endpoint if hit is null
         line.SetPosition(2, right.origin);
+        if (hitpoint.distance == 0)
+        {
+            //draw line to fully length
+            line.SetPosition(3, right.GetPoint(visionDistance));
+        }
+        else
+        {
+            //use raycasts hit point to draw the line to whatever its hitting
+            line.SetPosition(3, right.GetPoint(hitpoint.distance));
+        }
+
 
         if (angle > visionAngle)
         {
