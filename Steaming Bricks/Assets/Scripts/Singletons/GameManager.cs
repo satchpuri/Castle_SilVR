@@ -49,6 +49,7 @@ public class GameManager : Singleton<GameManager>
         guards = GameObject.FindGameObjectsWithTag("Distract");
         coins_remaining = GameObject.FindGameObjectsWithTag("Coin").Length; //wasnt working so I made it manually set in inspector
         player = GameObject.FindGameObjectWithTag("Player");
+		GameObject.Find ("Land").GetComponent<LevelRaise> ().LoadHeight (GameObject.Find ("DataSaver").GetComponent<PersistObject> ().height);
     }
        
     void OnDisable()

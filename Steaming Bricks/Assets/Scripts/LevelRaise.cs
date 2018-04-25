@@ -23,6 +23,8 @@ public class LevelRaise : MonoBehaviour {
 
 		//move the object with the controller
 		gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + (curPos.y-prevPos.y), gameObject.transform.position.z);
+
+		GameObject.Find ("DataSaver").GetComponent<PersistObject> ().height = gameObject.transform.position.y;
 	}
 
 	private void UpdatePosition(GameObject hand) {
@@ -38,5 +40,9 @@ public class LevelRaise : MonoBehaviour {
 	public void ResetPos() {
 		prevPos = Vector3.zero;
 		curPos = Vector3.zero;
+	}
+
+	public void LoadHeight(float height) {
+		transform.position = new Vector3 (transform.position.x, height, transform.position.z);
 	}
 }
