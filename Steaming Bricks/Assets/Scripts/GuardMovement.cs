@@ -25,6 +25,8 @@ public class GuardMovement : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        distractedPathParent = pathParent;
+
         //build path from GO that hold spath nodes
         waypoints.AddRange(pathParent.GetComponentsInChildren<Transform>());
         waypoints.RemoveAt(0); //remove 0 index because GetComponentsInCHildren is inclusive of parent
