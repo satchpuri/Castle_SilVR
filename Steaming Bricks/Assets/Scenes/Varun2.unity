@@ -518,7 +518,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1475510083977664, guid: b0797e12389b9b040a31264fe0971bf9, type: 2}
       propertyPath: m_TagString
-      value: Guard
+      value: Distract
       objectReference: {fileID: 0}
     - target: {fileID: 1800471053647224, guid: b0797e12389b9b040a31264fe0971bf9, type: 2}
       propertyPath: m_TagString
