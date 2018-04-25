@@ -7,7 +7,9 @@ public class GuardMovement : MonoBehaviour {
 
     //waypoints for guard to follow
     [SerializeField] private GameObject pathParent;
+    [SerializeField] private GameObject distractedPathParent;
     public List<Transform> waypoints;
+    public List<Transform> distracted_waypoints;
     //current waypoint they are seeking
     private int currWaypointNum;
     //movement speed
@@ -17,6 +19,7 @@ public class GuardMovement : MonoBehaviour {
     //player
     private GameObject player;
     //check if guard is distracted
+    public bool distracted = false;
     public bool seeking = true;
 
     // Use this for initialization
@@ -25,6 +28,10 @@ public class GuardMovement : MonoBehaviour {
         //build path from GO that hold spath nodes
         waypoints.AddRange(pathParent.GetComponentsInChildren<Transform>());
         waypoints.RemoveAt(0); //remove 0 index because GetComponentsInCHildren is inclusive of parent
+
+        //build path from GO that hold spath nodes
+        distracted_waypoints.AddRange(distractedPathParent.GetComponentsInChildren<Transform>());
+        distracted_waypoints.RemoveAt(0); //remove 0 index because GetComponentsInCHildren is inclusive of parent
 
         //start on waypoint 0
         currWaypointNum = 0;
@@ -68,6 +75,10 @@ public class GuardMovement : MonoBehaviour {
             currWaypointNum += 1;
             if(currWaypointNum >= waypoints.Count)
             {
+                if(distracted)
+                {
+                    seeking = false;
+                }
                 currWaypointNum = 0;
             }
         }
@@ -76,7 +87,9 @@ public class GuardMovement : MonoBehaviour {
     //Guard gets distracted
     public void SetDistracted()
     {
-        seeking = true;
+        currWaypointNum = 0;
+        waypoints = distracted_waypoints;
+        distracted = true;
     }
 
 }
