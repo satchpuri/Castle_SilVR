@@ -155,10 +155,12 @@ public class RightController : BaseController {
 
 	public override void OnGripDown() {
         
-            //turn the normal hand off
-            GetComponent<MeshRenderer> ().enabled = false;
-            //turn the island on
-            transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
+        //turn the normal hand off
+        GetComponent<MeshRenderer> ().enabled = false;
+        //turn the island on
+        transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
+		transform.GetChild (0).gameObject.transform.GetChild (0).gameObject.SetActive = true;
+		transform.GetChild (0).gameObject.transform.GetChild (1).gameObject.SetActive = true;
 
         //dont do level raising in the menus
         if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
@@ -191,6 +193,8 @@ public class RightController : BaseController {
         GetComponent<MeshRenderer> ().enabled = true;
         //turn the island off
         transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
+		transform.GetChild (0).gameObject.transform.GetChild (0).gameObject.SetActive = false;
+		transform.GetChild (0).gameObject.transform.GetChild (1).gameObject.SetActive = false;
 
         //end island mode
         raising = false;
