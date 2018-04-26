@@ -7,9 +7,7 @@ using UnityEngine.SceneManagement;
 using cakeslice;
 
 public class RightController : BaseController {
-    public bool grabbing; //are we holding an object
-	private bool sliding; //are we sliding an object
-	private bool raising; //are we in raise island mode
+    
 
 	// Use this for initialization
 	protected override void Start () {
@@ -20,17 +18,7 @@ public class RightController : BaseController {
         triggerAxis = "RTrigger";
 		gripAxis = "RGrip";
 
-        //set fields for this specific hand
-        grabbing = false;
-		sliding = false;
-		raising = false;
-
-        //change interaction mode to raycast for main menu
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
-        {
-            //set mode to raycast- things are far away and we cant touch them
-            interactMode = InteractMode.Raycast;
-        }
+        highlightIndex = 1;
 	}
 	
 	// Update is called once per frame
@@ -39,118 +27,19 @@ public class RightController : BaseController {
 		
 	}
 
-
-
-    public override void OnTriggerDown()
+    protected override void OnTriggerDown()
     {
-        
-        //use only specific interactions for some levels- so check what scene we are on
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
-        {
-            if (hit.tag == "Start")
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
-            else if (hit.tag == "Exit")
-            {
-                Application.Quit();
-            }
-        }
-        else //all other scenes should use these
-        {
-            //disable other controls while in island mode
-            if (!raising) {
-                //check what kind of object we hit with the raycast and interact accordingly
-                if (hit.tag == "Movable") {
-                    //everything checks out- actually pickup the object
-                    hit.GetComponent<MoveObject> ().PickUp (hit.transform, gameObject);
-                    grabbing = true;
-                    Debug.Log ("Grab");
-                }
-
-                if (hit.tag == "Key") {
-                    //change line colour
-                    rayLine.startColor = Color.blue;
-                    rayLine.endColor = Color.blue;
-
-                    hit.GetComponentInParent<DoorAndKey> ().CollectKey ();
-                }
-                if (hit.tag == "Door") {
-                    //change line colour
-                    rayLine.startColor = Color.blue;
-                    rayLine.endColor = Color.blue;
-
-                    Debug.Log ("Open Door");
-
-                    hit.transform.GetComponent<DoorAndKey> ().OpenDoor ();
-                }
-
-                if (hit.tag == "HidingSpace") {
-                    //chekc if we are hiding
-                    if (!hit.GetComponent<HidingSpace> ().hidding) { //we are not
-                        //hide
-                        hit.GetComponent<HidingSpace> ().Hide ();
-                    } else { //we are hiding
-                        //stop hiding
-                        hit.GetComponent<HidingSpace> ().StopHidding ();
-                    }
-                }
-                if (hit.tag == "Sliding") {
-                    //change line colour
-                    rayLine.startColor = Color.yellow;
-                    rayLine.endColor = Color.yellow;
-
-                    //everything checks out- actually pickup the object
-                    hit.GetComponent<MoveObject> ().PickUp (hit.transform, gameObject);
-                    sliding = true;
-                    Debug.Log ("Slide Grab");
-                }
-            }
-        }
-
+        base.OnTriggerDown();
     }
 
-    public override void OnTriggerHold()
+    protected override void OnTriggerHold()
     {
-        //check if we are grabbing
-        if (grabbing)
-        {
-            //drag that bish by the hair
-            hit.GetComponent<MoveObject>().Drag(hit.transform);
-        }
-		if (sliding)
-		{
-			//drag that bish by the hair
-			hit.GetComponent<MoveObject>().Drag(hit.transform);
-		}
+        base.OnTriggerHold();
     }
 
-    public override void OnTriggerUp()
+    protected override void OnTriggerUp()
     {
-        //reset colour
-        rayLine.startColor = Color.white;
-        rayLine.endColor = Color.white;
-
-        //check if we are grabbing
-        if (grabbing)
-        {
-            Debug.Log("Drop");
-            //drop object
-            hit.GetComponent<MoveObject>().Drop();
-
-            //notify that we let go
-            grabbing = false;
-        }
-
-		if (sliding)
-		{
-			Debug.Log("Slide Drop");
-			//drop object
-			hit.GetComponent<MoveObject>().Drop();
-
-			//notify that we stopped sliding
-			sliding = false;
-		}
+        base.OnTriggerUp();
     }
 
 	public override void OnGripDown() {

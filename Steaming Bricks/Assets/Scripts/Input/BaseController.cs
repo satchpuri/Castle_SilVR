@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 using cakeslice;
 
 public abstract class BaseController : MonoBehaviour {
@@ -15,8 +16,13 @@ public abstract class BaseController : MonoBehaviour {
     protected Ray ray; //ray line itself
     [SerializeField] protected LayerMask rayLayer; //layer in which raycast interacts
     [SerializeField] protected float rayDistance; //distance raycast extends
+
+    //highlight field
+    protected int highlightIndex; //each hand will use a different highlight colour and thus a different highlight index
+
+    //interaction type fields
     protected enum InteractMode {Grab, Raycast}; //default is physicla grab, raycast for long distance interactions
-    protected InteractMode interactMode ;
+    protected InteractMode interactMode;
 
     //trigger fields
     protected string triggerAxis; //axis name for trigger in use
@@ -26,6 +32,11 @@ public abstract class BaseController : MonoBehaviour {
 	protected string gripAxis;
 	protected float grip_lastFrame;
 	protected float grip_currentFrame;
+
+    //interaction fields
+    public bool grabbing; //are we holding an object
+    protected bool sliding; //are we sliding an object
+    protected bool raising; //are we in raise island mode
 
 	// Use this for initialization
 	protected virtual void Start () {
@@ -38,6 +49,18 @@ public abstract class BaseController : MonoBehaviour {
         //set inital line colour
         rayLine.startColor = Color.white;
         rayLine.endColor = Color.white;
+
+        //set fields for this specific hand
+        grabbing = false;
+        sliding = false;
+        raising = false;
+
+        //change interaction mode to raycast for main menu
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
+        {
+            //set mode to raycast- things are far away and we cant touch them
+            interactMode = InteractMode.Raycast;
+        }
 		
 	}
 	
@@ -61,7 +84,7 @@ public abstract class BaseController : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         //check for valid interactable
-        if (col.gameObject.GetComponent<Outline>() != null) //check it has an outline component
+        if (col.gameObject.GetComponent<Outline>() != null && !sliding) //check it has an outline component
         {
             
             if (hit != null)//check if no hit is set
@@ -72,6 +95,7 @@ public abstract class BaseController : MonoBehaviour {
 
             //update which obj you are interacting with
             hit = col.gameObject;
+            hit.GetComponent<Outline>().color = highlightIndex; //set highlight index tot his hands
             hit.GetComponent<Outline>().enabled = true; //highlight
         }
 
@@ -82,7 +106,7 @@ public abstract class BaseController : MonoBehaviour {
     void OnTriggerExit(Collider col)
     {
         //check to see if we are leaving the currently slected object
-        if (hit == col.gameObject)
+        if (hit == col.gameObject && !sliding)
         {
             //turn off highlight
             hit.GetComponent<Outline>().enabled = false;
@@ -90,7 +114,6 @@ public abstract class BaseController : MonoBehaviour {
             //clear interacting object
             hit = null;
         }
-
     }
 
     //chnages highlight color depending on which is selected
@@ -99,30 +122,43 @@ public abstract class BaseController : MonoBehaviour {
         //check if we haev something selected
         if (hit != null)
         {
+            Color saveColour = Color.black;
+
             //switch color based on interactable type
             switch (hit.tag)
             {
                 case "Movable":
-                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = Color.green;
+                     saveColour = Color.green;
                     break;
 
                 case "Sliding":
-                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = Color.yellow;
+                    saveColour = Color.yellow;
                     break;
 
                 case "Key":
                 case "Door":
-                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = Color.red;
+                    saveColour = Color.red;
                     break;
 
                 case "HidingSpace":
-                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = Color.magenta;
+                    saveColour = Color.magenta;
                     break;
 
                 case "Coin":
-                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = Color.cyan;
+                    saveColour = Color.cyan;
                     break;
             }
+
+            switch (highlightIndex)
+            {
+                case 1:
+                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = saveColour;
+                    break;
+                case 2:
+                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor2 = saveColour;
+                    break;
+            }
+
         }
     }
 
@@ -233,30 +269,136 @@ public abstract class BaseController : MonoBehaviour {
     /// <summary>
     /// The trigger down event.
     /// </summary>
-    public abstract void OnTriggerDown();
+    protected virtual void OnTriggerDown()
+    {
+
+        //use only specific interactions for some levels- so check what scene we are on
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
+        {
+            if (hit.tag == "Start")
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else if (hit.tag == "Exit")
+            {
+                Application.Quit();
+            }
+        }
+        else //all other scenes should use these
+        {
+            //disable other controls while in island mode
+            if (!raising) {
+                //check what kind of object we hit with the raycast and interact accordingly
+                if (hit.tag == "Movable") {
+                    //everything checks out- actually pickup the object
+                    hit.GetComponent<MoveObject> ().PickUp (hit.transform, gameObject);
+                    grabbing = true;
+                    Debug.Log ("Grab");
+                }
+
+                if (hit.tag == "Key") {
+                    //change line colour
+                    rayLine.startColor = Color.blue;
+                    rayLine.endColor = Color.blue;
+
+                    hit.GetComponentInParent<DoorAndKey> ().CollectKey ();
+                }
+                if (hit.tag == "Door") {
+                    //change line colour
+                    rayLine.startColor = Color.blue;
+                    rayLine.endColor = Color.blue;
+
+                    Debug.Log ("Open Door");
+
+                    hit.transform.GetComponent<DoorAndKey> ().OpenDoor ();
+                }
+
+                if (hit.tag == "HidingSpace") {
+                    //chekc if we are hiding
+                    if (!hit.GetComponent<HidingSpace> ().hidding) { //we are not
+                        //hide
+                        hit.GetComponent<HidingSpace> ().Hide ();
+                    } else { //we are hiding
+                        //stop hiding
+                        hit.GetComponent<HidingSpace> ().StopHidding ();
+                    }
+                }
+                if (hit.tag == "Sliding") {
+                    //change line colour
+                    rayLine.startColor = Color.yellow;
+                    rayLine.endColor = Color.yellow;
+
+                    //everything checks out- actually pickup the object
+                    hit.GetComponent<MoveObject> ().PickUp (hit.transform, gameObject);
+                    sliding = true;
+                    Debug.Log ("Slide Grab");
+                }
+            }
+        }
+
+    }
 
     /// <summary>
     /// The trigger hold event.
     /// </summary>
-    public abstract void OnTriggerHold();
+    protected virtual void OnTriggerHold()
+    {
+        //check if we are grabbing
+        if (grabbing)
+        {
+            //drag that bish by the hair
+            hit.GetComponent<MoveObject>().Drag(hit.transform);
+        }
+        if (sliding)
+        {
+            //drag that bish by the hair
+            hit.GetComponent<MoveObject>().Drag(hit.transform);
+        }
+    }
 
     /// <summary>
     /// The trigger up event.
     /// </summary>
-    public abstract void OnTriggerUp();
+    protected virtual void OnTriggerUp()
+    {
+        //reset colour
+        rayLine.startColor = Color.white;
+        rayLine.endColor = Color.white;
+
+        //check if we are grabbing
+        if (grabbing)
+        {
+            Debug.Log("Drop");
+            //drop object
+            hit.GetComponent<MoveObject>().Drop();
+
+            //notify that we let go
+            grabbing = false;
+        }
+
+        if (sliding)
+        {
+            Debug.Log("Slide Drop");
+            //drop object
+            hit.GetComponent<MoveObject>().Drop();
+
+            //notify that we stopped sliding
+            sliding = false;
+        }
+    }
 
 	/// <summary>
 	/// The grip down event.
 	/// </summary>
-	public abstract void OnGripDown();
+    public abstract void OnGripDown();
 
 	/// <summary>
 	/// The grip hold event.
 	/// </summary>
-	public abstract void OnGripHold();
+    public abstract void OnGripHold();
 
 	/// <summary>
 	/// the grip up event.
 	/// </summary>
-	public abstract void OnGripUp();
+    public abstract  void OnGripUp();
 }

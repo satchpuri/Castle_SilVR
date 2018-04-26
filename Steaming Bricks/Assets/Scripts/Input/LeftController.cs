@@ -14,6 +14,8 @@ public class LeftController : BaseController {
         handNode = XRNode.LeftHand;
         triggerAxis = "LTrigger";
 		gripAxis = "LGrip";
+
+        highlightIndex = 2;
 		
 	}
 	
@@ -23,32 +25,19 @@ public class LeftController : BaseController {
 
 	}
 
-    public override void OnTriggerDown()
+    protected override void OnTriggerDown()
     {
-        //change line colour
-        rayLine.startColor = Color.blue;
-        rayLine.endColor = Color.blue;
+        base.OnTriggerDown();
     }
 
-    public override void OnTriggerHold()
+    protected override void OnTriggerHold()
     {
-        //turn on rayline and draw
-        rayLine.enabled = true;
-        DrawLine();
+        base.OnTriggerHold();
     }
 
-    public override void OnTriggerUp()
+    protected override void OnTriggerUp()
     {
-        //reset colour
-        rayLine.startColor = Color.white;
-        rayLine.endColor = Color.white;
-
-        //turn off rayline
-        rayLine.enabled = false;
-
-        //Teleport Player on left trigger up. Calls Teleport method attached to Main Camera Script
-        //Sends rayLine field from BaseController base class to find position to teleport
-        Camera.main.GetComponent<BigPlayerTeleport>().Teleport(this.gameObject.transform.forward);
+        base.OnTriggerUp();
     }
 
 	public override void OnGripDown() {}
