@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
 
     //Object with tag "Coin"
     public int coins_remaining;
+    public int coins_collected;
     
     //hands
     public GameObject leftHand;

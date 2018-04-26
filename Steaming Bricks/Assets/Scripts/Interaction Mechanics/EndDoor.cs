@@ -7,6 +7,9 @@ public class EndDoor : MonoBehaviour {
 
     //temp Scene changing until we figure SceneManager issue out
 
+    public int requiredGems;
+
+
 	// Use this for initialization
 	void Start () {
         
@@ -20,23 +23,22 @@ public class EndDoor : MonoBehaviour {
     //trigger next scene when player enters door
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(GameManager.Instance.coins_collected >= requiredGems)
         {
-            //get current scene index and up by 1 - using mod t wrap back to 0 at end of scene list
-            int nextIndex = SceneManager.GetActiveScene().buildIndex + 1 % SceneManager.sceneCountInBuildSettings;
+            if (other.gameObject.tag == "Player")
+            {
+                //get current scene index, add 1. Set back to 0 if it's at the end of the list
+                int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
-            if(nextIndex == 3)
-            {
-                SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(0));
+                if (nextIndex > SceneManager.sceneCount)
+                {
+                    nextIndex = 0;
+                }
+
+                SceneManager.LoadScene(nextIndex);
             }
-            else
-            {
-                //goto that scene
-                //Scene scene = SceneManager.LoadSceneAsync(nextIndex);
-                SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(nextIndex));
-            }
-            
-            
         }
+
+        
     }
 }
