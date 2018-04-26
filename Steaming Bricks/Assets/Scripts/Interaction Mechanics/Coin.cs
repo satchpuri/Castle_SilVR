@@ -26,6 +26,7 @@ public class Coin : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             GameManager.Instance.coins_remaining--;
+            GameManager.Instance.coins_collected++;
             this.gameObject.SetActive(false);
 
             //Goes to next level?

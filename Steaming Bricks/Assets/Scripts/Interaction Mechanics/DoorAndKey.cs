@@ -12,6 +12,7 @@ public class DoorAndKey : MonoBehaviour
     void Start()
     {
         collected = false;
+		transform.GetChild (0).gameObject.GetComponent<Billboard> ().exception = true; //make the tinyTerry (tT) icon not respond by default
     }
 
     // Update is called once per frame
@@ -29,6 +30,9 @@ public class DoorAndKey : MonoBehaviour
             collected = true;
             key.SetActive(false);
             dangleKey.SetActive(true); //show dangling key
+			transform.GetChild (0).gameObject.GetComponent<Billboard> ().exception = false; //turn on tT icon checking
+			transform.GetChild (1).gameObject.GetComponent<Billboard> ().exception = true; //turn off lock icon checking
+			transform.GetChild (1).gameObject.GetComponent<SpriteRenderer> ().enabled = false; //turn off lock icon in case it was on when cancelled
         }
     }
 
@@ -40,6 +44,8 @@ public class DoorAndKey : MonoBehaviour
         {
             this.gameObject.SetActive(false);
             dangleKey.SetActive(false); //hide dangling key
+			transform.GetChild (0).gameObject.GetComponent<Billboard> ().exception = true; //turn off tT icon checking (just in case this doesn't disable)
+			transform.GetChild (0).gameObject.GetComponent<SpriteRenderer> ().enabled = false; //turn off tT icon in case it was on when cancelled
         }
     }
 
