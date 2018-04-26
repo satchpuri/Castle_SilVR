@@ -12,7 +12,10 @@ public class EndDoor : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+		transform.GetChild (0).gameObject.GetComponent<Billboard> ().exception = true; //disable default behavior of the door icon
+		transform.GetChild (0).gameObject.GetComponent<SpriteRenderer> ().enabled = true; //make the tinyTerry (tT) icon not respond by default
+
+
 	}
 	
 	// Update is called once per frame

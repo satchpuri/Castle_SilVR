@@ -9,7 +9,7 @@ public class Billboard : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //hide initally
-		this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;		
+		this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
 	}
 	
 	// Update is called once per frame
