@@ -12,6 +12,8 @@ public class GuardVision : MonoBehaviour {
     private float visionAngle;
     [SerializeField]
     private float visionDistance;
+    [SerializeField]
+    private GameObject hudIsland;
 
     private LineRenderer line;
 
@@ -43,7 +45,8 @@ public class GuardVision : MonoBehaviour {
 	void Update () {
         if (VisionCone())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            hudIsland.SetActive(true);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 		
 	}
