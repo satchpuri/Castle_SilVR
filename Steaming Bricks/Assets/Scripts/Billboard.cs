@@ -4,33 +4,42 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour {
 
+	public bool exception = false;
+
 	// Use this for initialization
 	void Start () {
         //hide initally
-        this.gameObject.SetActive(false);		
+		this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		//check if tiny terry is close
-
+		CheckActivate();
 
         //turn to face the player
 		//this.gameObject.transform.LookAt(Camera.main.transform,Vector3.up);
-		transform.rotation = Quaternion.LookRotation (Camera.main.transform.position, transform.parent.transform.up);
+		if (GetComponent<SpriteRenderer> ().enabled) {
+			transform.rotation = Quaternion.LookRotation (Camera.main.transform.position, transform.parent.transform.up);
+		}
 
 	}
 
 	private void CheckActivate() {
+		
+		if (!exception) {
+			Debug.Log ("Got in the checker");
+			if (!gameObject.GetComponent<SpriteRenderer> ().enabled && ((GameObject.Find ("Player").transform.position - transform.position).magnitude < .1f)) {
 
-		if (!gameObject.activeSelf && ((GameObject.Find ("Player").transform.position - transform.position).magnitude < .01f)) {
+				Debug.Log ("Turning it on");
+				gameObject.GetComponent<SpriteRenderer> ().enabled = true;
 
-			gameObject.SetActive (true);
-		} else if (gameObject.activeSelf && ((GameObject.Find ("Player").transform.position - transform.position).magnitude >= .01f)) {
+			} else if (gameObject.GetComponent<SpriteRenderer> ().enabled && ((GameObject.Find ("Player").transform.position - transform.position).magnitude >= .1f)) {
 
-			gameObject.SetActive (false);
+				Debug.Log ("Turning it Off");
+				gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+			}
 		}
-
 	}
 }

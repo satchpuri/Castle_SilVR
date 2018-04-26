@@ -20,6 +20,7 @@ public class PlayerIndicator : MonoBehaviour {
 	void Start () {
 		time = 0;
 		indicator = transform.GetChild (0).gameObject;
+		indicator.GetComponent<Billboard> ().exception = true;
 	}
 	
 	// Update is called once per frame
