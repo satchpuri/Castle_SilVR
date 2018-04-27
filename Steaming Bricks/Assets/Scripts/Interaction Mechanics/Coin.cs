@@ -4,12 +4,17 @@ using UnityEngine.SceneManagement;
 
 public class Coin : MonoBehaviour
 {
+	GameObject indicator;
+
     // Use this for initialization
     void OnEnabled()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+	void Start() {
+		indicator = GameObject.Find ("CoinIndicators");
+	}
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         GameManager.Instance.coins_remaining = GameManager.Instance.coins_remaining + 1;
@@ -27,6 +32,7 @@ public class Coin : MonoBehaviour
         {
             GameManager.Instance.coins_remaining--;
             GameManager.Instance.coins_collected++;
+			indicator.gameObject.GetComponent<GemIndicator> ().GemCollected();
             this.gameObject.SetActive(false);
 
             //Goes to next level?

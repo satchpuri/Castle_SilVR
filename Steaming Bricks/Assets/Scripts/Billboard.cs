@@ -19,9 +19,11 @@ public class Billboard : MonoBehaviour {
 		CheckActivate();
 
         //turn to face the player
-		//this.gameObject.transform.LookAt(Camera.main.transform,Vector3.up);
 		if (GetComponent<SpriteRenderer> ().enabled) {
-			transform.rotation = Quaternion.LookRotation (Camera.main.transform.position, transform.parent.transform.up);
+
+			Transform lookPos = Camera.main.transform;
+			lookPos.position = new Vector3(lookPos.position.x, 0f, lookPos.position.z);
+			gameObject.transform.LookAt (Camera.main.transform);
 		}
 
 	}
@@ -29,15 +31,12 @@ public class Billboard : MonoBehaviour {
 	private void CheckActivate() {
 		
 		if (!exception) {
-			Debug.Log ("Got in the checker");
 			if (!gameObject.GetComponent<SpriteRenderer> ().enabled && ((GameObject.Find ("Player").transform.position - transform.position).magnitude < .1f)) {
 
-				Debug.Log ("Turning it on");
 				gameObject.GetComponent<SpriteRenderer> ().enabled = true;
 
 			} else if (gameObject.GetComponent<SpriteRenderer> ().enabled && ((GameObject.Find ("Player").transform.position - transform.position).magnitude >= .1f)) {
 
-				Debug.Log ("Turning it Off");
 				gameObject.GetComponent<SpriteRenderer> ().enabled = false;
 			}
 		}
