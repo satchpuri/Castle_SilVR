@@ -175,10 +175,7 @@ public class MoveObject : MonoBehaviour {
 			//prevent motion in certain directions if the object can't move that way
             if (!lockedX)
             {
-                if (!Physics.Raycast(this.gameObject.transform.position, this.gameObject.transform.forward, .01f) && !Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.forward, .01f))
-                {
-                    moveX = (curPos.x - prevPos.x) * moveScale;
-                }
+                moveX = (curPos.x - prevPos.x) * moveScale;
             }    
             if (!lockedY)
             {
@@ -192,11 +189,7 @@ public class MoveObject : MonoBehaviour {
             }
             if (!lockedZ)
             {
-                //if (!Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.right, .02f))
-                //{
-                    //Debug.Log("slide Z");
                     moveZ = (curPos.z - prevPos.z) * moveScale;
-                //}
             }
 
 			transform.position = new Vector3 (objectCurPosition.x + (moveX), objectCurPosition.y + (moveY), objectCurPosition.z + (moveZ));
