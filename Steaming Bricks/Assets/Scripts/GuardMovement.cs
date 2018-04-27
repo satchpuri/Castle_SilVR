@@ -91,7 +91,6 @@ public class GuardMovement : MonoBehaviour {
     //Guard gets distracted
     public void SetDistracted()
     {
-		Debug.Log ("Guard movement distracted");
         currWaypointNum = 0;
         waypoints = distracted_waypoints;
         distracted = true;

@@ -16,7 +16,6 @@ public class GuardDistraction : MonoBehaviour
 				for (int i = 0; i < guards.Length; i++)
                 {
                     //GameManager.Instance.guards[i].GetComponent<GuardMovement>().SetDistracted();
-					Debug.Log("Distract");
 					guards[i].GetComponent<GuardMovement>().SetDistracted();
                 }
                 triggerOnce = true;
