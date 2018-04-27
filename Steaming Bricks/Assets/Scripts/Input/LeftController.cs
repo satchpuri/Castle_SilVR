@@ -40,8 +40,27 @@ public class LeftController : BaseController {
         base.OnTriggerUp();
     }
 
-	public override void OnGripDown() {}
-	public override void OnGripHold() {}
-	public override void OnGripUp() {}
+	protected override void OnGripDown() {
+
+		base.OnGripDown ();		
+	}
+
+	protected override void OnGripHold() {
+
+		base.OnGripHold ();
+
+	}
+	protected override void OnGripUp() {
+
+		base.OnGripUp ();
+	}
+
+	protected override void OnSelectPress(int handMarker) { //1 is left, 2 is right
+
+		if (handMarker == 1) {
+
+			menuIsland.GetComponent<MainMenu> ().MainMenuScene ();
+		}
+	}
 
 }

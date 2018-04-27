@@ -20,6 +20,8 @@ public abstract class BaseController : MonoBehaviour {
 
    // private GameObject menu;
     public MainMenu menu;
+
+	public GameObject menuIsland;
     //highlight field
     protected int highlightIndex; //each hand will use a different highlight colour and thus a different highlight index
 
@@ -60,6 +62,9 @@ public abstract class BaseController : MonoBehaviour {
         sliding = false;
         raising = false;
 
+		menuIsland = GameObject.Find ("Main Menu");
+		menuIsland.SetActive (false);
+
         //change interaction mode to raycast for main menu
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
         {
@@ -79,6 +84,7 @@ public abstract class BaseController : MonoBehaviour {
         Trigger();
 		GripButton ();
 
+		SelectButton ();
         //draw ray if we are in raycast mode
         if (interactMode == InteractMode.Raycast)
         {
@@ -217,6 +223,16 @@ public abstract class BaseController : MonoBehaviour {
 			//run grip up button
 			OnGripUp ();
 		}
+	}
+
+	protected virtual void SelectButton() { //0 is off, 1 is left, 2 is right
+
+		if (Input.GetKey ("LSelectButton")) {
+			OnSelectPress (1);
+		} else if (Input.GetKey ("LSelectButton")) {
+			OnSelectPress (2);
+		}
+			
 	}
 
     /// <summary>
@@ -559,15 +575,57 @@ public abstract class BaseController : MonoBehaviour {
 	/// <summary>
 	/// The grip down event.
 	/// </summary>
-    public abstract void OnGripDown();
+	protected virtual void OnGripDown() {
+
+		//turn the normal hand off
+		GetComponent<MeshRenderer> ().enabled = false;
+		//turn the island on
+		transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
+		transform.GetChild (0).gameObject.transform.GetChild (0).gameObject.SetActive(true);
+		transform.GetChild (0).gameObject.transform.GetChild (1).gameObject.SetActive(true);
+
+		//dont do level raising in the menus
+		if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
+		{
+			//acknowledge we are in island mode
+			raising = true;
+		}
+	}
 
 	/// <summary>
 	/// The grip hold event.
 	/// </summary>
-    public abstract void OnGripHold();
+	protected virtual void OnGripHold() {
+
+		if (raising) {
+
+			Debug.Log ("holding trigger");
+			GameObject.Find ("Land").GetComponent<LevelRaise> ().Move (gameObject);
+		}
+	}
 
 	/// <summary>
 	/// the grip up event.
 	/// </summary>
-    public abstract  void OnGripUp();
+	protected virtual void OnGripUp() {
+
+		if (raising) {
+
+			GameObject.Find ("Land").GetComponent<LevelRaise> ().ResetPos ();
+
+			//stop highlighting here
+		}
+
+		//turn the normal hand on
+		GetComponent<MeshRenderer> ().enabled = true;
+		//turn the island off
+		transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
+		transform.GetChild (0).gameObject.transform.GetChild (0).gameObject.SetActive(false);
+		transform.GetChild (0).gameObject.transform.GetChild (1).gameObject.SetActive(false);
+
+		//end island mode
+		raising = false;
+	}
+
+	protected abstract void OnSelectPress (int handMarker);
 }

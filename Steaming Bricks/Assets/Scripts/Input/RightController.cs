@@ -42,50 +42,27 @@ public class RightController : BaseController {
         base.OnTriggerUp();
     }
 
-	public override void OnGripDown() {
+	protected override void OnGripDown() {
         
-        //turn the normal hand off
-        GetComponent<MeshRenderer> ().enabled = false;
-        //turn the island on
-        transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
-		transform.GetChild (0).gameObject.transform.GetChild (0).gameObject.SetActive(true);
-		transform.GetChild (0).gameObject.transform.GetChild (1).gameObject.SetActive(true);
-
-        //dont do level raising in the menus
-        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
-        {
-            //acknowledge we are in island mode
-            raising = true;
-        }
-		
+		base.OnGripDown ();		
 	}
 
-	public override void OnGripHold() {
+	protected override void OnGripHold() {
 
-        if (raising) {
-
-            Debug.Log ("holding trigger");
-            GameObject.Find ("Land").GetComponent<LevelRaise> ().Move (gameObject);
-        }
+		base.OnGripHold ();
 
     }
-	public override void OnGripUp() {
+	protected override void OnGripUp() {
 
-        if (raising) {
+		base.OnGripUp ();
+	}
 
-            GameObject.Find ("Land").GetComponent<LevelRaise> ().ResetPos ();
+	protected override void OnSelectPress(int handMarker) { //1 is left, 2 is right
 
-            //stop highlighting here
-        }
+		//menuIsland.SetActive (true);
+		if (handMarker == 2) {
 
-        //turn the normal hand on
-        GetComponent<MeshRenderer> ().enabled = true;
-        //turn the island off
-        transform.GetChild (0).gameObject.GetComponent<PopIn> ().Toggle();
-		transform.GetChild (0).gameObject.transform.GetChild (0).gameObject.SetActive(false);
-		transform.GetChild (0).gameObject.transform.GetChild (1).gameObject.SetActive(false);
-
-        //end island mode
-        raising = false;
-    }
+			menuIsland.GetComponent<MainMenu> ().RestartCurrentScene ();
+		}
+	}
 }
