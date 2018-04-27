@@ -156,6 +156,10 @@ public abstract class BaseController : MonoBehaviour {
                 case "Coin":
                     saveColour = Color.cyan;
                     break;
+
+                case "Distraction":
+                    saveColour = Color.white;
+                    break;
             }
 
             switch (highlightIndex)
