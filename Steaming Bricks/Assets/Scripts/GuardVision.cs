@@ -12,8 +12,8 @@ public class GuardVision : MonoBehaviour {
     private float visionAngle;
     [SerializeField]
     private float visionDistance;
-    [SerializeField]
-    private GameObject hudIsland;
+
+    [SerializeField] private GameObject hudIsland;
 
     private LineRenderer line;
 
@@ -26,7 +26,8 @@ public class GuardVision : MonoBehaviour {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+        target = GameObject.Find("Player"); //GameObject.FindGameObjectWithTag("Player");
+        hudIsland = GameObject.Find("HUD Island");
     }
 
     void OnDisable()
@@ -38,6 +39,7 @@ public class GuardVision : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         line = this.gameObject.GetComponent<LineRenderer>();
+        hudIsland.SetActive(false);
 		
 	}
 	

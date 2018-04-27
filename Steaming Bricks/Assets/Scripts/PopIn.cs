@@ -15,6 +15,12 @@ public class PopIn : MonoBehaviour {
         properSize = this.gameObject.transform;
 		//make object invisible on startup
 		transform.localScale = Vector3.zero;
+
+        transform.GetChild(0).gameObject.GetComponent<Billboard>().exception = true;
+        transform.GetChild(1).gameObject.GetComponent<Billboard>().exception = true;
+        transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = true;
+
 	}
 	
 	// Update is called once per frame
