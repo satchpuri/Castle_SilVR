@@ -114,6 +114,7 @@ public class MoveObject : MonoBehaviour {
     // VR GRABBING CONTROLS ===================================
 	public void PickUp(Transform hitTransform, GameObject hand)
     {
+        SoundManager.Instance.PlaySfxOnce("menu-selection", 100);
         //unfreeze this object - but keep rot frozen
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
@@ -135,16 +136,11 @@ public class MoveObject : MonoBehaviour {
 
         if (!lockedX && !lockedY && !lockedZ)
         {
-            SoundManager.Instance.PlaySfxOnce("menu-selection", 100);
             //set parent to be hand
             transform.SetParent(handle.transform);
 
             //turn off collider
             this.gameObject.GetComponent<Collider>().enabled = false;
-        }
-        else
-        {
-            SoundManager.Instance.PlaySfxOnce("card-shuffle", 100);
         }
 
     }
@@ -166,7 +162,9 @@ public class MoveObject : MonoBehaviour {
 				moveX = (curPos.x - prevPos.x) * moveScale;
 			if (!lockedY)
 				moveY = (curPos.y - prevPos.y) * moveScale;
-			if (!lockedZ)
+            else //Play Sliding SFK
+                SoundManager.Instance.PlaySfxOnce("card-shuffle", 100);
+            if (!lockedZ)
 				moveZ = (curPos.z - prevPos.z) * moveScale;
 
 

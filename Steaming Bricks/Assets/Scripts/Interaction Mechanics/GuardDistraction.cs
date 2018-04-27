@@ -4,6 +4,7 @@ using System.Collections;
 public class GuardDistraction : MonoBehaviour
 {
 	public GameObject[] guards;
+    private bool triggerOnce = false;
 
 	void Start() {
 
@@ -13,7 +14,6 @@ public class GuardDistraction : MonoBehaviour
 		}
 	}
 
-    private bool triggerOnce = false;
     private void OnTriggerEnter(Collider other)
     {
         if (!triggerOnce)

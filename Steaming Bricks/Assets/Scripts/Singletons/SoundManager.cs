@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -63,6 +64,30 @@ public class SoundManager : Singleton<SoundManager>
         musicSource.loop = true; //turn on looping
         //musicSource.clip = musicLibrary["playful-music"]; //set default song
         //ChangeMusicVolume(0);
+        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1 % SceneManager.sceneCountInBuildSettings;
+        Debug.Log(nextIndex);
+        switch (nextIndex)
+        {
+            case 1:
+                //Main Menu 
+                musicSource.clip = musicLibrary["Sneaky_Snitch"];
+                break;
+            case 2:
+                //Tutorial 
+                musicSource.clip = musicLibrary["marimba_descending"];
+                break;
+            case 3:
+                //Level 1
+                musicSource.clip = musicLibrary["Sneaky_Adventure"];
+                break;
+            case 4:
+                //Level 2
+                musicSource.clip = musicLibrary["Sneaky"];
+                break;
+            default:
+                musicSource.clip = musicLibrary["sneaky_guitar_loop"]; 
+                break;
+        }
         musicSource.Play(); //play music
 	}
 
