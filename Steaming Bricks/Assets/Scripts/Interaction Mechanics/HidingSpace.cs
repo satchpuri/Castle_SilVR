@@ -41,6 +41,7 @@ public class HidingSpace : MonoBehaviour {
 
     public void Hide()
     {
+        SoundManager.Instance.PlaySfxOnce("indoor-footsteps", 100);
         //check if the player is clsoe enough to hide
         float difference = Vector3.Distance(GameManager.Instance.player.transform.position, this.gameObject.transform.position); //dista between player and this hiding spot
         if(difference <= interactDistance)

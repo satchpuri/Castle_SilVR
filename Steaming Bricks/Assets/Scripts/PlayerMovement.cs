@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
+            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 100);            
             current += new Vector3(speed * Mathf.Sin(camRotRad), 0, speed * Mathf.Cos(camRotRad));
         }
         player.transform.position = current;
@@ -82,6 +83,11 @@ public class PlayerMovement : MonoBehaviour
         //get x and z
         float xAxis = Input.GetAxis("LStick_Horizontal");
         float zAxis = Input.GetAxis("LStick_Vertical");
+
+        if (xAxis != 0 || zAxis != 0)
+        {
+            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 100);
+        }
 
         //Debug.Log(xAxis +"  "+ zAxis);
 

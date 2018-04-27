@@ -63,6 +63,27 @@ public class LevelManager : Singleton<LevelManager>
         //get current scene index and up by 1 - using mod t wrap back to 0 at end of scene list
         int nextIndex = SceneManager.GetActiveScene().buildIndex + 1 % SceneManager.sceneCountInBuildSettings;
 
+        switch (nextIndex)
+        {
+            case 0:
+                //Main Menu 
+                SoundManager.Instance.ChangeSong("Sneaky_Snitch");
+                break;
+            case 1:
+                //Tutorial 
+                SoundManager.Instance.ChangeSong("marimba_descending");
+                break;
+            case 2:
+                //Level 1
+                SoundManager.Instance.ChangeSong("Sneaky_Adventure");
+                break;
+            case 3:
+                //Level 1
+                SoundManager.Instance.ChangeSong("Sneaky");
+                break;
+            default:
+                break;
+        }
         //goto that scene
         //Scene scene = SceneManager.LoadSceneAsync(nextIndex);
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(nextIndex));

@@ -39,6 +39,7 @@ public class DoorAndKey : MonoBehaviour
     public void OpenDoor()
     {
         //check if the player is close enough to open door
+        SoundManager.Instance.PlaySfxOnce("unlocking-door-lock", 100);
         float difference = Vector3.Distance(GameManager.Instance.player.transform.position, this.gameObject.transform.position); //dista between player and this hiding spot
         if (difference <= interactDistance && collected)
         {

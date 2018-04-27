@@ -25,16 +25,44 @@ public class SoundManager : Singleton<SoundManager>
 		sfxSource = gameObject.AddComponent<AudioSource>();
         musicSource = gameObject.AddComponent<AudioSource>();
 
+        Object[] bgm_files = Resources.LoadAll("Audio/BGM", typeof(AudioClip));
+        Object[] sfx_files = Resources.LoadAll("Audio/SFX", typeof(AudioClip));
+
         //add sounds to the lib
-       // musicLibrary.Add("ambientWaves", Resources.Load("sfx/ambientWaves") as AudioClip);
+        ///musicLibrary.Add("sneaky-guitar-loop", Resources.Load("Audio/sneaky-guitar-loop") as AudioClip);
+        //sfxLibrary.Add("BoatMortgage", Resources.Load("sfx/BoatMortage") as AudioClip);
 
-       // sfxLibrary.Add("BoatMortgage", Resources.Load("sfx/BoatMortage") as AudioClip);
+        foreach (var t in bgm_files)
+        {
+            musicLibrary.Add(t.name, t as AudioClip);
+        }
 
+        foreach (var t in sfx_files)
+        {
+            sfxLibrary.Add(t.name, t as AudioClip);
+        }
+
+        //Print audio file names to check
+        /*
+        foreach (KeyValuePair<string, AudioClip> music in musicLibrary)
+        {
+            //Now you can access the key and value both separately from this attachStat as:
+            Debug.Log(music.Key + " - " + music.Value);
+        }
+
+        foreach (KeyValuePair<string, AudioClip> sfx in sfxLibrary)
+        {
+            //Now you can access the key and value both separately from this attachStat as:
+            Debug.Log(sfx.Key + " - " + sfx.Value);
+        }
+        */
+
+        //Debug.Log(musicLibrary["sneaky-guitar-loop"]);
 
         //loop background music
         musicSource.loop = true; //turn on looping
-       // musicSource.clip = musicLibrary["ambientWaves"]; //set default song
-        ChangeMusicVolume(0);
+        //musicSource.clip = musicLibrary["playful-music"]; //set default song
+        //ChangeMusicVolume(0);
         musicSource.Play(); //play music
 	}
 
@@ -58,7 +86,7 @@ public class SoundManager : Singleton<SoundManager>
         if (!GameObject.Find("One shot audio"))
         {
             //play sound again
-            PlaySfxAt(name, this.gameObject.transform.position, volume);
+            PlaySfxAt(name, this.gameObject.transform.position ,volume);
         }
     }
 

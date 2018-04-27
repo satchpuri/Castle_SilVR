@@ -135,11 +135,16 @@ public class MoveObject : MonoBehaviour {
 
         if (!lockedX && !lockedY && !lockedZ)
         {
+            SoundManager.Instance.PlaySfxOnce("menu-selection", 100);
             //set parent to be hand
             transform.SetParent(handle.transform);
 
             //turn off collider
             this.gameObject.GetComponent<Collider>().enabled = false;
+        }
+        else
+        {
+            SoundManager.Instance.PlaySfxOnce("card-shuffle", 100);
         }
 
     }

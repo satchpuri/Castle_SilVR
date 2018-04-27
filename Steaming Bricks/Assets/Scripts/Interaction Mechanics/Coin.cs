@@ -30,16 +30,13 @@ public class Coin : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            SoundManager.Instance.PlaySfx("bell-ding", 100);
+            //Stretch - Add longer ding for unlocking door
+
             GameManager.Instance.coins_remaining--;
             GameManager.Instance.coins_collected++;
 			indicator.gameObject.GetComponent<GemIndicator> ().GemCollected();
-            this.gameObject.SetActive(false);
-
-            //Goes to next level?
-            if (GameManager.Instance.coins_remaining == 0)
-            {
-                LevelManager.Instance.NextScene();
-            }
+            this.gameObject.SetActive(false);            
         }
     }
 }
