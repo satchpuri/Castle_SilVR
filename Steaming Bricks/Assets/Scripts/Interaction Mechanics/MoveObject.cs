@@ -13,6 +13,8 @@ public class MoveObject : MonoBehaviour {
 	private Vector3 originalPos;
 	private Quaternion originalRot;
 
+    private bool blocked;
+
 	public bool lockedX;
 	public bool lockedY;
 	public bool lockedZ;
@@ -28,7 +30,7 @@ public class MoveObject : MonoBehaviour {
 	//These values are used to see if the hand has moved
 	private Vector3 prevPos;
 	private Vector3 curPos;
-	private float moveScale = 1f; //this would probably need to be some scale factor of map to bigTerry
+	private float moveScale = .3f; //this would probably need to be some scale factor of map to bigTerry
 
 	//The height of the ground plane
 	private GameObject floor;
@@ -46,6 +48,8 @@ public class MoveObject : MonoBehaviour {
 
 		//a trigger placed around the level
 		boundary = GameObject.Find ("Boundary");
+
+        blocked = false;
     }
 	
 	// Update is called once per frame
@@ -80,6 +84,8 @@ public class MoveObject : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+        blocked = true;
+        
         //freeze object when colliding with tiny terry so he doesnt kick it around
         if(collision.gameObject == GameManager.Instance.player)
         {
@@ -90,6 +96,8 @@ public class MoveObject : MonoBehaviour {
 
     void OnCollisionExit(Collision collision)
     {
+        blocked = false;
+
         //unfreeze frozen obj
         if(collision.gameObject == GameManager.Instance.player)
         {
@@ -116,12 +124,19 @@ public class MoveObject : MonoBehaviour {
     {
         SoundManager.Instance.PlaySfxOnce("menu-selection", 100);
         //unfreeze this object - but keep rot frozen
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
+        if (!lockedX && !lockedY && !lockedZ)
+        {
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+
+            gameObject.GetComponent<Rigidbody>().useGravity = false;  
+        }
+
         this.GetComponent<Rigidbody>().isKinematic = false;
 
 
-        gameObject.GetComponent<Rigidbody> ().useGravity = false;
+
+
 		zeroG = true;
 		//gameObject.GetComponent<Rigidbody> ().mass = 1;
 
@@ -158,15 +173,31 @@ public class MoveObject : MonoBehaviour {
 			float moveZ = 0;
 
 			//prevent motion in certain directions if the object can't move that way
-			if (!lockedX)
-				moveX = (curPos.x - prevPos.x) * moveScale;
-			if (!lockedY)
-				moveY = (curPos.y - prevPos.y) * moveScale;
-            else //Play Sliding SFK
-                SoundManager.Instance.PlaySfxOnce("card-shuffle", 100);
-            if (!lockedZ)
-				moveZ = (curPos.z - prevPos.z) * moveScale;
+            if (!lockedX)
+            {
+                if (!Physics.Raycast(this.gameObject.transform.position, this.gameObject.transform.forward, .01f) && !Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.forward, .01f))
+                {
+                    moveX = (curPos.x - prevPos.x) * moveScale;
+                }
+            }    
+            if (!lockedY)
+            {
 
+                moveY = (curPos.y - prevPos.y) * moveScale;
+            }
+            else //not moving up
+            {
+                //run sound
+                SoundManager.Instance.PlaySfxOnce("card-shuffle", 100);
+            }
+            if (!lockedZ)
+            {
+                //if (!Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.right, .02f))
+                //{
+                    //Debug.Log("slide Z");
+                    moveZ = (curPos.z - prevPos.z) * moveScale;
+                //}
+            }
 
 			transform.position = new Vector3 (objectCurPosition.x + (moveX), objectCurPosition.y + (moveY), objectCurPosition.z + (moveZ));
 		}
@@ -185,6 +216,10 @@ public class MoveObject : MonoBehaviour {
         {
             transform.parent = GameObject.Find("Moveable").transform;
             this.gameObject.GetComponent<Collider>().enabled = true;
+        }
+        else
+        {
+            this.GetComponent<Rigidbody>().isKinematic = true;
         }
 
         //Need find when Movable object hits the floor and put this there (OnCollisionEnter()?)
