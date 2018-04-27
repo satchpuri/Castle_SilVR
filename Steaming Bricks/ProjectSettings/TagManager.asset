@@ -17,6 +17,10 @@ TagManager:
   - Key
   - Boundary
   - Distract
+  - Credits
+  - CreditsCanvas
+  - Back
+  - Main Menu
   layers:
   - Default
   - TransparentFX

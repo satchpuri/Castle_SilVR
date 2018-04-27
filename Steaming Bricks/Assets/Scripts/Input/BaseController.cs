@@ -5,6 +5,7 @@ using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR;
 using UnityEngine.SceneManagement;
 using cakeslice;
+using UnityEngine.UI;
 
 public abstract class BaseController : MonoBehaviour {
     //hand fields
@@ -17,13 +18,15 @@ public abstract class BaseController : MonoBehaviour {
     [SerializeField] protected LayerMask rayLayer; //layer in which raycast interacts
     [SerializeField] protected float rayDistance; //distance raycast extends
 
+   // private GameObject menu;
+    public MainMenu menu;
     //highlight field
     protected int highlightIndex; //each hand will use a different highlight colour and thus a different highlight index
 
     //interaction type fields
     protected enum InteractMode {Grab, Raycast}; //default is physicla grab, raycast for long distance interactions
     protected InteractMode interactMode;
-
+            
     //trigger fields
     protected string triggerAxis; //axis name for trigger in use
     protected float trigger_lastFrame; //trigger state last frame
@@ -38,8 +41,10 @@ public abstract class BaseController : MonoBehaviour {
     protected bool sliding; //are we sliding an object
     protected bool raising; //are we in raise island mode
 
-	// Use this for initialization
-	protected virtual void Start () {
+    RaycastHit rayHit;
+
+    // Use this for initialization
+    protected virtual void Start () {
         rayLine = this.gameObject.GetComponent<LineRenderer>(); //attach linerenderer to field
         rayLine.enabled = false; //turn off line draying by default
 
@@ -60,7 +65,11 @@ public abstract class BaseController : MonoBehaviour {
         {
             //set mode to raycast- things are far away and we cant touch them
             interactMode = InteractMode.Raycast;
+
+           
         }
+
+
 		
 	}
 	
@@ -84,19 +93,19 @@ public abstract class BaseController : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         //check for valid interactable
-        if (col.gameObject.GetComponent<Outline>() != null && !sliding) //check it has an outline component
+        if (col.gameObject.GetComponent<cakeslice.Outline>() != null && !sliding) //check it has an cakeslice.Outline component
         {
             
             if (hit != null)//check if no hit is set
             {
                 //turn off highlight on old selected object
-                hit.GetComponent<Outline>().enabled = false;
+                hit.GetComponent<cakeslice.Outline>().enabled = false;
             }
 
             //update which obj you are interacting with
             hit = col.gameObject;
-            hit.GetComponent<Outline>().color = highlightIndex; //set highlight index tot his hands
-            hit.GetComponent<Outline>().enabled = true; //highlight
+            hit.GetComponent<cakeslice.Outline>().color = highlightIndex; //set highlight index tot his hands
+            hit.GetComponent<cakeslice.Outline>().enabled = true; //highlight
         }
 
 
@@ -109,7 +118,7 @@ public abstract class BaseController : MonoBehaviour {
         if (hit == col.gameObject && !sliding)
         {
             //turn off highlight
-            hit.GetComponent<Outline>().enabled = false;
+            hit.GetComponent<cakeslice.Outline>().enabled = false;
 
             //clear interacting object
             hit = null;
@@ -152,10 +161,10 @@ public abstract class BaseController : MonoBehaviour {
             switch (highlightIndex)
             {
                 case 1:
-                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor1 = saveColour;
+                    Camera.main.gameObject.GetComponent<cakeslice.OutlineEffect>().lineColor1 = saveColour;
                     break;
                 case 2:
-                    Camera.main.gameObject.GetComponent<OutlineEffect>().lineColor2 = saveColour;
+                    Camera.main.gameObject.GetComponent<cakeslice.OutlineEffect>().lineColor2 = saveColour;
                     break;
             }
 
@@ -250,12 +259,68 @@ public abstract class BaseController : MonoBehaviour {
         }
         else if (trigger_lastFrame > 0f && trigger_currentFrame > 0f) //holding trigger
         {
-            OnTriggerHold();
+            //check ineract mode and run TriggerDown accordingly
+            switch (interactMode)
+            {
+                //Default mode is a physical grab- hit is set with trigger colliders
+                case InteractMode.Grab:
+                    if (hit != null) //we have a collision selected
+                    {
+                        OnTriggerHold();
+                    }
+                    break;
+
+                //long distance mode is raycast- need to set ht with physics raycast
+                case InteractMode.Raycast:
+                    //turn on rayline
+                    rayLine.enabled = true;
+
+                    //check raycast and set hit
+                  
+                    if (Physics.Raycast(ray, out rayHit, rayDistance, rayLayer))
+                    {
+                        //set hit
+                        hit = rayHit.collider.gameObject;
+
+                        //run on trigger down
+                        OnTriggerHold();
+                    }
+                   
+                    break;
+            }
+            
         }
         else  if (trigger_lastFrame >= .1f && trigger_currentFrame <= .1f) //let go of trigger
         {
+            switch (interactMode)
+            {
+                //Default mode is a physical grab- hit is set with trigger colliders
+                case InteractMode.Grab:
+                    if (hit != null) //we have a collision selected
+                    {
+                        OnTriggerUp();
+                    }
+                    break;
+
+                //long distance mode is raycast- need to set ht with physics raycast
+                case InteractMode.Raycast:
+                    //turn on rayline
+                    rayLine.enabled = true;
+
+                    //check raycast and set hit
+                    RaycastHit rayHit;
+                    if (Physics.Raycast(ray, out rayHit, rayDistance, rayLayer))
+                    {
+                        //set hit
+                        hit = rayHit.collider.gameObject;
+
+                        //run on trigger down
+                        OnTriggerUp();
+                    }
+                    break;
+            }
             //run trigger up function
-            OnTriggerUp();
+
 
             //clean up raycast if we are in that mode
             if (interactMode == InteractMode.Raycast)
@@ -275,14 +340,17 @@ public abstract class BaseController : MonoBehaviour {
         //use only specific interactions for some levels- so check what scene we are on
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
         {
-            if (hit.tag == "Start")
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
-            else if (hit.tag == "Exit")
-            {
-                Application.Quit();
-            }
+            //if (hit.tag == "Start")
+            //{
+            //    // menu = GameObject.Find("Main Menu");
+            //    //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //    menu.Play();
+           
+            //}
+            //else if (hit.tag == "Exit")
+            //{
+            //    Application.Quit();
+            //}
         }
         else //all other scenes should use these
         {
@@ -354,6 +422,66 @@ public abstract class BaseController : MonoBehaviour {
             //drag that bish by the hair
             hit.GetComponent<MoveObject>().Drag(hit.transform);
         }
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
+        {
+            if (hit.tag == "Start")
+            {
+                // hit.GetComponentInParent<MainMenu>().Play();
+                GameObject exit = GameObject.FindGameObjectWithTag("Exit");
+                exit.GetComponent<Image>().sprite = exit.GetComponent<Button>().spriteState.pressedSprite;
+
+                GameObject credits = GameObject.FindGameObjectWithTag("Credits");
+                credits.GetComponent<Image>().sprite = credits.GetComponent<Button>().spriteState.pressedSprite;
+
+                GameObject back = GameObject.FindGameObjectWithTag("Back");
+                back.GetComponent<Image>().sprite = back.GetComponent<Button>().spriteState.pressedSprite;
+
+                hit.GetComponent<Image>().sprite = hit.GetComponent<Button>().spriteState.highlightedSprite;
+            }
+            else if (hit.tag == "Exit")
+            {
+                GameObject start = GameObject.FindGameObjectWithTag("Start");
+                start.GetComponent<Image>().sprite = start.GetComponent<Button>().spriteState.pressedSprite;
+
+                GameObject credits = GameObject.FindGameObjectWithTag("Credits");
+                credits.GetComponent<Image>().sprite = credits.GetComponent<Button>().spriteState.pressedSprite;
+
+                GameObject back = GameObject.FindGameObjectWithTag("Back");
+                back.GetComponent<Image>().sprite = back.GetComponent<Button>().spriteState.pressedSprite;
+
+                hit.GetComponent<Image>().sprite = hit.GetComponent<Button>().spriteState.highlightedSprite;
+            }
+            else if (hit.tag == "Credits")
+            {
+                GameObject start = GameObject.FindGameObjectWithTag("Start");
+                start.GetComponent<Image>().sprite = start.GetComponent<Button>().spriteState.pressedSprite;
+
+                GameObject exit = GameObject.FindGameObjectWithTag("Exit");
+                exit.GetComponent<Image>().sprite = exit.GetComponent<Button>().spriteState.pressedSprite;
+
+                GameObject back = GameObject.FindGameObjectWithTag("Back");
+                back.GetComponent<Image>().sprite = back.GetComponent<Button>().spriteState.pressedSprite;
+
+                hit.GetComponent<Image>().sprite = hit.GetComponent<Button>().spriteState.highlightedSprite;
+            }
+
+            else if(hit.tag == "Back")
+            {
+                GameObject start = GameObject.FindGameObjectWithTag("Start");
+                start.GetComponent<Image>().sprite = start.GetComponent<Button>().spriteState.pressedSprite;
+
+                GameObject exit = GameObject.FindGameObjectWithTag("Exit");
+                exit.GetComponent<Image>().sprite = exit.GetComponent<Button>().spriteState.pressedSprite;
+
+                GameObject credits = GameObject.FindGameObjectWithTag("Credits");
+                credits.GetComponent<Image>().sprite = credits.GetComponent<Button>().spriteState.pressedSprite;
+
+                hit.GetComponent<Image>().sprite = hit.GetComponent<Button>().spriteState.highlightedSprite;
+            }
+            
+  
+        }
     }
 
     /// <summary>
@@ -364,7 +492,44 @@ public abstract class BaseController : MonoBehaviour {
         //reset colour
         rayLine.startColor = Color.white;
         rayLine.endColor = Color.white;
+        //use only specific interactions for some levels- so check what scene we are on
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
+        {
+            if (hit.tag == "Start")
+            {
+                
+                hit.GetComponentInParent<MainMenu>().Play();                  
+            }
+            else if (hit.tag == "Exit")
+            {
+                hit.GetComponentInParent<MainMenu>().Quit();
+            }
+            else if (hit.tag == "Credits")
+            {
+               
+                Vector3 pos;
+                GameObject creditsCanvas = GameObject.FindGameObjectWithTag("CreditsCanvas");
+                pos = creditsCanvas.transform.position;
 
+                creditsCanvas.transform.position =  hit.GetComponentInParent<MainMenu>().gameObject.transform.position;
+
+                hit.GetComponentInParent<MainMenu>().gameObject.transform.position = pos;
+
+               
+            }
+            else if (hit.tag == "Back")
+            {
+                Vector3 pos;
+                GameObject menu = GameObject.FindGameObjectWithTag("Main Menu");
+                pos = menu.transform.position;
+
+                menu.transform.position = GameObject.FindGameObjectWithTag("CreditsCanvas").gameObject.transform.position;
+
+                GameObject.FindGameObjectWithTag("CreditsCanvas").gameObject.transform.position = pos;
+                
+               
+            }
+        }
         //check if we are grabbing
         if (grabbing)
         {

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
+    [SerializeField] Sprite playHighlighed;
 	//play 
     public void Play()
     {
@@ -13,6 +14,7 @@ public class MainMenu : MonoBehaviour {
         PauseMenu.isPaused = false;
     }
 
+   
     //quit
     public void Quit()
     {
