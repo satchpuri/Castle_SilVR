@@ -22,7 +22,7 @@ public class Billboard : MonoBehaviour {
 		if (GetComponent<SpriteRenderer> ().enabled) {
 
 			Transform lookPos = Camera.main.transform;
-			lookPos.position = new Vector3(lookPos.position.x, 0f, lookPos.position.z);
+            lookPos.position = new Vector3(lookPos.position.x, transform.position.y, lookPos.position.z);
 			gameObject.transform.LookAt (Camera.main.transform);
 		}
 
