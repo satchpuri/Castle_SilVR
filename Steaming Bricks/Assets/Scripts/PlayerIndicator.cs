@@ -48,20 +48,20 @@ public class PlayerIndicator : MonoBehaviour {
 			moveTime += Time.deltaTime;
 
 			indicator.transform.position = new Vector3 (transform.position.x, transform.position.y + (moveTime / 2), transform.position.z);
-
-			Debug.Log (moveTime);
 		}
 	}
 
 	private void ShowIndicator() {
 
 		indicator.SetActive (true);
+		indicator.GetComponent<SpriteRenderer> ().enabled = true;
 		indicatorOn = true;
 	}
 
 	private void HideIndicator() {
 
 		indicator.SetActive (false);
+		indicator.GetComponent<SpriteRenderer> ().enabled = false;
 		indicatorOn = false;
 		moveTime = 0;
 	}

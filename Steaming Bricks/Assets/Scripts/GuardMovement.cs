@@ -29,7 +29,7 @@ public class GuardMovement : MonoBehaviour {
         {
             distractedPathParent = pathParent;
         }
-        //build path from GO that hold spath nodes
+        //build path from GO that holds path nodes
         waypoints.AddRange(pathParent.GetComponentsInChildren<Transform>());
         waypoints.RemoveAt(0); //remove 0 index because GetComponentsInCHildren is inclusive of parent
 
@@ -91,6 +91,7 @@ public class GuardMovement : MonoBehaviour {
     //Guard gets distracted
     public void SetDistracted()
     {
+		Debug.Log ("Guard movement distracted");
         currWaypointNum = 0;
         waypoints = distracted_waypoints;
         distracted = true;
