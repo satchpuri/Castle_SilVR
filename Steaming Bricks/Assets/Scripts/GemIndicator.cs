@@ -24,7 +24,11 @@ public class GemIndicator : MonoBehaviour {
 			gems [i] = transform.GetChild (i).gameObject;
 
 			//gems[i].GetComponent<Billboard> ().exception = true;
-			//gems[i].GetComponent<SpriteRenderer> ().enabled = true;
+			gems[i].GetComponent<SpriteRenderer> ().enabled = false;
+		}
+
+		for (int i = 0; i < GameManager.Instance.coins_remaining; i++) {
+			gems [i].GetComponent<SpriteRenderer> ().enabled = true;
 		}
 	}
 	
