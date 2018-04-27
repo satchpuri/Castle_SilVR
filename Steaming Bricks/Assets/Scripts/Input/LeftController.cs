@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 
 public class LeftController : BaseController {
 
@@ -59,7 +60,7 @@ public class LeftController : BaseController {
 
 		if (handMarker == 1) {
 
-			menuIsland.GetComponent<MainMenu> ().MainMenuScene ();
+            SceneManager.LoadScene(0);
 		}
 	}
 

@@ -62,7 +62,7 @@ public class RightController : BaseController {
 		//menuIsland.SetActive (true);
 		if (handMarker == 2) {
 
-			menuIsland.GetComponent<MainMenu> ().RestartCurrentScene ();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 	}
 }

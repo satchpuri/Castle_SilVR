@@ -62,16 +62,13 @@ public abstract class BaseController : MonoBehaviour {
         sliding = false;
         raising = false;
 
-		menuIsland = GameObject.Find ("Main Menu");
-		menuIsland.SetActive (false);
+		
 
         //change interaction mode to raycast for main menu
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
         {
             //set mode to raycast- things are far away and we cant touch them
             interactMode = InteractMode.Raycast;
-
-           
         }
 
 
@@ -227,9 +224,9 @@ public abstract class BaseController : MonoBehaviour {
 
 	protected virtual void SelectButton() { //0 is off, 1 is left, 2 is right
 
-		if (Input.GetKey ("LSelectButton")) {
+		if (Input.GetButton("LSelectButton")) {
 			OnSelectPress (1);
-		} else if (Input.GetKey ("LSelectButton")) {
+		} else if (Input.GetButton("RSelectButton")) {
 			OnSelectPress (2);
 		}
 			
