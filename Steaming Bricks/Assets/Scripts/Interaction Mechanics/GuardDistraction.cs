@@ -5,6 +5,14 @@ public class GuardDistraction : MonoBehaviour
 {
 	public GameObject[] guards;
 
+	void Start() {
+
+		foreach (GameObject guard in guards) {
+
+			guard.transform.GetChild (1).GetComponent<Billboard> ().exception = true;
+		}
+	}
+
     private bool triggerOnce = false;
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +25,7 @@ public class GuardDistraction : MonoBehaviour
                 {
                     //GameManager.Instance.guards[i].GetComponent<GuardMovement>().SetDistracted();
 					guards[i].GetComponent<GuardMovement>().SetDistracted();
+					guards[i].transform.GetChild (1).gameObject.GetComponent<SpriteRenderer> ().enabled = true;
                 }
                 triggerOnce = true;
             }
