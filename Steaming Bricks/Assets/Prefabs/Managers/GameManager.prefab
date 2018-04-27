@@ -56,5 +56,6 @@ MonoBehaviour:
   slidingObject: []
   guards: []
   coins_remaining: 0
+  coins_collected: 0
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}
