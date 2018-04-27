@@ -85,7 +85,8 @@ public class SoundManager : Singleton<SoundManager>
                 musicSource.clip = musicLibrary["Sneaky"];
                 break;
             default:
-                musicSource.clip = musicLibrary["sneaky_guitar_loop"]; 
+                //All scenes
+                musicSource.clip = musicLibrary["Sneaky"];
                 break;
         }
         musicSource.Play(); //play music
