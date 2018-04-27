@@ -36,7 +36,7 @@ public class EndDoor : MonoBehaviour {
                 int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
 
-                if (nextIndex > SceneManager.sceneCount)
+                if (nextIndex > SceneManager.sceneCountInBuildSettings)
                 {
                     nextIndex = 0;
                 }
