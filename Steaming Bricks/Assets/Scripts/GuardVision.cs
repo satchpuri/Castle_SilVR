@@ -59,7 +59,8 @@ public class GuardVision : MonoBehaviour {
     /// </summary>
     private bool VisionCone()
     {
-        Vector3 direction = target.transform.position - this.transform.position;
+        Vector3 player = new Vector3(target.transform.position.x, target.transform.position.y + target.GetComponent<CapsuleCollider>().bounds.size.y/2, target.transform.position.z);
+        Vector3 direction = player - this.transform.position;
 
         float angle = Vector3.Angle(direction, transform.forward);
 
@@ -120,7 +121,7 @@ public class GuardVision : MonoBehaviour {
 
             Physics.Raycast(transform.position, direction, out hit);
 
-            //Debug.Log(hit.transform.gameObject.name);
+            Debug.LogWarning(hit.transform.gameObject.name);
 
             if (hit.transform.gameObject == target && target.layer != 10 && direction.magnitude <= visionDistance)
             {
