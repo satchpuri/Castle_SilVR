@@ -21,6 +21,8 @@ public class MoveObject : MonoBehaviour {
 
 	public bool outOfBounds = false;
 
+	public bool activeSliding = false;
+
 	private bool zeroG = false;
 	private float zeroGFixTimer = 0f;
 	//public bool lockedRotation;
@@ -156,7 +158,9 @@ public class MoveObject : MonoBehaviour {
 
             //turn off collider
             this.gameObject.GetComponent<Collider>().enabled = false;
-        }
+		} else {
+			activeSliding = true;
+		}
 
     }
 
@@ -217,7 +221,8 @@ public class MoveObject : MonoBehaviour {
 
         //Need find when Movable object hits the floor and put this there (OnCollisionEnter()?)
         //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+		activeSliding = false;
     }
 
 }
-
