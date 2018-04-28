@@ -20,7 +20,7 @@ public class GuardDistraction : MonoBehaviour
         {
             if (other.tag == "Player")
             {
-                SoundManager.Instance.PlaySfxOnce("crash", 100);
+                SoundManager.Instance.PlaySfxOnce("crash", 70);
 				for (int i = 0; i < guards.Length; i++)
                 {
                     //GameManager.Instance.guards[i].GetComponent<GuardMovement>().SetDistracted();

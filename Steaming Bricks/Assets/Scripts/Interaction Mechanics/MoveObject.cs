@@ -185,7 +185,7 @@ public class MoveObject : MonoBehaviour {
             else //not moving up
             {
                 //run sound
-                SoundManager.Instance.PlaySfxOnce("card-shuffle", 100);
+                SoundManager.Instance.PlaySfxOnce("card-shuffle", 60);
             }
             if (!lockedZ)
             {
