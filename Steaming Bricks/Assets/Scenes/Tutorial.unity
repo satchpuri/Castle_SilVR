@@ -113,37 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!84 &8760147
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1187
-  m_Height: 520
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &16018909
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,6 +159,68 @@ MonoBehaviour:
   gizmoSize: 0.02
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   isVisible: 1
+--- !u!84 &19268790
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 100
+  m_Height: 492
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+--- !u!84 &39892069
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 100
+  m_Height: 492
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &86216644
 Prefab:
   m_ObjectHideFlags: 0
@@ -2435,7 +2466,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1838963980}
+  m_TargetTexture: {fileID: 19268790}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -3113,7 +3144,7 @@ Prefab:
     - target: {fileID: 224963803353184254, guid: a2d548e50cbd9174492a2563dae06b0a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -64.63632
       objectReference: {fileID: 0}
     - target: {fileID: 224963803353184254, guid: a2d548e50cbd9174492a2563dae06b0a,
         type: 2}
@@ -3123,7 +3154,7 @@ Prefab:
     - target: {fileID: 224963803353184254, guid: a2d548e50cbd9174492a2563dae06b0a,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 129.27264
       objectReference: {fileID: 0}
     - target: {fileID: 224103277667744516, guid: a2d548e50cbd9174492a2563dae06b0a,
         type: 2}
@@ -3143,7 +3174,7 @@ Prefab:
     - target: {fileID: 224103277667744516, guid: a2d548e50cbd9174492a2563dae06b0a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -198.60132
       objectReference: {fileID: 0}
     - target: {fileID: 224103277667744516, guid: a2d548e50cbd9174492a2563dae06b0a,
         type: 2}
@@ -3153,7 +3184,7 @@ Prefab:
     - target: {fileID: 224103277667744516, guid: a2d548e50cbd9174492a2563dae06b0a,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 128.79738
       objectReference: {fileID: 0}
     - target: {fileID: 4446688997337920, guid: a2d548e50cbd9174492a2563dae06b0a, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3449,6 +3480,100 @@ Prefab:
     - target: {fileID: 4648081698918870, guid: 77bb92f87e61cf145a59c9763c3bd806, type: 2}
       propertyPath: m_LocalScale.z
       value: 0.0017000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 102737347189505770, guid: 77bb92f87e61cf145a59c9763c3bd806,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Put your hand
+
+        into and object
+
+        and squeeze the
+
+        trigger to pick
+
+        it up!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 102715210894395456, guid: 77bb92f87e61cf145a59c9763c3bd806,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Some objects
+
+        can only slide
+
+        back and forth!
+
+        Move them the
+
+        same way!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 102283222034345718, guid: 77bb92f87e61cf145a59c9763c3bd806,
+        type: 2}
+      propertyPath: m_Text
+      value: "Each key goes\nto a specific\ndoor! Put your\nhand on the door\nand
+        squeeze the \ntrigger to use a\nkey!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 102579832285203608, guid: 77bb92f87e61cf145a59c9763c3bd806,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Guards notice
+
+        you if you are
+
+        in their vision
+
+        cone!
+
+        Don''t get caught!
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 102848431547503012, guid: 77bb92f87e61cf145a59c9763c3bd806,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Hide by putting
+
+        your hand in an
+
+        object and
+
+        squeezing the
+
+        trigger! Make
+
+        sure Tiny Tarry
+
+        is close to the
+
+        barrel or armor!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 102695109451962772, guid: 77bb92f87e61cf145a59c9763c3bd806,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Run TIny Tarry
+
+        into a distraction
+
+        to move guards
+
+        from their post!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 102988744717962948, guid: 77bb92f87e61cf145a59c9763c3bd806,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Collect treasure
+
+        using TIny Tarry
+
+        to unlock the
+
+        the next level!
+
+        Go through the
+
+        door with the
+
+        golden marker!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 77bb92f87e61cf145a59c9763c3bd806, type: 2}
@@ -5379,8 +5504,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 1329349803}
   outlineCamera: {fileID: 558625827}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1838963980}
-  extraRenderTexture: {fileID: 8760147}
+  renderTexture: {fileID: 19268790}
+  extraRenderTexture: {fileID: 39892069}
 --- !u!114 &1329349800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6798,37 +6923,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1812331957}
   m_Mesh: {fileID: 4300048, guid: 0464143087fe5b24982c05c31b3c0e5f, type: 3}
---- !u!84 &1838963980
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1187
-  m_Height: 520
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1839866072 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1265043080353066, guid: 420350b2abbea1d4b9f3c07bc66beea3,
