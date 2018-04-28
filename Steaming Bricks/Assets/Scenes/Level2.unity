@@ -160,37 +160,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4247572011989508, guid: da6b6700a83508047a58bd1e20ca4c1a,
     type: 2}
   m_PrefabInternal: {fileID: 47953}
---- !u!84 &433236
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 100
-  m_Height: 492
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &661520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,6 +2367,7 @@ GameObject:
   - component: {fileID: 109451537}
   - component: {fileID: 109451536}
   - component: {fileID: 109451540}
+  - component: {fileID: 109451541}
   m_Layer: 8
   m_Name: Chair9
   m_TagString: Movable
@@ -2507,6 +2477,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &109451541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 109451534}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &109648723
 GameObject:
   m_ObjectHideFlags: 0
@@ -4301,7 +4284,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 433236}
+  m_TargetTexture: {fileID: 1521297710}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -5233,37 +5216,52 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 222639251}
   m_Mesh: {fileID: 4300180, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
---- !u!84 &232835476
-RenderTexture:
+--- !u!1 &226189316
+GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 1927738663443730, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 226189317}
+  - component: {fileID: 226189318}
+  m_Layer: 0
+  m_Name: Path Node (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &226189317
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4264084925773248, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 226189316}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 131.00009, y: -0.34052086, z: 787}
+  m_LocalScale: {x: 2168.9565, y: 2168.9565, z: 2168.9563}
+  m_Children: []
+  m_Father: {fileID: 1547038652}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &226189318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114941131734101992, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 226189316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2292877bcd5c13e4dadc400104252244, type: 3}
   m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 100
-  m_Height: 492
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
+  m_EditorClassIdentifier: 
+  gizmoSize: 0.012
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  isVisible: 1
 --- !u!1 &235168351
 GameObject:
   m_ObjectHideFlags: 0
@@ -5278,6 +5276,7 @@ GameObject:
   - component: {fileID: 235168354}
   - component: {fileID: 235168353}
   - component: {fileID: 235168357}
+  - component: {fileID: 235168358}
   m_Layer: 8
   m_Name: Chair11
   m_TagString: Movable
@@ -5387,6 +5386,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &235168358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 235168351}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &237363298
 GameObject:
   m_ObjectHideFlags: 0
@@ -7667,6 +7679,37 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 318954822}
   m_Mesh: {fileID: 4300322, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
+--- !u!84 &319282504
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 100
+  m_Height: 492
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &324180933
 GameObject:
   m_ObjectHideFlags: 0
@@ -9794,6 +9837,7 @@ GameObject:
   - component: {fileID: 374309169}
   - component: {fileID: 374309168}
   - component: {fileID: 374309172}
+  - component: {fileID: 374309173}
   m_Layer: 8
   m_Name: Chair10
   m_TagString: Movable
@@ -9903,6 +9947,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &374309173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 374309166}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &374872127
 GameObject:
   m_ObjectHideFlags: 0
@@ -10251,6 +10308,7 @@ GameObject:
   - component: {fileID: 401786119}
   - component: {fileID: 401786118}
   - component: {fileID: 401786122}
+  - component: {fileID: 401786123}
   m_Layer: 8
   m_Name: Chair2
   m_TagString: Movable
@@ -10360,6 +10418,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &401786123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 401786116}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &402585905
 GameObject:
   m_ObjectHideFlags: 0
@@ -10579,6 +10650,7 @@ GameObject:
   - component: {fileID: 408940136}
   - component: {fileID: 408940135}
   - component: {fileID: 408940139}
+  - component: {fileID: 408940140}
   m_Layer: 8
   m_Name: Chair4
   m_TagString: Movable
@@ -10688,6 +10760,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &408940140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 408940133}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &418862349
 GameObject:
   m_ObjectHideFlags: 0
@@ -12063,8 +12148,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 462086345}
   outlineCamera: {fileID: 193639569}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 433236}
-  extraRenderTexture: {fileID: 232835476}
+  renderTexture: {fileID: 1521297710}
+  extraRenderTexture: {fileID: 319282504}
 --- !u!114 &462086342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13184,6 +13269,7 @@ GameObject:
   - component: {fileID: 494745742}
   - component: {fileID: 494745741}
   - component: {fileID: 494745745}
+  - component: {fileID: 494745746}
   m_Layer: 8
   m_Name: Chair8
   m_TagString: Movable
@@ -13293,6 +13379,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &494745746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 494745739}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &497269552
 GameObject:
   m_ObjectHideFlags: 0
@@ -13307,6 +13406,7 @@ GameObject:
   - component: {fileID: 497269555}
   - component: {fileID: 497269554}
   - component: {fileID: 497269558}
+  - component: {fileID: 497269559}
   m_Layer: 8
   m_Name: Chair3
   m_TagString: Movable
@@ -13416,6 +13516,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &497269559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 497269552}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &498046535
 GameObject:
   m_ObjectHideFlags: 0
@@ -21141,6 +21254,52 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 636061560}
   m_Mesh: {fileID: 4300304, guid: 4a79a16565231554ab6ef0145bc34a36, type: 3}
+--- !u!1 &637659311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1954587131519762, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 637659312}
+  - component: {fileID: 637659313}
+  m_Layer: 0
+  m_Name: Path Node (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &637659312
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4684135823230584, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 637659311}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 158, y: -0.34039614, z: 883.9999}
+  m_LocalScale: {x: 2168.9805, y: 2168.9805, z: 2168.9802}
+  m_Children: []
+  m_Father: {fileID: 1176654322}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &637659313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114790695695943144, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 637659311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2292877bcd5c13e4dadc400104252244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoSize: 0.012
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  isVisible: 1
 --- !u!1 &647437763
 GameObject:
   m_ObjectHideFlags: 0
@@ -22884,6 +23043,52 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 699047326}
   m_Mesh: {fileID: 4300054, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
+--- !u!1 &710960173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1884962906050316, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 710960174}
+  - component: {fileID: 710960175}
+  m_Layer: 0
+  m_Name: Path Node (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710960174
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4577066562242584, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 710960173}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 673.00006, y: -0.34039614, z: 1224}
+  m_LocalScale: {x: 2168.9805, y: 2168.9805, z: 2168.9802}
+  m_Children: []
+  m_Father: {fileID: 1176654322}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710960175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114830625161723180, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 710960173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2292877bcd5c13e4dadc400104252244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoSize: 0.012
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  isVisible: 1
 --- !u!1 &713758314
 GameObject:
   m_ObjectHideFlags: 0
@@ -29369,6 +29574,7 @@ GameObject:
   - component: {fileID: 809940964}
   - component: {fileID: 809940963}
   - component: {fileID: 809940967}
+  - component: {fileID: 809940968}
   m_Layer: 8
   m_Name: Chair7
   m_TagString: Movable
@@ -29478,6 +29684,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &809940968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 809940961}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &812243176
 GameObject:
   m_ObjectHideFlags: 0
@@ -30501,6 +30720,7 @@ GameObject:
   - component: {fileID: 885294013}
   - component: {fileID: 885294012}
   - component: {fileID: 885294016}
+  - component: {fileID: 885294017}
   m_Layer: 8
   m_Name: Chair13
   m_TagString: Movable
@@ -30610,6 +30830,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &885294017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 885294010}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &885520197
 GameObject:
   m_ObjectHideFlags: 0
@@ -34524,6 +34757,52 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1040169921}
   m_Mesh: {fileID: 4300144, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
+--- !u!1 &1052258976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1882917232768842, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1052258977}
+  - component: {fileID: 1052258978}
+  m_Layer: 0
+  m_Name: Path Node (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1052258977
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4280224845109756, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1052258976}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 131.00009, y: -0.34052086, z: 207.9998}
+  m_LocalScale: {x: 2168.9565, y: 2168.9565, z: 2168.9563}
+  m_Children: []
+  m_Father: {fileID: 1547038652}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1052258978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114736136794686388, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1052258976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2292877bcd5c13e4dadc400104252244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoSize: 0.012
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  isVisible: 1
 --- !u!1 &1058800760
 GameObject:
   m_ObjectHideFlags: 0
@@ -37728,6 +38007,9 @@ Transform:
   - {fileID: 1244563869}
   - {fileID: 1058948064}
   - {fileID: 1739580148}
+  - {fileID: 710960174}
+  - {fileID: 2093830385}
+  - {fileID: 637659312}
   m_Father: {fileID: 282783554}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43496,6 +43778,7 @@ GameObject:
   - component: {fileID: 1491628295}
   - component: {fileID: 1491628294}
   - component: {fileID: 1491628298}
+  - component: {fileID: 1491628299}
   m_Layer: 8
   m_Name: Chair12
   m_TagString: Movable
@@ -43605,6 +43888,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1491628299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1491628292}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &1508401919
 GameObject:
   m_ObjectHideFlags: 0
@@ -43972,6 +44268,37 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1514598121}
   m_Mesh: {fileID: 4300132, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
+--- !u!84 &1521297710
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 100
+  m_Height: 492
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1525286454
 GameObject:
   m_ObjectHideFlags: 0
@@ -43986,6 +44313,7 @@ GameObject:
   - component: {fileID: 1525286457}
   - component: {fileID: 1525286456}
   - component: {fileID: 1525286460}
+  - component: {fileID: 1525286461}
   m_Layer: 8
   m_Name: Chair6
   m_TagString: Movable
@@ -44095,6 +44423,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1525286461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1525286454}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &1528797806
 GameObject:
   m_ObjectHideFlags: 0
@@ -44842,6 +45183,9 @@ Transform:
   - {fileID: 1487589171}
   - {fileID: 1132105336}
   - {fileID: 342205995}
+  - {fileID: 1052258977}
+  - {fileID: 226189317}
+  - {fileID: 1720160806}
   m_Father: {fileID: 282783554}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48702,6 +49046,52 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1715628942}
   m_Mesh: {fileID: 4300094, guid: 4a79a16565231554ab6ef0145bc34a36, type: 3}
+--- !u!1 &1720160805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1059843315968266, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1720160806}
+  - component: {fileID: 1720160807}
+  m_Layer: 0
+  m_Name: Path Node (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1720160806
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4377768683592424, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1720160805}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 437.00003, y: -0.34052086, z: 787}
+  m_LocalScale: {x: 2168.9565, y: 2168.9565, z: 2168.9563}
+  m_Children: []
+  m_Father: {fileID: 1547038652}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1720160807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114193245823445810, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1720160805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2292877bcd5c13e4dadc400104252244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoSize: 0.012
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  isVisible: 1
 --- !u!1 &1721846700
 GameObject:
   m_ObjectHideFlags: 0
@@ -54685,6 +55075,7 @@ GameObject:
   - component: {fileID: 1813133839}
   - component: {fileID: 1813133838}
   - component: {fileID: 1813133842}
+  - component: {fileID: 1813133843}
   m_Layer: 8
   m_Name: Chair5
   m_TagString: Movable
@@ -54794,6 +55185,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1813133843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1813133836}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &1817383258
 GameObject:
   m_ObjectHideFlags: 0
@@ -63193,6 +63597,52 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2092108562}
   m_Mesh: {fileID: 4300034, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
+--- !u!1 &2093830384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1833705621213146, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2093830385}
+  - component: {fileID: 2093830386}
+  m_Layer: 0
+  m_Name: Path Node (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2093830385
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4792455567896494, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2093830384}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 158, y: -0.34039614, z: 1224}
+  m_LocalScale: {x: 2168.9805, y: 2168.9805, z: 2168.9802}
+  m_Children: []
+  m_Father: {fileID: 1176654322}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2093830386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114264472607412354, guid: c2f117f8a1b89ca4abb5960ed6916cad,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2093830384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2292877bcd5c13e4dadc400104252244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoSize: 0.012
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  isVisible: 1
 --- !u!1 &2097350767
 GameObject:
   m_ObjectHideFlags: 0
