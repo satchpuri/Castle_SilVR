@@ -94,7 +94,7 @@ public abstract class BaseController : MonoBehaviour {
         //update highlight around interactables
         UpdateHighlight();
 
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
         {
             if (GameManager.Instance.isDead == true)
             {
@@ -536,12 +536,16 @@ public abstract class BaseController : MonoBehaviour {
             {
                 GameObject restart = GameObject.FindGameObjectWithTag("Restart");
                 restart.GetComponent<Image>().sprite = restart.GetComponent<Button>().spriteState.pressedSprite;
+
+                hit.GetComponent<Image>().sprite = hit.GetComponent<Button>().spriteState.highlightedSprite;
             }
 
             if (hit.tag == "Restart")
             {
                 GameObject mainMenu = GameObject.FindGameObjectWithTag("MainMenuButton");
                 mainMenu.GetComponent<Image>().sprite = mainMenu.GetComponent<Button>().spriteState.pressedSprite;
+
+                hit.GetComponent<Image>().sprite = hit.GetComponent<Button>().spriteState.highlightedSprite;
             }
         }
     }
@@ -588,9 +592,20 @@ public abstract class BaseController : MonoBehaviour {
 
                 menu.transform.position = GameObject.FindGameObjectWithTag("CreditsCanvas").gameObject.transform.position;
 
-                GameObject.FindGameObjectWithTag("CreditsCanvas").gameObject.transform.position = pos;
-                
+                GameObject.FindGameObjectWithTag("CreditsCanvas").gameObject.transform.position = pos;               
                
+            }
+        }
+        else
+        {
+            if(hit.tag == "Restart")
+            {
+                hit.GetComponentInParent<MainMenu>().RestartCurrentScene();
+            }
+
+            if(hit.tag == "MainMenuButton")
+            {
+                hit.GetComponentInParent<MainMenu>().MainMenuScene();
             }
         }
         //check if we are grabbing
