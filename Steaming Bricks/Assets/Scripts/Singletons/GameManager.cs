@@ -25,6 +25,9 @@ public class GameManager : Singleton<GameManager>
     //hands
     public GameObject leftHand;
     public GameObject rightHand;
+    
+    //player state
+    public bool isDead;
 
     // Use this for initialization
     void OnEnable()
@@ -58,11 +61,18 @@ public class GameManager : Singleton<GameManager>
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    void Start()
+    {
+        isDead = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
 
     }
+
+    
 
 
 

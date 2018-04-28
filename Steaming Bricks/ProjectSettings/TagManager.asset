@@ -21,6 +21,8 @@ TagManager:
   - CreditsCanvas
   - Back
   - Main Menu
+  - Restart
+  - MainMenuButton
   layers:
   - Default
   - TransparentFX

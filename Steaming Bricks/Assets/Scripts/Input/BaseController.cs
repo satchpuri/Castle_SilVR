@@ -93,7 +93,17 @@ public abstract class BaseController : MonoBehaviour {
 
         //update highlight around interactables
         UpdateHighlight();
-	}
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) //scene 0 should be main menu
+        {
+            if (GameManager.Instance.isDead == true)
+            {
+
+                interactMode = InteractMode.Raycast;
+            }
+
+        }
+    }
        
     //for staying within trigger type colliders
     void OnTriggerEnter(Collider col)
@@ -500,7 +510,7 @@ public abstract class BaseController : MonoBehaviour {
                 hit.GetComponent<Image>().sprite = hit.GetComponent<Button>().spriteState.highlightedSprite;
             }
 
-            else if(hit.tag == "Back")
+            else if (hit.tag == "Back")
             {
                 if (!audioPlayed)
                 {
@@ -518,8 +528,21 @@ public abstract class BaseController : MonoBehaviour {
 
                 hit.GetComponent<Image>().sprite = hit.GetComponent<Button>().spriteState.highlightedSprite;
             }
-            
-  
+
+        }
+        else
+        {
+            if (hit.tag == "MainMenuButton")
+            {
+                GameObject restart = GameObject.FindGameObjectWithTag("Restart");
+                restart.GetComponent<Image>().sprite = restart.GetComponent<Button>().spriteState.pressedSprite;
+            }
+
+            if (hit.tag == "Restart")
+            {
+                GameObject mainMenu = GameObject.FindGameObjectWithTag("MainMenuButton");
+                mainMenu.GetComponent<Image>().sprite = mainMenu.GetComponent<Button>().spriteState.pressedSprite;
+            }
         }
     }
 
