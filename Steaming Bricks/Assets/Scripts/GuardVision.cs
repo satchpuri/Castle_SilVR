@@ -47,6 +47,7 @@ public class GuardVision : MonoBehaviour {
 	void Update () {
         if (VisionCone())
         {
+            GameManager.Instance.isDead = true;
             hudIsland.SetActive(true);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
