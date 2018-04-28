@@ -83,7 +83,7 @@ public class LevelManager : Singleton<LevelManager>
                 break;
             default:
                 //All scenes
-                musicSource.clip = musicLibrary["Sneaky"];
+                SoundManager.Instance.ChangeSong("Sneaky");
                 break;
         }
         //goto that scene
