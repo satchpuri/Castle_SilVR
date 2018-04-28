@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SoundManager : Singleton<SoundManager>
 {
+
+	public static bool created;
     //FIELDS
 	private AudioSource sfxSource; //what'll play effects
 	private Dictionary<string, AudioClip> sfxLibrary = new Dictionary<string, AudioClip>(); //sound effect library
@@ -16,8 +18,12 @@ public class SoundManager : Singleton<SoundManager>
 
 	void Awake()
 	{
-        //dont touch me when we load a new scene
-		DontDestroyOnLoad(this);
+		if (!created) {
+			
+			//dont touch me when we load a new scene
+			DontDestroyOnLoad (this);
+			created = true;
+		}
 	}
 
 	void Start()

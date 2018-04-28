@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class PersistObject : MonoBehaviour {
 
+	public static bool created;
+
 	public float height;
+
+	void Awake()
+	{
+		if (!created) {
+
+			//dont touch me when we load a new scene
+			DontDestroyOnLoad (this);
+			created = true;
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
