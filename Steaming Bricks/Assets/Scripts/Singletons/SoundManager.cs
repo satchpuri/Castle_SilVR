@@ -90,8 +90,13 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
     public void StopSfx()
-    {
-        sfxSource.Stop();
+    {        
+        //check if its currently playing
+        if (GameObject.Find("One shot audio"))
+        {
+            //stop sound
+            GameObject.Find("One shot audio").GetComponent<AudioSource>().Stop();
+        }
     }
     /// <summary>
     /// chnage the background music

@@ -54,22 +54,31 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             SoundManager.Instance.PlaySfxOnce("wood-creak-02", 1);
+            playerAnimation.SetBool("isMoving", true);
             current += new Vector3(speed * Mathf.Cos(camRotRad), 0, -speed * Mathf.Sin(camRotRad));
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             SoundManager.Instance.PlaySfxOnce("wood-creak-02", 1);
+            playerAnimation.SetBool("isMoving", true);
             current += new Vector3(-speed * Mathf.Cos(camRotRad), 0, speed * Mathf.Sin(camRotRad));
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             SoundManager.Instance.PlaySfxOnce("wood-creak-02", 1);
+            playerAnimation.SetBool("isMoving", true);
             current += new Vector3(-speed * Mathf.Sin(camRotRad), 0, -speed * Mathf.Cos(camRotRad));
         }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 1);            
+            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 1);
+            playerAnimation.SetBool("isMoving", true);
             current += new Vector3(speed * Mathf.Sin(camRotRad), 0, speed * Mathf.Cos(camRotRad));
+        }
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            playerAnimation.SetBool("isMoving", false);
+            SoundManager.Instance.StopSfx();
         }
         player.transform.position = current;
     }
@@ -91,11 +100,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (xAxis != 0 || zAxis != 0)
         {
-            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 3);
+            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 5);
             playerAnimation.SetBool("isMoving", true);
         }
         else
         {
+            SoundManager.Instance.StopSfx();
             playerAnimation.SetBool("isMoving", false);
         }
 
