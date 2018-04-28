@@ -57,38 +57,12 @@ public class SoundManager : Singleton<SoundManager>
             Debug.Log(sfx.Key + " - " + sfx.Value);
         }
         */
-
-        //Debug.Log(musicLibrary["sneaky-guitar-loop"]);
-
+        
         //loop background music
         musicSource.loop = true; //turn on looping
-        //musicSource.clip = musicLibrary["playful-music"]; //set default song
-        //ChangeMusicVolume(0);
-        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1 % SceneManager.sceneCountInBuildSettings;
-        Debug.Log(nextIndex);
-        switch (nextIndex)
-        {
-            case 1:
-                //Main Menu 
-                musicSource.clip = musicLibrary["Sneaky_Snitch"];
-                break;
-            case 2:
-                //Tutorial 
-                musicSource.clip = musicLibrary["marimba_descending"];
-                break;
-            case 3:
-                //Level 1
-                musicSource.clip = musicLibrary["Sneaky_Adventure"];
-                break;
-            case 4:
-                //Level 2
-                musicSource.clip = musicLibrary["Sneaky"];
-                break;
-            default:
-                //All scenes
-                musicSource.clip = musicLibrary["Sneaky"];
-                break;
-        }
+        musicSource.clip = musicLibrary["Sneaky_Snitch"]; //set default song
+        ChangeMusicVolume(20);
+        
         musicSource.Play(); //play music
 	}
 

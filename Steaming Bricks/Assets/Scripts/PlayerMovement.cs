@@ -11,12 +11,14 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove;
 
     private float camRotRad;
+    Animator playerAnimation;
 
     // Use this for initialization
     void Start()
     {
 
         player = this.gameObject;
+        playerAnimation = GetComponent<Animator>();
 
         //Get Roatation (Radians) of the camera to alter player motion
         //We use Mathf.Sin and Mathf.Cos to alter player motion which takes Radians as input
@@ -87,6 +89,11 @@ public class PlayerMovement : MonoBehaviour
         if (xAxis != 0 || zAxis != 0)
         {
             SoundManager.Instance.PlaySfxOnce("wood-creak-02", 100);
+            playerAnimation.SetBool("isMoving", true);
+        }
+        else
+        {
+            playerAnimation.SetBool("isMoving", false);
         }
 
         //Debug.Log(xAxis +"  "+ zAxis);
