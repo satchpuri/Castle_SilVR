@@ -53,19 +53,22 @@ public class PlayerMovement : MonoBehaviour
         Vector3 current = player.transform.position;
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
+            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 1);
             current += new Vector3(speed * Mathf.Cos(camRotRad), 0, -speed * Mathf.Sin(camRotRad));
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
+            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 1);
             current += new Vector3(-speed * Mathf.Cos(camRotRad), 0, speed * Mathf.Sin(camRotRad));
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
+            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 1);
             current += new Vector3(-speed * Mathf.Sin(camRotRad), 0, -speed * Mathf.Cos(camRotRad));
         }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 10);            
+            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 1);            
             current += new Vector3(speed * Mathf.Sin(camRotRad), 0, speed * Mathf.Cos(camRotRad));
         }
         player.transform.position = current;
@@ -88,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (xAxis != 0 || zAxis != 0)
         {
-            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 10);
+            SoundManager.Instance.PlaySfxOnce("wood-creak-02", 3);
             playerAnimation.SetBool("isMoving", true);
         }
         else

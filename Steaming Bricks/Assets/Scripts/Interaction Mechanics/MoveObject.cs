@@ -124,7 +124,7 @@ public class MoveObject : MonoBehaviour {
     // VR GRABBING CONTROLS ===================================
 	public void PickUp(Transform hitTransform, GameObject hand)
     {
-        SoundManager.Instance.PlaySfxOnce("menu-selection", 100);
+        SoundManager.Instance.PlaySfx("menu-selection", 100);
         //unfreeze this object - but keep rot frozen
         if (!lockedX && !lockedY && !lockedZ)
         {

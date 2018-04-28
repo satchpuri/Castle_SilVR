@@ -30,7 +30,7 @@ public class Coin : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            SoundManager.Instance.PlaySfxOnce("bell-ding", 100);
+            SoundManager.Instance.PlaySfx("bell-ding", 100);
             //Stretch - Add longer ding for unlocking door
 
             GameManager.Instance.coins_remaining--;

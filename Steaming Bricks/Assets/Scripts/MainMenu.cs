@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour {
     public void Play()
     {
         Debug.Log("Start Pressed");
+        SoundManager.Instance.PlaySfxOnce("select", 80);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         PauseMenu.isPaused = false;
     }

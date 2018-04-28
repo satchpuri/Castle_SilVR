@@ -89,7 +89,10 @@ public class SoundManager : Singleton<SoundManager>
             PlaySfxAt(name, this.gameObject.transform.position ,volume);
         }
     }
-
+    public void StopSfx()
+    {
+        sfxSource.Stop();
+    }
     /// <summary>
     /// chnage the background music
     /// </summary>
