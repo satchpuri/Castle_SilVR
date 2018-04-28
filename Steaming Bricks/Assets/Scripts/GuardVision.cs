@@ -52,7 +52,7 @@ public class GuardVision : MonoBehaviour {
         {
 
             plane.SetActive(true);
-            GameManager.Instance.player.isStatic = true;
+            GameManager.Instance.player.GetComponent<PlayerMovement>().canMove = true;
             GameManager.Instance.isDead = true;
             hudIsland.SetActive(true);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
