@@ -605,6 +605,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &25811814
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1446,6 +1447,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &57281333
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1712,6 +1714,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &61113250
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -3373,6 +3376,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &119168907
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -3496,37 +3500,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 93.15161, y: 169.29892, z: 86.52374}
   m_Center: {x: -0.7657089, y: -0.0000038146973, z: 0.074394226}
---- !u!84 &122417120
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 861
-  m_Height: 416
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &122651839
 Prefab:
   m_ObjectHideFlags: 0
@@ -5059,7 +5032,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 670840565}
+  m_TargetTexture: {fileID: 1700216150}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -6367,6 +6340,37 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 240251211}
   m_Mesh: {fileID: 4300274, guid: 4a79a16565231554ab6ef0145bc34a36, type: 3}
+--- !u!84 &243966167
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1187
+  m_Height: 520
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &245984443
 Prefab:
   m_ObjectHideFlags: 0
@@ -9043,6 +9047,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!114 &324180937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9397,6 +9402,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &325779606
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -13662,8 +13668,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 462086345}
   outlineCamera: {fileID: 193639569}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 670840565}
-  extraRenderTexture: {fileID: 122417120}
+  renderTexture: {fileID: 1700216150}
+  extraRenderTexture: {fileID: 243966167}
 --- !u!114 &462086342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16115,6 +16121,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &521086855
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -24573,37 +24580,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 667903087}
   m_Mesh: {fileID: 4300286, guid: 8107920df12e1b14f8898404f78ee1ca, type: 3}
---- !u!84 &670840565
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 861
-  m_Height: 416
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &672395571
 Prefab:
   m_ObjectHideFlags: 0
@@ -26273,6 +26249,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &741247168
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -27626,6 +27603,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &780632020
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -37127,6 +37105,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1032098871
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -37711,6 +37690,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1040064985
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -39434,6 +39414,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1114484127
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -39701,6 +39682,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1117019176
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -40146,6 +40128,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1125409760
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -40790,6 +40773,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1140472167
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -41521,6 +41505,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1173773943
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -43195,6 +43180,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1230153445
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -45455,6 +45441,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1334526783
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -45843,6 +45830,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1339970100
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -54564,6 +54552,37 @@ Transform:
   m_PrefabParentObject: {fileID: 4546665816709518, guid: 799e65aa444ba0d4da0ad215ece66785,
     type: 2}
   m_PrefabInternal: {fileID: 1699652677}
+--- !u!84 &1700216150
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1187
+  m_Height: 520
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1700286924
 GameObject:
   m_ObjectHideFlags: 0
@@ -54902,6 +54921,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!114 &1702737636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66701,6 +66721,7 @@ MonoBehaviour:
   visionAngle: 20
   visionDistance: 0.08
   hudIsland: {fileID: 0}
+  plane: {fileID: 0}
 --- !u!120 &1918224763
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -69837,6 +69858,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2073011727}
   m_Mesh: {fileID: 4300110, guid: 4a79a16565231554ab6ef0145bc34a36, type: 3}
+--- !u!1001 &2077255294
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4181837116302274, guid: 0977b5b506deced4596aa90de5f1316d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.022
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181837116302274, guid: 0977b5b506deced4596aa90de5f1316d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.567
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181837116302274, guid: 0977b5b506deced4596aa90de5f1316d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.0198832
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181837116302274, guid: 0977b5b506deced4596aa90de5f1316d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181837116302274, guid: 0977b5b506deced4596aa90de5f1316d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181837116302274, guid: 0977b5b506deced4596aa90de5f1316d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181837116302274, guid: 0977b5b506deced4596aa90de5f1316d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181837116302274, guid: 0977b5b506deced4596aa90de5f1316d, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0977b5b506deced4596aa90de5f1316d, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2078981775
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class GuardVision : MonoBehaviour {
     private float visionDistance;
 
     [SerializeField] private GameObject hudIsland;
+    [SerializeField] private GameObject plane;
 
     private LineRenderer line;
 
@@ -28,6 +29,7 @@ public class GuardVision : MonoBehaviour {
     {
         //GameManager.Instance.player = GameObject.Find("Player"); //GameObject.FindGameObjectWithTag("Player");
         hudIsland = GameObject.Find("HUD Island");
+        plane = GameObject.FindGameObjectWithTag("Plane");
     }
 
     void OnDisable()
@@ -40,6 +42,7 @@ public class GuardVision : MonoBehaviour {
 	void Start () {
         line = this.gameObject.GetComponent<LineRenderer>();
         hudIsland.SetActive(false);
+        plane.SetActive(false);
 		
 	}
 	
@@ -47,6 +50,9 @@ public class GuardVision : MonoBehaviour {
 	void Update () {
         if (VisionCone())
         {
+
+            plane.SetActive(true);
+            GameManager.Instance.player.isStatic = true;
             GameManager.Instance.isDead = true;
             hudIsland.SetActive(true);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);

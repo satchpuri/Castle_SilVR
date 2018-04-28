@@ -23,6 +23,7 @@ TagManager:
   - Main Menu
   - Restart
   - MainMenuButton
+  - Plane
   layers:
   - Default
   - TransparentFX
