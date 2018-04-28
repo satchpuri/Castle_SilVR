@@ -84,7 +84,7 @@ public class HidingSpace : MonoBehaviour {
     IEnumerator FadeIn(GameObject affectedObj)
     {
         yield return new WaitForSeconds(.6f);
-        GameManager.Instance.player.GetComponent<Renderer>().enabled = true; //turn on mesh
+        GameManager.Instance.player.transform.GetChild(1).gameObject.SetActive(true); //turn off mesh renderer to make tiny terry invible
     }
 
     /// <summary>
@@ -94,6 +94,6 @@ public class HidingSpace : MonoBehaviour {
     IEnumerator FadeOut(GameObject affectedObj)
     {
         yield return new WaitForSeconds(.6f);
-        GameManager.Instance.player.GetComponent<Renderer>().enabled = false; //turn off mesh renderer to make tiny terry invible
+        GameManager.Instance.player.transform.GetChild(1).gameObject.SetActive(false); //turn off mesh renderer to make tiny terry invible
     }
 }
