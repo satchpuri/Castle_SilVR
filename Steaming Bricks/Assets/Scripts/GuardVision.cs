@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 //this script should go on the vision cone itself
 
 public class GuardVision : MonoBehaviour {
-    private GameObject target;
+    //private GameObject GameManager.Instance.player;
 
     [SerializeField]
     private float visionAngle;
@@ -26,13 +26,13 @@ public class GuardVision : MonoBehaviour {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        target = GameObject.Find("Player"); //GameObject.FindGameObjectWithTag("Player");
+        //GameManager.Instance.player = GameObject.Find("Player"); //GameObject.FindGameObjectWithTag("Player");
         hudIsland = GameObject.Find("HUD Island");
     }
 
     void OnDisable()
     {
-        target = null;
+        GameManager.Instance.player = null;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -60,7 +60,7 @@ public class GuardVision : MonoBehaviour {
     /// </summary>
     private bool VisionCone()
     {
-        Vector3 player = new Vector3(target.transform.position.x, target.transform.position.y + target.GetComponent<CapsuleCollider>().bounds.size.y/2, target.transform.position.z);
+        Vector3 player = new Vector3(GameManager.Instance.player.transform.position.x, GameManager.Instance.player.transform.position.y + GameManager.Instance.player.GetComponent<CapsuleCollider>().bounds.size.y/2, GameManager.Instance.player.transform.position.z);
         Vector3 direction = player - this.transform.position;
 
         float angle = Vector3.Angle(direction, transform.forward);
@@ -124,7 +124,7 @@ public class GuardVision : MonoBehaviour {
 
             Debug.LogWarning(hit.transform.gameObject.name);
 
-            if (hit.transform.gameObject == target && target.layer != 10 && direction.magnitude <= visionDistance)
+            if (hit.transform.gameObject == GameManager.Instance.player && GameManager.Instance.player.layer != 10 && direction.magnitude <= visionDistance)
             {
 
                 return true;
