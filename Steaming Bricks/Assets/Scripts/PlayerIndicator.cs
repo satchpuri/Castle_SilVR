@@ -9,7 +9,7 @@ public class PlayerIndicator : MonoBehaviour {
 	Vector3 thisFramePos;
 	Vector3 lastFramePos;
 
-	float timeToIndicate = 2;
+	float timeToIndicate = 10;
 
 	float time;
 	float moveTime = 0;
