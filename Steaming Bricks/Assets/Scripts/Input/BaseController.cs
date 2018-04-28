@@ -43,10 +43,13 @@ public abstract class BaseController : MonoBehaviour {
     protected bool sliding; //are we sliding an object
     protected bool raising; //are we in raise island mode
 
+    private bool audioPlayed;
+
     RaycastHit rayHit;
 
     // Use this for initialization
     protected virtual void Start () {
+        audioPlayed = false;
         rayLine = this.gameObject.GetComponent<LineRenderer>(); //attach linerenderer to field
         rayLine.enabled = false; //turn off line draying by default
 
@@ -444,7 +447,11 @@ public abstract class BaseController : MonoBehaviour {
         {
             if (hit.tag == "Start")
             {
-                // hit.GetComponentInParent<MainMenu>().Play();
+                if (!audioPlayed)
+                {
+                    SoundManager.Instance.PlaySfxOnce("select", 60);
+                    audioPlayed = true;
+                }
                 GameObject exit = GameObject.FindGameObjectWithTag("Exit");
                 exit.GetComponent<Image>().sprite = exit.GetComponent<Button>().spriteState.pressedSprite;
 
@@ -458,6 +465,11 @@ public abstract class BaseController : MonoBehaviour {
             }
             else if (hit.tag == "Exit")
             {
+                if (!audioPlayed)
+                {
+                    SoundManager.Instance.PlaySfxOnce("select", 60);
+                    audioPlayed = true;
+                }
                 GameObject start = GameObject.FindGameObjectWithTag("Start");
                 start.GetComponent<Image>().sprite = start.GetComponent<Button>().spriteState.pressedSprite;
 
@@ -471,6 +483,11 @@ public abstract class BaseController : MonoBehaviour {
             }
             else if (hit.tag == "Credits")
             {
+                if (!audioPlayed)
+                {
+                    SoundManager.Instance.PlaySfxOnce("select", 60);
+                    audioPlayed = true;
+                }
                 GameObject start = GameObject.FindGameObjectWithTag("Start");
                 start.GetComponent<Image>().sprite = start.GetComponent<Button>().spriteState.pressedSprite;
 
@@ -485,6 +502,11 @@ public abstract class BaseController : MonoBehaviour {
 
             else if(hit.tag == "Back")
             {
+                if (!audioPlayed)
+                {
+                    SoundManager.Instance.PlaySfxOnce("select", 60);
+                    audioPlayed = true;
+                }
                 GameObject start = GameObject.FindGameObjectWithTag("Start");
                 start.GetComponent<Image>().sprite = start.GetComponent<Button>().spriteState.pressedSprite;
 
@@ -506,6 +528,7 @@ public abstract class BaseController : MonoBehaviour {
     /// </summary>
     protected virtual void OnTriggerUp()
     {
+        audioPlayed = false;
         //reset colour
         rayLine.startColor = Color.white;
         rayLine.endColor = Color.white;

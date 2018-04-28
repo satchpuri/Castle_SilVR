@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
         {
             playerAnimation.SetBool("isMoving", false);
+            playerAnimation.Play("Idle");
             SoundManager.Instance.StopSfx();
         }
         player.transform.position = current;
@@ -107,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
         {
             SoundManager.Instance.StopSfx();
             playerAnimation.SetBool("isMoving", false);
+            playerAnimation.Play("Idle");
         }
 
         //Debug.Log(xAxis +"  "+ zAxis);
